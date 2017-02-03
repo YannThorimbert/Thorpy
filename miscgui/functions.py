@@ -1,6 +1,8 @@
 import pygame.event as pygame_event
+import pygame
 
-from thorpy.miscgui import constants, application
+
+from thorpy.miscgui import constants, application, parameters
 
 def obtain_valid_painter(painter_class, **kwargs):
     """Returns a valid painter whose class is <painter_class>. You can try any
@@ -107,3 +109,13 @@ def get_default_font_infos():
     from thorpy.painting.writer import get_font_name
     from thorpy.miscgui import style
     return {"name":get_font_name(None), "size":style.FONT_SIZE}
+
+def writing(delay=30,interval=100,interval_pygame=500):
+    parameters.KEY_DELAY = delay
+    parameters.KEY_INTERVAL = interval
+    pygame.key.set_repeat(delay,interval_pygame)
+
+def playing(delay,interval):
+    parameters.KEY_DELAY = delay
+    parameters.KEY_INTERVAL = interval
+    pygame.key.set_repeat(delay,interval)

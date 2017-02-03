@@ -29,6 +29,7 @@ class BaseGrid(object):
         self.nx = nx
         self.ny = ny
         self.cells = [[value for y in range(ny)] for x in range(nx)]
+        self.default_value = value
         self.periodicity = periodicity
         self.min_nxy = min(self.nx, self.ny)
         self.set_all = self.fill #alias
@@ -94,7 +95,37 @@ class BaseGrid(object):
             self[x,y] = value
 
     def is_inside(self, coord):
+        """returns True if <coord> is contained into the domain (not pixels!)"""
         return (0 <= coord[0] < self.nx) and  (0 <= coord[1] < self.ny)
+
+    def shift_values_x(self, amount): #todo: fill new cells (works only for |amount| = 1!!!
+        if amount > 0: #shift to the right, new column on the left
+            for x in range(self.nx-1,amount-1,-1):
+                for y in range(self.ny):
+                    self[x,y] = self[x-1,y]
+            for y in range(self.ny): #boucler!
+                self[0,y] = self.default_value
+        else:
+            for x in range(self.nx+amount): #amount is negative!
+                for y in range(self.ny):
+                    self[x,y] = self[x+1,y]
+            for y in range(self.ny): #boucler!
+                self[self.nx-1,y] = self.default_value
+
+    def shift_values_y(self, amount): #todo: fill new cells (works only for |amount| = 1!!!
+        if amount > 0: #shift to the right, new column on the left
+            for y in range(self.ny-1,amount-1,-1):
+                for x in range(self.nx):
+                    self[x,y] = self[x,y-1]
+            for x in range(self.nx): #boucler!
+                self[x,0] = self.default_value
+        else:
+            for y in range(self.ny+amount): #amount is negative!
+                for x in range(self.nx):
+                    self[x,y] = self[x,y+1]
+            for x in range(self.nx): #boucler!
+                self[x,self.ny-1] = self.default_value
+
 
 
 class DiagonalHelper(object):
@@ -130,3 +161,4 @@ class DiagonalHelper(object):
         x, y, n = self.diags_down[x][y]
         for i in range(n):
             yield self.grid[x+i,y-i]
+
