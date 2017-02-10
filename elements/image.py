@@ -7,25 +7,26 @@ from thorpy.miscgui import style, functions
 class Image(Element):
     """Image element."""
 
-    @classmethod
-    def make(cls, path=None, color=None):
+    @staticmethod
+    def make(path=None, color=None, colorkey=None):
         """Image element.
         <path>: the path to the image.
         <color>: if path is None, use this color instead of image.
         """
         print("type2",path)
-        img = Image(path, color)
+        img = Image(path, color, colorkey=colorkey)
         img.finish()
         return img
 
-    def __init__(self, path=None, color=None, elements=None, normal_params=None):
+    def __init__(self, path=None, color=None, elements=None, normal_params=None,
+                    colorkey=None):
         """Image element.
         <path>: the path to the image.
         <color>: if path is None, use this color instead of image.
         """
         super(Image, self).__init__("", elements, normal_params)
         if path:
-            painter = ImageFrame(path, mode=None)
+            painter = ImageFrame(path, mode=None, colorkey=colorkey)
         else:
             if color:
                 painter = BasicFrame(style.SIZE, color)
