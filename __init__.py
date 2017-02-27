@@ -1,4 +1,4 @@
-__version__ = "1.5.3"
+__version__ = "1.5.5"
 
 import sys
 import os
@@ -34,7 +34,7 @@ import thorpy.painting.graphics as graphics
 
 ##import testmodule
 
-from thorpy._utils.images import load_image, change_color_on_img, change_color_on_img_ip
+from thorpy._utils.images import load_image, change_color_on_img, change_color_on_img_ip, get_resized_image
 
 from thorpy.elements.launchers.browserlauncher import BrowserLauncher
 from thorpy.elements.launchers.dropdownlistlauncher import DropDownListLauncher
@@ -47,10 +47,13 @@ from thorpy.elements.box import Box, BarBox
 from thorpy.elements.browserlight import BrowserLight
 from thorpy.elements.browser import Browser
 from thorpy.elements.checker import Checker
+CheckBox = Checker
 from thorpy.elements.clickable import Clickable
 from thorpy.elements._wrappers import make_button, make_text, make_alert, make_image_button
-from thorpy.elements._wrappers import launch_alert, launch_blocking_alert
-from thorpy.elements._wrappers import launch_choices, launch_blocking_choices
+from thorpy.elements._wrappers import launch_blocking_alert
+from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
+from thorpy.elements._wrappers import launch_blocking_choices
+from thorpy.elements._wrappers import launch_choices as launch_nonblocking_choices
 from thorpy.elements._wrappers import launch_binary_choice
 from thorpy.elements._wrappers import make_alert
 from thorpy.elements._wrappers import make_stored_ghost as make_group
@@ -68,6 +71,7 @@ from thorpy.elements.keypressable import KeyPressable
 from thorpy.elements.keytogglable import KeyTogglable
 from thorpy.elements.paramsetter import ParamSetter
 from thorpy.elements.pressable import Pressable
+from thorpy.elements.lifebar import LifeBar
 ##from thorpy.elements.text import MultilineText
 from thorpy.elements.text import OneLineText, MultilineText
 from thorpy.elements.slidersetter import SliderXSetter as SliderX
@@ -102,7 +106,9 @@ from thorpy.miscgui.metadata import MetaDataManager
 from thorpy.miscgui.pools import TogglablePool, RadioPool
 from thorpy.miscgui.textpacker import pack_text
 
-from thorpy.miscgui.launchers.launcher import set_launcher, make_launcher, get_launcher, Launcher, make_ok_cancel_box, launch, make_ok_box
+from thorpy.miscgui.launchers.launcher import set_launcher, make_launcher, get_launcher
+from thorpy.miscgui.launchers.launcher import Launcher, make_ok_cancel_box, make_ok_box, launch_blocking, auto_ok
+from thorpy.miscgui.launchers.launcher import launch as launch_nonblocking
 
 from thorpy.painting.writer import Writer
 from thorpy.painting import painters

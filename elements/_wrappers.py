@@ -8,7 +8,7 @@ from thorpy.miscgui.storage import store
 from thorpy.miscgui import constants, style, functions
 from thorpy.painting.painters.imageframe import ButtonImage
 
-def make_alert(text, font_size=None, font_color=None, ok_text="Ok"):
+def make_textbox(text, font_size=None, font_color=None, ok_text="Ok"):
     if font_size is None: font_size = style.FONT_SIZE
     if font_color is None: font_color = style.FONT_COLOR
     from thorpy.miscgui.launchers.launcher import make_ok_box
@@ -102,6 +102,7 @@ def launch_blocking_choices(text, choices, parent=None, title_fontsize=None,
 def launch_binary_choice(title_text, parent=None, title_fontsize=None,
                     title_fontcolor=None, main_color=None, yes_text="Yes",
                     no_text="No", blocking=True):
+    """Use <blocking> argument to decide wether or not the launch is blocking"""
     class Choice:
         value = False
     def yes():

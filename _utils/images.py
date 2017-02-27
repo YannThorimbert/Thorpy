@@ -59,13 +59,13 @@ def extract_frames(inGif, outFolder):
             break
     return True
 
-def get_resized_image(image, dims):
+def get_resized_image(image, dims, type_=min):
     """Fits whitout deformation <image> to <dims>. Return the scaled image.
-    Note that if dims ratio is not the same as image ratio, the highest side
-    fits the specified dimensions."""
+    Note that if dims ratio is not the same as image ratio, the max/min side
+    fits the specified dimensions, depending on the <type_> argument."""
     size = image.get_size()
     (fx, fy) = (float(dims[0]) / size[0], float(dims[1]) / size[1])
-    f = min(fx, fy)
+    f = type_(fx, fy)
     size_x = int(size[0] * f)
     size_y = int(size[1] * f)
     return pygame.transform.scale(image, (size_x, size_y))

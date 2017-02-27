@@ -11,6 +11,7 @@ from thorpy.elements.ghost import Ghost
 from thorpy.miscgui.storage import store
 from thorpy.elements.line import Line
 from thorpy.elements._wrappers import make_stored_ghost
+from thorpy.menus.tickedmenu import TickedMenu
 
 DONE, CANCEL, CLICK_QUIT = constants.LAUNCH_DONE, constants.LAUNCH_CANCEL, constants.LAUNCH_CLICK_QUIT
 
@@ -44,7 +45,7 @@ def get_launcher(launched, click_quit=False, launching=None, autocenter=True):
     return launcher
 
 def launch(launched, click_quit=False, launching=None, autocenter=True):
-    """Launch <launched> on the current menu."""
+    """Launch <launched> on the current menu. NON_BLOCKING"""
     launcher = get_launcher(launched, click_quit, launching, autocenter)
     launcher.launch()
     return launcher
@@ -249,4 +250,18 @@ class Launcher(object):
 ##        print(ev, "posted")
         self.remove_from_current_menu()
         self.postlaunch()
+
+
+def launch_blocking(element, after=None, func=None, auto_ok=True):
+    """Suppose <element> provides a way to call quit_current_menu"""
+    m = TickedMenu(element)
+    m.play()
+    if after:
+        after.unblit_and_reblit()
+    if func:
+        func()
+
+def auto_ok(element):
+    element.e_ok.user_func = functions.quit_menu_func
+    element.e_ok.user_params = {}
 

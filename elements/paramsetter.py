@@ -70,7 +70,7 @@ class ParamSetter(Box):
         """Returns a dictionnary of pairs (i, varname) containing elements."""
         for i, varname in self.handlers:
             value = self.varsets[i].get_value(varname)
-##            print(self.handlers[(i,varname)], value)
+            print(self.handlers[(i,varname)], value)
             self.handlers[(i,varname)].set_value(value)
 
 
