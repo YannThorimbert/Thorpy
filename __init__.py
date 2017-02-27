@@ -49,13 +49,12 @@ from thorpy.elements.browser import Browser
 from thorpy.elements.checker import Checker
 CheckBox = Checker
 from thorpy.elements.clickable import Clickable
-from thorpy.elements._wrappers import make_button, make_text, make_alert, make_image_button
+from thorpy.elements._wrappers import make_button, make_text, make_textbox, make_image_button
 from thorpy.elements._wrappers import launch_blocking_alert
 from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
 from thorpy.elements._wrappers import launch_blocking_choices
 from thorpy.elements._wrappers import launch_choices as launch_nonblocking_choices
 from thorpy.elements._wrappers import launch_binary_choice
-from thorpy.elements._wrappers import make_alert
 from thorpy.elements._wrappers import make_stored_ghost as make_group
 from thorpy.elements._wrappers import make_font_setter, make_fontsize_setter
 from thorpy.elements._wrappers import make_font_options_setter, make_display_options_setter, make_global_display_options

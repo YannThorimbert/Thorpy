@@ -172,3 +172,84 @@ class Title(object):
             return self._lines
         else:
             return self._text
+
+##from thorpy import Writer, Title
+
+
+##class RichText(object):
+##    """Handles font color, font size and indentation."""
+##    def __init__(self, default_font_size=thorpy.style.FONT_SIZE,
+##                        default_font_color=thorpy.style.FONT_COLOR,
+##                        indent="    ",
+##                        meta="*/",
+##                        font_name=None):
+##        self.fs = default_font_size
+##        self.fc = default_font_color
+##        self.default_fs = default_font_size
+##        self.default_fc = default_font_color
+##        self.indent = indent
+##        self.paragraphs = [""]
+##        self.colors = {"r":(255,0,0),"g":(0,255,0),"b":(0,0,255),"k":(0,0,0),
+##                        "w":(255,255,255)}
+##        self.writer = Writer(font_name,self.fc,self.fs)
+##
+##    def paragraph(self,*text):
+##        """Add a new paragraph"""
+##        content = self.indent
+##        for t in text:
+##            content += t
+##        self.paragraphs.append(content)
+##
+##    def more(self, *text):
+##        """Append to the current paragraph"""
+##        for t in text:
+##            self.paragraphs[-1] += t
+##
+##    #**<color>: r, g, b, k, y, w or any (r,g,b) tuple
+##    #**s<n> : e.g **s12
+##    #**d : all default
+##
+##    def apply_effect(self, command):
+##        if command == "d":
+##            self.fc = self.default_fc
+##            self.fs = self.default_fs
+##        elif command[0] == "(" and command[-1] == ")":
+##            rgb = command[1:len(command)-1]
+##            rgb = tuple([int(val) for val in rgb.split(",")])
+##            self.fc = rgb
+##        elif command in self.colors:
+##            self.fc = self.colors[command]
+##        elif command[0] == "s":
+##            size = int(command[1:])
+##            self.fs = size
+##        self.refresh
+##
+##    def get_title(self,text): #add bold and font name
+##        self.writer.set_color(self.fc)
+##        self.writer.set_size(self.fs)
+##        return Title(text, self.writer)
+##
+##    def render_text(self, text):
+##        fs = self.fs #we start with default size and color
+##        fc = self.fc
+##        i = 0
+##        imgs = []
+##        current_text = ""
+##        while True:
+##            c = text[i]
+##            current_text += c
+##            if c == "*":
+##                try:
+##                    is_command = c[i+1] == "*"
+##                except:
+##                    is_command = False
+##                if is_command:
+##                    title = self.get_title(current_text)
+##                    imgs
+##                    space = text[i+2,::].find(" ")
+##                    command = text[i+2:space]
+##                    self.apply_effect(command)
+##                    i += len(command)
+##                    continue
+##            img = self.writer.get_imgs(c)
+##            imgs.append()
