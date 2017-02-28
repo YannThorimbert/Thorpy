@@ -50,10 +50,10 @@ from thorpy.elements.checker import Checker
 CheckBox = Checker
 from thorpy.elements.clickable import Clickable
 from thorpy.elements._wrappers import make_button, make_text, make_textbox, make_image_button
-from thorpy.elements._wrappers import launch_blocking_alert
-from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
-from thorpy.elements._wrappers import launch_blocking_choices
-from thorpy.elements._wrappers import launch_choices as launch_nonblocking_choices
+##from thorpy.elements._wrappers import launch_blocking_alert
+##from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
+##from thorpy.elements._wrappers import launch_blocking_choices
+##from thorpy.elements._wrappers import launch_choices as launch_nonblocking_choices
 from thorpy.elements._wrappers import launch_binary_choice
 from thorpy.elements._wrappers import make_stored_ghost as make_group
 from thorpy.elements._wrappers import make_font_setter, make_fontsize_setter
@@ -108,6 +108,7 @@ from thorpy.miscgui.textpacker import pack_text
 from thorpy.miscgui.launchers.launcher import set_launcher, make_launcher, get_launcher
 from thorpy.miscgui.launchers.launcher import Launcher, make_ok_cancel_box, make_ok_box, launch_blocking, auto_ok
 from thorpy.miscgui.launchers.launcher import launch as launch_nonblocking
+from thorpy.elements.dialog import launch_blocking_alert, launch_blocking_choices
 
 from thorpy.painting.writer import Writer
 from thorpy.painting import painters
@@ -118,5 +119,7 @@ from thorpy.painting import mousecursor
 from thorpy.gamestools import basegrid
 from thorpy.gamestools.basegrid import BaseGrid
 from thorpy.gamestools.grid import Grid, PygameGrid
+
+from thorpy.painting.mousecursor import change_cursor
 
 del thorpy, pygame, os, sys

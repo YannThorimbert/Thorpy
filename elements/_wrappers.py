@@ -20,7 +20,7 @@ def launch_blocking_alert(text, parent=None, font_size=None, font_color=None,
                             ok_text="Ok"):
     if font_size is None: font_size = style.FONT_SIZE
     if font_color is None: font_color = style.FONT_COLOR
-    box_alert = make_alert(text, font_size, font_color, ok_text)
+    box_alert = make_textbox(text, font_size, font_color, ok_text)
     box_alert.center()
     from thorpy.menus.tickedmenu import TickedMenu
     m = TickedMenu(box_alert)
@@ -36,7 +36,7 @@ def launch_alert(text, font_size=None, font_color=None, ok_text="Ok"):
     if font_size is None: font_size = style.FONT_SIZE
     if font_color is None: font_color = style.FONT_COLOR
     from thorpy.miscgui.launchers.launcher import launch
-    box_alert = make_alert(text, font_size, font_color, ok_text)
+    box_alert = make_textbox(text, font_size, font_color, ok_text)
     box_alert.center()
     launch(box_alert)
 

@@ -151,15 +151,19 @@ class Inserter(Clickable):
         a.unblit(r)
         a.partial_blit(None, r)
 
+    def K_RETURN_pressed(self):
+        if self._activated:
+            self._value = self._inserted
+            self.exit()
+            functions.debug_msg("'" + self._inserted + "'", " inserted")
+
     def _reaction_keydown(self, pygame_event):
         if self._activated:
             if pygame_event.type == KEYDOWN:
                 if pygame_event.key == K_ESCAPE:
                     self.exit()
                 elif pygame_event.key == K_RETURN:  # way to exit saving insertion
-                    self._value = self._inserted
-                    self.exit()
-                    functions.debug_msg("'" + self._inserted + "'", " inserted")
+                    self.K_RETURN_pressed()
                 elif pygame_event.key == K_BACKSPACE:
                     if self._cursor_index > 0:
                         before = self._inserted[0:self._cursor_index-1]
@@ -242,8 +246,10 @@ class Inserter(Clickable):
                                    el=self,
                                    value=self._value)
             event.post(event_quit)
+            change_cursor(constants.CURSOR_NORMAL)
             if self._varlink_func:
                 self._varlink_func(self._value)
+
         for e in self.deactivate_on_focus:
             e.active = True
 

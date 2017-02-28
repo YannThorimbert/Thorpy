@@ -1,3 +1,4 @@
+from __future__ import division
 import thorpy, pygame
 
 class LifeBar(thorpy.Element):

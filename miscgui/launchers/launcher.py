@@ -1,6 +1,6 @@
 """It is elements' responsibilities to handle event in order to call launch
 and unlaunch. However a default behaviour can be set using launch()."""
-
+import pygame
 from pygame import event
 
 from thorpy.miscgui import constants, functions, parameters
@@ -45,7 +45,7 @@ def get_launcher(launched, click_quit=False, launching=None, autocenter=True):
     return launcher
 
 def launch(launched, click_quit=False, launching=None, autocenter=True):
-    """Launch <launched> on the current menu. NON_BLOCKING"""
+    """Launch <launched> on the current menu."""
     launcher = get_launcher(launched, click_quit, launching, autocenter)
     launcher.launch()
     return launcher
@@ -252,16 +252,40 @@ class Launcher(object):
         self.postlaunch()
 
 
-def launch_blocking(element, after=None, func=None, auto_ok=True):
-    """Suppose <element> provides a way to call quit_current_menu"""
+def launch_blocking(element, after=None, func=None, set_auto_ok=True,
+                    add_ok_enter=None):
+    if set_auto_ok:
+        auto_ok(element)
+    from thorpy.elements.inserter import Inserter
+    inserters = []
+    if add_ok_enter is None: #auto detect
+        add_ok_enter = True
+        for e in [element]+list(element.get_descendants()):
+            if isinstance(e, Inserter):
+                inserters.append(e)
+    if add_ok_enter:
+        reac = ConstantReaction(pygame.KEYDOWN, emulate_ok_press,
+                        {"key":pygame.K_RETURN}, {"element":element,
+                                                    "inserters":inserters})
+        element.add_reaction(reac)
     m = TickedMenu(element)
     m.play()
+    if add_ok_enter:
+        element.remove_reaction(reac)
     if after:
         after.unblit_and_reblit()
     if func:
         func()
 
+def emulate_ok_press(element=None, inserters=None):
+    if inserters:
+        for i in inserters:
+            i.K_RETURN_pressed()
+    e = event.Event(constants.THORPY_EVENT, id=constants.EVENT_DONE, el=element)
+    event.post(e)
+    functions.quit_menu_func()
+
 def auto_ok(element):
-    element.e_ok.user_func = functions.quit_menu_func
-    element.e_ok.user_params = {}
+    element.e_ok.user_func = emulate_ok_press
+    element.e_ok.user_params = {"element":element.e_ok}
 
