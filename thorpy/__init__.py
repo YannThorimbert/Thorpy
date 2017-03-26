@@ -1,4 +1,4 @@
-__version__ = "1.5.6a1"
+__version__ = "1.5.7"
 
 import sys
 import os
@@ -70,7 +70,7 @@ from thorpy.elements.keypressable import KeyPressable
 from thorpy.elements.keytogglable import KeyTogglable
 from thorpy.elements.paramsetter import ParamSetter
 from thorpy.elements.pressable import Pressable
-from thorpy.elements.lifebar import LifeBar
+from thorpy.elements.lifebar import LifeBar, SkillBar
 ##from thorpy.elements.text import MultilineText
 from thorpy.elements.text import OneLineText, MultilineText
 from thorpy.elements.slidersetter import SliderXSetter as SliderX

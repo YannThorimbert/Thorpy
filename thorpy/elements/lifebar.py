@@ -46,3 +46,23 @@ class LifeBar(thorpy.Element):
 
     def set_life(self,life):
         self.life_rect.width = int(life*self.life_width)
+
+class SkillBar(LifeBar):
+
+    @staticmethod
+    def make(text, m, M, color=(255,165,0), text_color=(0,0,0),
+                    size=(200,30), font_size=None):
+        return SkillBar(text,m,M,color,text_color,size,font_size)
+
+    def __init__(self, text, m, M, color=(255,165,0), text_color=(0,0,0),
+                    size=(200,30), font_size=None):
+        LifeBar.__init__(self,text,color,text_color,size,font_size)
+        self.m = m
+        self.M = M
+
+    def set_skill(self, value):
+        self.set_life(value)
+
+    def set_life(self,life):
+        value = (life - self.m)/(self.M-self.m)
+        LifeBar.set_life(self, value)

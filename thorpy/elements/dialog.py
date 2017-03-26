@@ -30,7 +30,7 @@ def make_textbox(title, text, font_size=None, font_color=None, ok_text="Ok",
 ##    return box
 
 def launch_blocking_alert(title, text, parent=None, font_size=None, font_color=None,
-                            ok_text="Ok", transp=True, alpha_dialog=150, func=None):
+                            ok_text="Ok", transp=True, alpha_dialog=200, func=None):
     if font_size is None: font_size = thorpy.style.FONT_SIZE
     if font_color is None: font_color = thorpy.style.FONT_COLOR
     box_alert = make_textbox(title, text, font_size, font_color, ok_text)

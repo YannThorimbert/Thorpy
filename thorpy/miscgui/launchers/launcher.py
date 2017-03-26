@@ -100,6 +100,7 @@ def make_ok_box(elements,ok_text="Ok"):
     box.finish()
     ok.user_params = {"el":box}
     box.e_ok = ok
+    print(box)
     return box
 
 def make_ok_cancel_box(elements,ok_text="Ok",cancel_text="Cancel"):
@@ -286,6 +287,7 @@ def emulate_ok_press(element=None, inserters=None):
     functions.quit_menu_func()
 
 def auto_ok(element):
-    element.e_ok.user_func = emulate_ok_press
-    element.e_ok.user_params = {"element":element.e_ok}
+    if hasattr(element,"e_ok"):
+        element.e_ok.user_func = emulate_ok_press
+        element.e_ok.user_params = {"element":element.e_ok}
 

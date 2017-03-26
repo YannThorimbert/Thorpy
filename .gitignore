@@ -1,0 +1,9 @@
+*.pyc
+*.pyo
+build/*
+dist/*
+*egg-info*
+*__pycache_
+*Thumbs.db*
+*pour_moi*
+thorpy.zip
