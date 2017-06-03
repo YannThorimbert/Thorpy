@@ -153,6 +153,8 @@ EXAMPLE_IMG = os.path.join(THORPY_PATH, "data/painting.jpg")
 
 DEFAULT_ICON = os.path.join(THORPY_PATH, "data/thorpy_icon.png")
 
+SMOKE_IMG = os.path.join(THORPY_PATH, "data/smoke.png")
+
 # default styles
 STYLE = "normal"
 STYLE_NAME = "text"

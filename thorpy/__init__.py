@@ -1,4 +1,4 @@
-__version__ = "1.5.7"
+__version__ = "1.5.8"
 
 import sys
 import os
@@ -117,8 +117,11 @@ from thorpy.painting import makeup
 from thorpy.painting import mousecursor
 
 from thorpy.gamestools import basegrid
+from thorpy.gamestools import commands
 from thorpy.gamestools.basegrid import BaseGrid
 from thorpy.gamestools.grid import Grid, PygameGrid
+from thorpy.gamestools.sound import SoundCollection #1.5.8
+from thorpy.gamestools import fx
 
 from thorpy.painting.mousecursor import change_cursor
 
