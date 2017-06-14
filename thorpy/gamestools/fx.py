@@ -66,7 +66,7 @@ class SmokeGenerator(object):
         return imgs
 
     def generate(self, q):
-        self.smokes.append(Smoke(q, self))
+        self.smokes.append(Smoke(V2(q), self))
 
     def kill_old_elements(self):
 ##        for s in self.smokes:
@@ -197,7 +197,7 @@ class FireSmokeGenerator(SmokeGenerator):
         return gen
 
     def generate(self, q):
-        self.smokes.append(FireSmoke(q, self))
+        self.smokes.append(FireSmoke(V2(q), self))
 
 class FireSmoke(Smoke):
 

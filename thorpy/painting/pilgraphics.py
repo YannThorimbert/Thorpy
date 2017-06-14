@@ -28,13 +28,13 @@ def pygame_surf_to_pil_img(surf, color_format="RGBA"):
         raise Exception("PIL was not found on this machine.")
     size = surf.get_size()
     pil_string_image = tostring(surf, color_format, False)
-    return Image.fromstring(color_format, size, pil_string_image)
+    return Image.frombytes(color_format, size, pil_string_image)
 
 def pil_img_to_pygame_surf(img, color_format="RGBA"):
     if not HAS_PIL:
         raise Exception("PIL was not found on this machine.")
     size = img.size
-    data = img.convert(color_format).tostring("raw", color_format)
+    data = img.convert(color_format).tobytes("raw", color_format)
     return fromstring(data, size, color_format)
 
 def get_black_white(surf, black=128, color_format="RGBA", convert=True):

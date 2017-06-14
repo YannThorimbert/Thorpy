@@ -14,7 +14,7 @@ def playing(fps):
 
 class Commands:
 
-    def __init__(self, element, delta_i=10):
+    def __init__(self, element, delta_i=-1):
         self.e = element
         self._initialize()
         self.last_key_action = -float("inf")

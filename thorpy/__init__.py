@@ -1,4 +1,4 @@
-__version__ = "1.5.8"
+__version__ = "1.5.9"
 
 import sys
 import os
@@ -79,6 +79,7 @@ from thorpy.elements.line import Line
 from thorpy.elements._makeuputils._halo import Halo
 from thorpy.elements._makeuputils._shadow import StaticShadow
 from thorpy.elements._makeuputils._shadow import DynamicShadow
+from thorpy.elements.animatedgif import AnimatedGif
 
 # menus:
 from thorpy.menus.tickedmenu import TickedMenu as Menu
@@ -86,7 +87,7 @@ from thorpy.menus.basicmenu import BasicMenu
 
 # miscellaneous stuff, constants, parameters
 from thorpy.miscgui.application import Application
-from thorpy.miscgui.reaction import Reaction, ConstantReaction
+from thorpy.miscgui.reaction import Reaction, ConstantReaction, add_time_reaction
 from thorpy.miscgui import constants, functions
 from thorpy.miscgui.functions import get_screen
 from thorpy.miscgui.functions import get_current_application as get_application
@@ -106,9 +107,11 @@ from thorpy.miscgui.pools import TogglablePool, RadioPool
 from thorpy.miscgui.textpacker import pack_text
 
 from thorpy.miscgui.launchers.launcher import set_launcher, make_launcher, get_launcher
-from thorpy.miscgui.launchers.launcher import Launcher, make_ok_cancel_box, make_ok_box, launch_blocking, auto_ok
+from thorpy.miscgui.launchers.launcher import Launcher, make_ok_cancel_box, make_ok_box
+from thorpy.miscgui.launchers.launcher import launch_blocking, auto_ok, set_as_done_button, set_as_cancel_button
 from thorpy.miscgui.launchers.launcher import launch as launch_nonblocking
 from thorpy.elements.dialog import launch_blocking_alert, launch_blocking_choices, make_textbox
+from thorpy.elements.dialog import launch_nonblocking_alert, launch_nonblocking_choices
 
 from thorpy.painting.writer import Writer
 from thorpy.painting import painters

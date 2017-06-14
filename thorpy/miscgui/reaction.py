@@ -1,3 +1,5 @@
+from thorpy.miscgui.constants import THORPY_EVENT, EVENT_TIME
+
 class Reaction(object):
     """Reacts to a pygame event <reacts_to> by running <reac_func>. Designed
     to belong to a specific element, normally through element.reactions.
@@ -52,3 +54,9 @@ class ConstantReaction(Reaction):
         """Tests if has to react to <event>"""
         if self._is_right_event(event):
             self.reac_func(**self.params)
+
+
+def add_time_reaction(element, func, event_args=None, params=None, reac_name=None):
+        reac = ConstantReaction(THORPY_EVENT, func, {"id":EVENT_TIME}, params,
+                reac_name)
+        element.add_reaction(reac)

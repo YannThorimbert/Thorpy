@@ -103,6 +103,14 @@ def make_ok_box(elements,ok_text="Ok"):
     print(box)
     return box
 
+def set_as_done_button(button, element_to_unlaunch):
+    button.user_func = post_done
+    button.user_params = {"el":element_to_unlaunch}
+
+def set_as_cancel_button(button, element_to_unlaunch):
+    button.user_func = post_cancel
+    button.user_params = {"el":element_to_unlaunch}
+
 def make_ok_cancel_box(elements,ok_text="Ok",cancel_text="Cancel"):
     ok = make_button(ok_text)
     ok.user_func = post_done

@@ -30,7 +30,7 @@ def make_textbox(title, text, font_size=None, font_color=None, ok_text="Ok",
 ##    return box
 
 def launch_blocking_alert(title, text, parent=None, font_size=None, font_color=None,
-                            ok_text="Ok", transp=True, alpha_dialog=200, func=None):
+                            ok_text="Ok", transp=False, alpha_dialog=200, func=None):
     if font_size is None: font_size = thorpy.style.FONT_SIZE
     if font_color is None: font_color = thorpy.style.FONT_COLOR
     box_alert = make_textbox(title, text, font_size, font_color, ok_text)
@@ -77,3 +77,37 @@ def launch_blocking_choices(text, choices, parent=None, title_fontsize=None,
         box.update()
     if func:
         func()
+
+
+def launch_nonblocking_alert(title, text, parent=None, font_size=None,
+                             font_color=None, ok_text="Ok", transp=False,
+                             alpha_dialog=200, func=None):
+    if font_size is None: font_size = thorpy.style.FONT_SIZE
+    if font_color is None: font_color = thorpy.style.FONT_COLOR
+    box_alert = make_textbox(title, text, font_size, font_color, ok_text)
+    box_alert.center()
+    if transp:
+        color_transp = tuple(list(thorpy.style.DEF_COLOR)[:3]+[alpha_dialog])
+        box_alert.set_main_color(color_transp)
+    thorpy.launch_nonblocking(box_alert)
+
+
+def launch_nonblocking_choices(text, choices, parent=None, title_fontsize=None,
+                            title_fontcolor=None, func=None):
+    """choices are tuple (text,func)"""
+    from thorpy.miscgui.launchers.launcher import post_done
+    if title_fontsize is None: title_fontsize = thorpy.style.FONT_SIZE
+    if title_fontcolor is None: title_fontcolor = thorpy.style.FONT_COLOR
+    elements = [thorpy.make_button(t,f) for t,f in choices]
+    ghost = thorpy.make_group(elements)
+    e_text = thorpy.make_text(text, title_fontsize, title_fontcolor)
+    box = thorpy.Box.make([e_text, ghost])
+    box.center()
+    from thorpy.miscgui.reaction import ConstantReaction
+    for e in elements:
+        reac = ConstantReaction(thorpy.constants.THORPY_EVENT,
+                                post_done,
+                                {"id":thorpy.constants.EVENT_UNPRESS, "el":e},
+                                {"el":box})
+        box.add_reaction(reac)
+    thorpy.launch_nonblocking(box)
