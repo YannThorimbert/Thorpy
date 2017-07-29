@@ -1,5 +1,6 @@
 import pygame
 from pygame import Rect
+from pygame import display
 
 from thorpy.miscgui import constants, functions
 from thorpy.miscgui.state import get_void_state
@@ -32,6 +33,7 @@ class Ghost(object):
 
         <elements>: list of the children elements.
         """
+        self.surface = display.get_surface()
         if not elements:
             elements = []
         self.normal_params = init_params(normal_params)
@@ -356,6 +358,38 @@ class Ghost(object):
             rects.extend(e.get_fus_rects(state))
         return rects
 
+##    def unblit_and_reblit_func(self, func, **kwargs):
+##        """Unblit and update the element, then calls a function, and finally
+##        blit and update the element.
+##        Faster than unblit(), update(), func(), blit(), update().
+##        <func> : the function to be called before reblitting the element.
+##        """
+##        rects = self.get_fus_rects()
+##        rect = rects[0].unionall(rects[1:]) #handle case where len(rects) = 0or1
+##        func(**kwargs)
+##        a = self.get_oldest_ancester()
+##        a.partial_blit(exception=self, rect=rect)
+##        pygame.display.update(rect)
+##        self.blit()
+##        self.update()
+
+##    def unblit_and_reblit_func(self, func, **kwargs):
+##        """Unblit and update the element, then calls a function, and finally
+##        blit and update the element.
+##        Faster than unblit(), update(), func(), blit(), update().
+##        <func> : the function to be called before reblitting the element.
+##        """
+##        func(**kwargs)
+##        a = self.get_oldest_ancester()
+##        a.blit()
+##        pygame.display.flip()
+##
+##    def unblit_and_reblit(self):
+##        self.unblit()
+##        self.blit()
+####        self.update()
+##        pygame.display.flip()
+
     def unblit_and_reblit_func(self, func, **kwargs):
         """Unblit and update the element, then calls a function, and finally
         blit and update the element.
@@ -486,6 +520,9 @@ class Ghost(object):
         if top is not None:
             y_shift = top - self._states[state].ghost_rect.top
         self.move((x_shift, y_shift))
+
+    def set_center_pos(self, pos, state=constants.STATE_NORMAL):
+        self.set_center(pos, state)
 
     def set_center(self, pos, state=constants.STATE_NORMAL):
         """Set all the states'centers to pos, using state <state> as reference.
@@ -749,6 +786,8 @@ class Ghost(object):
         """
         if not element:
             center = self.surface.get_rect().center
+        elif element == "screen":
+            center = functions.get_screen().get_rect().center
         else:
             center = element.get_storer_center()
         x = center[0]
@@ -762,6 +801,13 @@ class Ghost(object):
         if not axis[1]:
             y = None
         self.set_center((x, y))
+
+    def recenter(self, x=True, y=False):
+        """Recenter self on self.father"""
+        if self.father:
+            self.center(element=self.father, axis=(x,y))
+        else:
+            self.center(axis=(x,y))
 
     def storage_center(self, x_shift=None, y_shift=None, element=None,
                        axis=(True,True)):

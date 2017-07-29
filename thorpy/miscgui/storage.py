@@ -125,6 +125,9 @@ def store(frame, elements=None, mode="v", x="auto", y="auto", margin=None,
         rect = frame
         if elements is None:
             elements = []
+##    elif frame.__class__.__name__ == "Box":
+##        raise Exception("You cannot call store on a Box instance."+\
+##                            "The Box element has its own store method.")
     else:
         if elements is None:
             elements = frame.get_elements()

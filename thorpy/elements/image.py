@@ -13,7 +13,6 @@ class Image(Element):
         <path>: the path to the image.
         <color>: if path is None, use this color instead of image.
         """
-        print("type2",path)
         img = Image(path, color, colorkey=colorkey)
         img.finish()
         return img

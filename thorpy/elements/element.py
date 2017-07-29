@@ -298,15 +298,21 @@ class Element(_Screened, Ghost):
 
 
     def fit_children(self, margins=None, state=constants.STATE_NORMAL,
-                     only_children=True):
+                     only_children=True, axis=(True,True)):
         """Scale to englobe children"""
         if margins is None: margins=style.MARGINS
         fr = self.get_family_rect(state, only_children=only_children)
-        width = fr.width
-        height = fr.height
-        self.set_size((width+2*margins[0], height+2*margins[1]))
-        x = self.get_storer_rect().x - fr.x + margins[0]
-        y = self.get_storer_rect().y - fr.y + margins[1]
+        width, height = None, None
+        if axis[0]:
+            width = fr.width + 2*margins[0]
+        if axis[1]:
+            height = fr.height + 2*margins[1]
+        self.set_size((width, height))
+        x, y = 0, 0
+        if axis[0]:
+            x = self.get_storer_rect().x - fr.x + margins[0]
+        if axis[1]:
+            y = self.get_storer_rect().y - fr.y + margins[1]
         for e in self.get_elements():
             e.move((x, y))
         if self._lift:
@@ -583,6 +589,10 @@ class Element(_Screened, Ghost):
             self._jail = jail
             if lock:
                 self._lock_jail = True
+
+    def force_unjailed(self):
+        self._jail = None
+        self._lock_jail = False
 
 
     def set_prison(self):

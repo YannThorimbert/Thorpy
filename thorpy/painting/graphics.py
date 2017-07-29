@@ -572,7 +572,78 @@ def aadashed_lines(surface, points, N=50, start=True):
         else:
             pass
 
+from thorpy.painting.pilgraphics import get_shadow as  _pilshadow
+from math import tan, pi
+from pygame import Surface
+from pygame.transform import rotate, flip, scale
 
+def get_shadow(target_img, shadow_radius=2, black=255, color_format="RGBA",
+                alpha_factor=0.85, decay_mode="exponential", color=(0,0,0),
+                sun_angle=30., vertical=True, angle_mode="flip", mode_value=(False, True)):
+        r = target_img.get_rect()
+        #the shadow will be larger in order to make free space for fadeout.
+        r.inflate_ip(2*shadow_radius, 2*shadow_radius)
+        img = Surface(r.size)
+        img.fill((255, 255, 255, 255))
+        img.blit(target_img, (shadow_radius, shadow_radius))
+        if sun_angle <= 0.:
+            raise Exception("Sun angle must be greater than zero.")
+        elif sun_angle != 45. and vertical:
+            w, h = img.get_size()
+            new_h = h / tan(sun_angle * pi / 180.)
+            screen_size = functions.get_screen().get_size()
+            new_h = abs(int(min(new_h, max(screen_size))))
+            img = scale(img, (w, new_h))
+        if angle_mode == "flip":
+            img = flip(img, mode_value[0], mode_value[1])
+        elif self.angle_mode == "rotate":
+            img = rotate(img, mode_value)
+        else:
+            raise Exception("angle_mode not available: " + str(angle_mode))
+        shadow =             _pilshadow(img,
+                                        radius=shadow_radius,
+                                        black=black,
+                                        alpha_factor=alpha_factor,
+                                        decay_mode=decay_mode,
+                                        color=color)
+        #
+        W, H = functions.get_screen_size()
+        shadow.set_alpha(-1, RLEACCEL)
+        return shadow.convert_alpha()
+
+
+##from math import tan, pi
+##from pygame import Surface
+##from pygame.transform import rotate, flip, scale
+##def get_shadow(src, radius, sun_angle, vertical, angle_mode, mode_value):
+##    r = src.get_rect()
+##    #the shadow will be larger in order to make free space for fadeout.
+##    r.inflate_ip(2*radius, 2*radius)
+##    img = Surface(r.size)
+##    img.fill((255, 255, 255, 255))
+##    img.blit(src, (radius, radius))
+##    if sun_angle <= 0.:
+##        raise Exception("Sun angle must be greater than zero.")
+##    elif sun_angle != 45. and vertical:
+##        w, h = img.get_size()
+##        new_h = h / tan(sun_angle * pi / 180.)
+##        screen_size = functions.get_screen_size()
+##        new_h = abs(int(min(new_h, max(screen_size))))
+##        img = scale(img, (w, new_h))
+##    if angle_mode == "flip":
+##        img = flip(img, mode_value[0], mode_value[1])
+##    elif angle_mode == "rotate":
+##        img = rotate(img, mode_value)
+##    else:
+##        raise Exception("angle_mode not available: " + str(angle_mode))
+##    shadow = pilgraphics.get_shadow(img,
+##                                    radius=radius,
+##                                    black=self.black,
+##                                    alpha_factor=self.alpha_factor,
+##                                    decay_mode=self.decay_mode,
+##                                    color=self.color)
+##    return shadow
+##from thorpy.painting import pilgraphics
 
 ##
 # def dashedRect(surface, color, rect, N=-3, start=False):

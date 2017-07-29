@@ -252,7 +252,9 @@ class Launcher(object):
         self.prelaunch()
         self.add_to_current_menu()
 
-    def unlaunch(self, what):
+    def unlaunch(self, what=None):
+        if what is None:
+            what = self.launched
         ev = event.Event(constants.THORPY_EVENT, id=constants.EVENT_UNLAUNCH,
                         launcher=self, what=what)
         event.post(ev)

@@ -155,6 +155,9 @@ DEFAULT_ICON = os.path.join(THORPY_PATH, "data/thorpy_icon.png")
 
 SMOKE_IMG = os.path.join(THORPY_PATH, "data/smoke.png")
 
+HEART_FULL = os.path.join(THORPY_PATH, "data/heart_full.png")
+HEART_EMPTY = os.path.join(THORPY_PATH, "data/heart_empty.png")
+
 # default styles
 STYLE = "normal"
 STYLE_NAME = "text"

@@ -7,7 +7,12 @@ class Monitor:
         else:
             getattr(self,name).append(time.clock())
 
-    def show(self, letters):
+    def show(self, letters=None):
+        if not letters:
+            letters = []
+            for letter in "abcdefghijklmnopqrstuvwxyz":
+                if hasattr(self,letter):
+                    letters.append(letter)
         tot = [0.]*len(letters)
         L = len(getattr(self,letters[0]))
         for i in range(1,len(letters)):

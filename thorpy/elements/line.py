@@ -5,7 +5,7 @@ class Line(Element):
     """Vertical or horizontal graphical separation Line."""
 
     @staticmethod
-    def make(size, type_, color=None, pressed=True):
+    def make(size, type_="h", color=None, pressed=True):
         """Vertical or horizontal graphical separation Line.
         <size>: the size in pixel (single int value).
         <type>: either 'horizontal', 'h' or 'vertical', 'v'.

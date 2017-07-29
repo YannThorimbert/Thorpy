@@ -12,7 +12,7 @@ class _Screened(object):
 
     def __init__(self):
         """Object that is designed to be blitted on the screen."""
-        self.surface = display.get_surface()
+##        self.surface = display.get_surface()
         self._old_clips = [None]  # fifo
 
     def _add_old_clip(self):

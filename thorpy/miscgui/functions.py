@@ -75,14 +75,14 @@ def debug_msg(*content):
         str_content = list()
         for e in content:
             str_content.append(str(e) + " ")
-        print("THOR DEBUG : " + ''.join(str_content))
+        print("Thorpy debug : " + ''.join(str_content))
 
 def info_msg(*content):
     if application.DEBUG_MODE:
         str_content = list()
         for e in content:
             str_content.append(str(e) + " ")
-        print("THOR INFO : " + ''.join(str_content))
+        print("Thorpy info : " + ''.join(str_content))
 
 def get_fps():
     return application._CURRENT_MENU.clock.get_fps()

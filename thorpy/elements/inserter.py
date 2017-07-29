@@ -331,3 +331,6 @@ class Inserter(Clickable):
         self.visible = value #deactivate text insertion
         self.cursor.visible = value #deactivate cursor
         self._name_element.visible = value #deactivate hoverable title
+
+##    def reac_click(self, e):
+

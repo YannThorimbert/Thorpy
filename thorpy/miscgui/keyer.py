@@ -5,6 +5,8 @@ from pygame.locals import *
 
 from thorpy.miscgui.functions import debug_msg
 
+
+
 MODIFIERS = [K_RSHIFT,
              K_LSHIFT,
              K_RCTRL,
@@ -23,23 +25,35 @@ QWERTZ_SPECIALS = {(K_RALT, K_3): K_HASH,                        # "#"
                    (K_LSHIFT, K_LESS): K_GREATER,                # ">"
                    (K_LSHIFT, K_3): K_ASTERISK,                  # "*"
                    }
+SPECIALS = {}
 
 
 QWERTZ_CHANGES = {K_z: K_y,
                   K_y: K_z,
                   K_SLASH: K_MINUS}  # example
+CHANGES = {}
 
+
+def set_qwertz():
+    global SPECIALS, CHANGES
+    SPECIALS = QWERTZ_SPECIALS.copy()
+    CHANGES = QWERTZ_CHANGES.copy()
+
+def set_default():
+    global SPECIALS, CHANGES
+    SPECIALS = {}
+    CHANGES = {}
 
 class Keyer(object):
     # Penser a permettre les set blocked et allowed
 
     def __init__(self, specials=None, modifiers=None, changes=None):
         if not specials:
-            specials = QWERTZ_SPECIALS
+            specials = SPECIALS
         if not modifiers:
             modifiers = MODIFIERS
         if not changes:
-            changes = QWERTZ_CHANGES
+            changes = CHANGES
         self.specials = specials
         self.changes = changes
         self.modifiers = modifiers

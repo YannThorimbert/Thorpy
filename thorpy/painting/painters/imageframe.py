@@ -14,7 +14,7 @@ class ImageFrame(Painter):
         self.img_path = img_path
         self.colorkey = colorkey
         self.mode = mode
-        print("type3",img_path)
+##        print("type3",img_path)
         size = list(self.init_get_img().get_size())
         W, H = functions.get_screen_size()
         if self.mode == "cut":

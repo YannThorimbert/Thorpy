@@ -1,5 +1,6 @@
 from __future__ import division
 
+import pygame
 from pygame.rect import Rect
 
 from thorpy.elements._sliderutils._dragger import DraggerX, DraggerY
@@ -22,11 +23,15 @@ class _Slider(object):
     def get_width_val(self):
         return self.limvals[1] - self.limvals[0]
 
-    def pix_to_val(self, pix, x0):
+    def pix_to_val(self, pix, x0=None):
+        if x0 is None:
+            x0 = self._get_slide_rect().x
         fraction = float((pix - x0)) / self._length
         return self.limvals[0] + fraction * self.get_width_val()
 
-    def val_to_pix(self, val, x0):
+    def val_to_pix(self, val, x0=None):
+        if x0 is None:
+            x0 = self._get_slide_rect().x
         fraction = float(val - self.limvals[0]) / self.get_width_val()
         return int(round(fraction * self._length + x0))
 
@@ -51,6 +56,7 @@ class _GraphicalSlider(_Slider, Element):
 ##                                  {"button": parameters.WHEELDOWN_BUTTON})
         self._setup()
         self.active_wheel = False
+
 
     def get_storer_rect(self):
         return self.get_family_rect(constants.STATE_NORMAL)
@@ -174,6 +180,27 @@ class SliderX(_GraphicalSlider):
         super(SliderX, self).__init__(length, limvals, text, elements)
         self._drag_element.finish()
         self.add_elements(list([self._drag_element]))
+        reac_click = Reaction(pygame.MOUSEBUTTONDOWN,self._func_reac_click)
+        self.add_reaction(reac_click)
+
+    def _func_reac_click(self, e):
+        rel = pygame.mouse.get_rel()
+##        if rel[0] == 0 and rel[1] == 0:
+        if self.get_fus_rect().collidepoint(e.pos):
+            self._drag_element.unblit()
+            self._drag_element.update()
+            value = self.pix_to_val(e.pos[0])
+            if value < self.limvals[0]:
+                value = self.limvals[0]
+            elif value > self.limvals[1]:
+                value = self.limvals[1]
+            self._drag_element.place_at(value)
+            self.father.refresh_value()
+            self.unblit_and_reblit()
+            drag_event = pygame.event.Event(constants.THORPY_EVENT,
+                                            id=constants.EVENT_SLIDE,
+                                            el=self.father)
+            pygame.event.post(drag_event)
 
     def finish(self):
         Element.finish(self)
@@ -249,7 +276,9 @@ class SliderX(_GraphicalSlider):
 
 class _SliderXSetter(SliderX): #donner ca au father, pas sliderx
 
-    def pix_to_val(self, pix, x0): #!!!!!
+    def pix_to_val(self, pix, x0=None): #!!!!!
+        if x0 is None:
+            x0 = self._get_slide_rect().x
         value = SliderX.pix_to_val(self, pix, x0)
         if self.father._value_type is float:
             return round(value, self.father._round_decimals)

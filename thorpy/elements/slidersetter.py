@@ -58,6 +58,12 @@ class SliderXSetter(Ghost):
         value = str(self._slider_el.get_value())
         self._value_element.set_text(value)
 
+    def set_font_color(self, color):
+        self._name_element.set_font_color(color)
+
+    def set_font_size(self, size):
+        self._name_element.set_font_size(size)
+
     def set_value(self, value):
         self._slider_el.get_dragger().place_at(value)
         self.refresh_value()

@@ -118,8 +118,8 @@ class BrowserLight(Element):
     def _get_folders_and_files(self):
         try:
             titles = listdir(self.path)
-        except WindowsError:
-            functions.debug_msg("Access denied to this folder/file. Try running\
+        except:
+            print("Access denied to this folder/file. Try running\
                                  the script as administrator.")
             return [], []
         folders = []

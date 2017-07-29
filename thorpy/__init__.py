@@ -49,7 +49,7 @@ from thorpy.elements.browser import Browser
 from thorpy.elements.checker import Checker
 CheckBox = Checker
 from thorpy.elements.clickable import Clickable
-from thorpy.elements._wrappers import make_button, make_text, make_image_button
+from thorpy.elements._wrappers import make_button, make_text, make_image_button, make_menu_button
 ##from thorpy.elements._wrappers import launch_blocking_alert
 ##from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
 ##from thorpy.elements._wrappers import launch_blocking_choices
@@ -105,6 +105,7 @@ from thorpy.miscgui.theme import set_theme as set_theme
 from thorpy.miscgui.metadata import MetaDataManager
 from thorpy.miscgui.pools import TogglablePool, RadioPool
 from thorpy.miscgui.textpacker import pack_text
+import thorpy.miscgui.keyer as keyer
 
 from thorpy.miscgui.launchers.launcher import set_launcher, make_launcher, get_launcher
 from thorpy.miscgui.launchers.launcher import Launcher, make_ok_cancel_box, make_ok_box
@@ -125,6 +126,8 @@ from thorpy.gamestools.basegrid import BaseGrid
 from thorpy.gamestools.grid import Grid, PygameGrid
 from thorpy.gamestools.sound import SoundCollection #1.5.8
 from thorpy.gamestools import fx
+from thorpy.gamestools import hud
+from thorpy.gamestools.monitoring import Monitor
 
 from thorpy.painting.mousecursor import change_cursor
 

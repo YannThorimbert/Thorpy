@@ -57,7 +57,7 @@ def get_blurred(surf, radius=2, color_format="RGBA"):
 def get_shadow(surf, radius=2, black=255, color_format="RGBA", alpha_factor=255,
                decay_mode="exponential", color=(0,0,0)):
     if not HAS_PIL:
-        raise Exception("PIL was not found on this machine.")
+        raise Exception("PIL was not found on this machine. Cannot build shadow")
     img = get_black_white(surf, black, color_format)
     img = img.filter(ImageFilter.GaussianBlur(radius))
     img = pil_img_to_pygame_surf(img, color_format)

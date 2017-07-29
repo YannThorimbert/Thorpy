@@ -7,6 +7,7 @@ from thorpy.elements.box import Box
 from thorpy.miscgui.storage import store
 from thorpy.miscgui import constants, style, functions
 from thorpy.painting.painters.imageframe import ButtonImage
+import thorpy.painting.graphics as graphics
 
 def make_textbox(text, font_size=None, font_color=None, ok_text="Ok"):
     if font_size is None: font_size = style.FONT_SIZE
@@ -16,21 +17,21 @@ def make_textbox(text, font_size=None, font_color=None, ok_text="Ok"):
     box = make_ok_box([e_text], ok_text=ok_text)
     return box
 
-def launch_blocking_alert(text, parent=None, font_size=None, font_color=None,
-                            ok_text="Ok"):
-    if font_size is None: font_size = style.FONT_SIZE
-    if font_color is None: font_color = style.FONT_COLOR
-    box_alert = make_textbox(text, font_size, font_color, ok_text)
-    box_alert.center()
-    from thorpy.menus.tickedmenu import TickedMenu
-    m = TickedMenu(box_alert)
-    box_alert.get_elements_by_text(ok_text)[0].user_func = functions.quit_menu_func
-    box_alert.get_elements_by_text(ok_text)[0].user_params = {}
-    m.play()
-    box_alert.unblit()
-    if parent:
-        parent.partial_blit(None, box_alert.get_fus_rect())
-        box_alert.update()
+##def launch_blocking_alert(text, parent=None, font_size=None, font_color=None,
+##                            ok_text="Ok"):
+##    if font_size is None: font_size = style.FONT_SIZE
+##    if font_color is None: font_color = style.FONT_COLOR
+##    box_alert = make_textbox(text, font_size, font_color, ok_text)
+##    box_alert.center()
+##    from thorpy.menus.tickedmenu import TickedMenu
+##    m = TickedMenu(box_alert)
+##    box_alert.get_elements_by_text(ok_text)[0].user_func = functions.quit_menu_func
+##    box_alert.get_elements_by_text(ok_text)[0].user_params = {}
+##    m.play()
+##    box_alert.unblit()
+##    if parent:
+##        parent.partial_blit(None, box_alert.get_fus_rect())
+##        box_alert.update()
 
 def launch_alert(text, font_size=None, font_color=None, ok_text="Ok"):
     if font_size is None: font_size = style.FONT_SIZE
@@ -310,3 +311,28 @@ def make_global_display_options(fn, text):
     box = make_ok_box([disp_options, font_options], "Return")
     return make_launcher(box, text)
 ##    return box
+
+def make_menu_button(frame_size=(40,40), lines_size=(25,2), lines_radius=1,
+                     lines_color=(0,0,0), n=3):
+    e = make_button("")
+    e.set_size(frame_size)
+    imgs = {}
+    for state in e.get_states():
+        img = e.get_image(state)
+        frame = img.get_rect()
+        line = graphics.get_aa_round_rect(lines_size, lines_radius, lines_color)
+        rect = line.get_rect()
+        rect.centerx = frame.centerx
+        margin = frame.h//3
+        gap = (frame.h - 2*margin - n*rect.h) // (n-1)
+        for y in range(n):
+            rect.y = margin + y*(gap+rect.h)
+            img.blit(line, rect.topleft)
+        imgs[state] = img
+    e = make_image_button(imgs[constants.STATE_NORMAL],
+                            imgs[constants.STATE_PRESSED],
+                            imgs[constants.STATE_NORMAL])
+    return e
+
+
+

@@ -6,6 +6,7 @@ try:
 except ImportError:
     HAS_PIL = False
 
+import pygame
 from thorpy.elements.image import Image as ThorpyImage
 from thorpy.painting.pilgraphics import pil_img_to_pygame_surf
 from thorpy.miscgui.reaction import ConstantReaction
@@ -61,6 +62,8 @@ def processImage(path):
     '''
     Iterate the GIF, extracting each frame.
     '''
+    if not path.endswith(".gif") or path.endswith(".GIF"):
+        return [thorpy.load_image(path)]
     mode = analyseImage(path)['mode']
     im = Image.open(path)
     i = 0
@@ -75,6 +78,7 @@ def processImage(path):
             If not, we need to apply the global palette to the new frame.
             '''
             if not im.getpalette():
+
                 im.putpalette(p)
             new_frame = Image.new('RGBA', im.size)
             '''
@@ -97,33 +101,51 @@ def processImage(path):
 
 class AnimatedGif(ThorpyImage):
     @staticmethod
-    def make(path=None, colorkey=None):
+    def make(path=None, colorkey=None, low=2, nread=float("inf")):
         """Image element.
         <path>: the path to the image.
         <color>: if path is None, use this color instead of image.
         """
-        img = AnimatedGif(path, colorkey=colorkey)
+        img = AnimatedGif(path, colorkey=colorkey, low=low, nread=nread)
         img.finish()
         return img
 
     def __init__(self, path, elements=None, normal_params=None, colorkey=None,
-                 start_frame=0, low=2):
+                 start_frame=0, low=2, nread=float("inf")):
         if not HAS_PIL:
             print("You need to have PIL installed in order to use animated gifs")
         ThorpyImage.__init__(self, path=path, elements=elements, normal_params=normal_params, colorkey=colorkey)
         self.colorkey = colorkey
-        self.frames = processImage(path)
+        if isinstance(path,list):
+            self.frames = frames
+        else:
+            self.frames = processImage(path)
         self.current_frame = start_frame
         self.low = low
+        self.nread = nread
         self.i = 0
         thorpy.add_time_reaction(self, self.next_frame)
         for img in self.frames:
             img.set_colorkey(self.colorkey)
 
     def next_frame(self):
-        if self.i%self.low == 0:
+        if self.i%self.low == 0 and self.nread>0:
             self.current_frame += 1
-            self.current_frame %= len(self.frames)
+            if self.current_frame == len(self.frames):
+                self.current_frame = 0
+                self.nread -= 1
             self.set_image(self.frames[self.current_frame])
             self.unblit_and_reblit()
+        if self.nread <= 0:
+            self.set_visible(False)
         self.i += 1
+
+    def resize_frames(self, size):
+        self.set_size(size)
+        new_frames = []
+        for img in self.frames:
+            newone = pygame.transform.smoothscale(img, size)
+            newone.set_colorkey(self.colorkey)
+            new_frames.append(newone)
+        self.frames = new_frames
+
