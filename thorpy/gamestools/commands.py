@@ -44,3 +44,11 @@ class Commands:
         if self.refresh:
             self.refresh()
         self.i += 1
+
+    def add_reaction(self, key, func):
+        if key in self.reac:
+            raise Exception("There is already a func for this key")
+        self.reac[key] = func
+
+    def default_func(self):
+        pass

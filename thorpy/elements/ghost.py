@@ -124,6 +124,17 @@ class Ghost(object):
                                 el=self)
         pygame.event.post(ev)
 
+    def set_visible(self, value):
+        pass
+
+    def clamp(self, other):
+        """<other> can either be a rect or another element"""
+        r = self.get_fus_rect()
+        if isinstance(other, pygame.Rect):
+            r.clamp_ip(other)
+        else:
+            r.clamp_ip(other.get_fus_rect())
+        self.set_center(r.center)
 
     def add_state(self, key, state=None):
         """Add state"""
@@ -554,6 +565,13 @@ class Ghost(object):
         for r in self._reactions:
             if r.reac_name == reaction_name:
                 return r
+
+    def get_reaction_by_event_type(self, event_type):
+        for r in self._reactions:
+            if r.reacts_to == event_type:
+                return r
+
+
 
     def add_reaction(self, reaction, index=None):
         """If reaction's name is not None and already exists in self._reactions,

@@ -1,4 +1,5 @@
 from thorpy.miscgui.constants import THORPY_EVENT, EVENT_TIME
+import pygame
 
 class Reaction(object):
     """Reacts to a pygame event <reacts_to> by running <reac_func>. Designed
@@ -57,6 +58,26 @@ class ConstantReaction(Reaction):
 
 
 def add_time_reaction(element, func, event_args=None, params=None, reac_name=None):
-        reac = ConstantReaction(THORPY_EVENT, func, {"id":EVENT_TIME}, params,
-                reac_name)
-        element.add_reaction(reac)
+    reac = ConstantReaction(THORPY_EVENT, func, {"id":EVENT_TIME}, params,
+            reac_name)
+    element.add_reaction(reac)
+
+def add_keydown_reaction(element, key, func, event_args=None, params=None,
+                            reac_name=None):
+    reac = ConstantReaction(pygame.KEYDOWN, func, {"key":key}, params,
+            reac_name)
+    element.add_reaction(reac)
+
+def add_keyup_reaction(element, key, func, event_args=None, params=None,
+                            reac_name=None):
+    reac = ConstantReaction(pygame.KEYUP, func, {"key":key}, params,
+            reac_name)
+    element.add_reaction(reac)
+
+def add_mousemotion_reaction(element, func, event_args=None, params=None,
+                            reac_name=None):
+    reac = ConstantReaction(pygame.KEYUP, func, {"key":key}, params,
+            reac_name)
+    element.add_reaction(reac)
+
+

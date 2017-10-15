@@ -109,3 +109,37 @@ class ButtonImage(ImageFrame):
         else:
             surface = ImageFrame.get_image(self)
         return surface
+
+class ButtonImageFrame(ButtonImage):
+
+    def __init__(self, painter, img_normal, img_pressed=None, img_hover=None, alpha=255,
+                 colorkey=None, clip=None, pressed=False, mode=None,
+                 hovered=False):
+        ImageFrame.__init__(self, img_normal, alpha, colorkey, clip, pressed,
+                            mode, hovered)
+        img_pressed = img_normal if not img_pressed else img_pressed
+        img_hover = img_normal if not img_hover else img_hover
+        self.img_pressed = img_pressed
+        self.img_hover = img_hover
+        self.painter = painter
+
+    def get_image(self):
+        if self.pressed:
+            if isinstance(self.img_pressed, str):  # load image
+                img = load_image(self.img_pressed)
+            else:  # take image
+                img = self.img_pressed
+        elif self.hovered:
+            if isinstance(self.img_hover, str):  # load image
+                img = load_image(self.img_hover)
+            else:  # take image
+                img = self.img_hover
+        else:
+            img = ImageFrame.get_image(self)
+        #
+        self.painter.pressed = self.pressed
+        surface = self.painter.get_image()
+        r = img.get_rect()
+        r.center = surface.get_rect().center
+        surface.blit(img, r.topleft)
+        return surface

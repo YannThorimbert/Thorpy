@@ -141,6 +141,15 @@ def make_image_button(img_normal, img_pressed=None, img_hover=None,
     e.finish()
     return e
 
+def make_image_button_with_frame(img_normal, img_pressed=None, img_hover=None,
+                        alpha=255, colorkey=None, text=""):
+    e = Clickable(text)
+    painter = ButtonImage(img_normal, img_pressed, img_hover, alpha, colorkey)
+    e.set_painter(painter)
+    e.finish()
+    return e
+
+
 def make_text(text, font_size=None, font_color=None):
     if font_size is None: font_size = style.FONT_SIZE
     if font_color is None: font_color = style.FONT_COLOR
@@ -305,6 +314,7 @@ def make_display_options_setter(fn, const_text="",
     return button
 
 def make_global_display_options(fn, text):
+    """Returns a button to launch font and display options"""
     from thorpy.miscgui.launchers.launcher import make_ok_box, make_launcher
     font_options = make_font_options_setter(fn, "Font options")
     disp_options = make_display_options_setter(fn, "Display options")

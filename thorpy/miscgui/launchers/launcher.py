@@ -8,7 +8,6 @@ from thorpy.miscgui.reaction import Reaction, ConstantReaction
 from thorpy.elements.box import Box
 from thorpy.elements._wrappers import make_button
 from thorpy.elements.ghost import Ghost
-from thorpy.miscgui.storage import store
 from thorpy.elements.line import Line
 from thorpy.elements._wrappers import make_stored_ghost
 from thorpy.menus.tickedmenu import TickedMenu

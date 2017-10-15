@@ -49,7 +49,7 @@ from thorpy.elements.browser import Browser
 from thorpy.elements.checker import Checker
 CheckBox = Checker
 from thorpy.elements.clickable import Clickable
-from thorpy.elements._wrappers import make_button, make_text, make_image_button, make_menu_button
+from thorpy.elements._wrappers import make_button, make_text, make_image_button, make_menu_button, make_image_button_with_frame
 ##from thorpy.elements._wrappers import launch_blocking_alert
 ##from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
 ##from thorpy.elements._wrappers import launch_blocking_choices
@@ -87,7 +87,8 @@ from thorpy.menus.basicmenu import BasicMenu
 
 # miscellaneous stuff, constants, parameters
 from thorpy.miscgui.application import Application
-from thorpy.miscgui.reaction import Reaction, ConstantReaction, add_time_reaction
+from thorpy.miscgui.reaction import Reaction, ConstantReaction
+from thorpy.miscgui.reaction import add_time_reaction, add_keydown_reaction, add_keyup_reaction
 from thorpy.miscgui import constants, functions
 from thorpy.miscgui.functions import get_screen
 from thorpy.miscgui.functions import get_current_application as get_application
