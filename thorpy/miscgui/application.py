@@ -21,7 +21,7 @@ class Application(object):
     location.
     """
 
-    def __init__(self, size, caption=None, icon="thorpy", center=True, flags=0):
+    def __init__(self, size, caption=None, icon="thorpy", center=True, flags=pygame.FULLSCREEN):
         """This object handles the pygame variables needed to create a graphical
         program, such as screen, screen's size window caption and window
         location.
@@ -54,7 +54,8 @@ class Application(object):
         if center:
             os.environ['SDL_VIDEO_CENTERED'] = '1'
         self.set_icon(icon)
-        w,h = pygame.display.set_mode((0,0),pygame.FULLSCREEN).get_size()
+        infoObject = pygame.display.Info()
+        w,h = (infoObject.current_w, infoObject.current_h)
         self.max_screen_size = (w,h)
         screen = pygame.display.set_mode(self.size, flags)
         if self.caption:
