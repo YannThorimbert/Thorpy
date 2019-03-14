@@ -16,7 +16,8 @@ class ColorSetterLauncher(Clickable):
              text="",
              show_select=True,
              click_cancel=False):
-        cs = ColorSetterLauncher(colorsetter, text, show_select, click_cancel)
+        cs = ColorSetterLauncher(colorsetter, text, show_select, click_cancel,
+                                    finish=False)
         cs.finish()
         return cs
 
@@ -24,7 +25,8 @@ class ColorSetterLauncher(Clickable):
                  colorsetter,
                  text="",
                  show_select=True,
-                 click_cancel=False):
+                 click_cancel=False,
+                 finish=True):
         self.text = text
         self.show_select = show_select
         self.click_cancel = click_cancel
@@ -36,11 +38,13 @@ class ColorSetterLauncher(Clickable):
         self.launched = launchmod.make_ok_cancel_box([self.colorsetter], "Ok", "Cancel") #!!! text
         self.launcher = None
         self.e_color = get_example_element(self.colorsetter.get_color(), (20,20))
-        self.e_text = Element(self.text)
+        self.e_text = Element(self.text,finish=False)
         self.e_text.set_style("text")
         self.e_text.finish()
         self.unlaunch_func = None
-        Clickable.__init__(self, elements=[self.e_text, self.e_color])
+        Clickable.__init__(self, elements=[self.e_text, self.e_color],finish=False)
+        if finish:
+            self.finish()
 
     def finish(self):
         Clickable.finish(self)

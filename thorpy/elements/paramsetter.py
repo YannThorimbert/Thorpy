@@ -9,7 +9,7 @@ class ParamSetter(Box):
 
     @staticmethod
     def make(varsets, elements=None, size=None):
-        ps = ParamSetter(varsets, elements, size=size)
+        ps = ParamSetter(varsets, elements, size=size, finish=False)
         ps.finish()
         return ps
 
@@ -19,7 +19,8 @@ class ParamSetter(Box):
                  normal_params=None,
                  size=None,
                  bar=None,
-                 file_width=None):
+                 file_width=None,
+                 finish=True):
         if file_width is None: file_width = style.FILE_WIDTH
 ##        box_size = style.BOX_SIZE if box_size is None else box_size
         self.scale_list = [DropDownListLauncher] #!paramsetter
@@ -29,7 +30,10 @@ class ParamSetter(Box):
         self.handlers = self.get_handlers() #below, will deny them so they know self
         elements = [] if elements is None else elements
         elements += self.handlers.values()
-        Box.__init__(self, elements=elements, normal_params=normal_params, size=size)
+        Box.__init__(self, elements=elements, normal_params=normal_params,
+                        size=size, finish=False)
+        if finish:
+            self.finish()
 
 
 

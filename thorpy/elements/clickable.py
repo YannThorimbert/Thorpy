@@ -9,14 +9,16 @@ class Clickable(Pressable, Hoverable):
     """Clickable Element (Pressable and hoverable)"""
 
     def __init__(self, text="", elements=None, normal_params=None,
-                 press_params=None):
+                 press_params=None, finish=True):
         """Pressable and hoverable element.
         <text>: the text of the element.
         """
         super(Clickable, self).__init__(text, elements, normal_params,
-                                        press_params)
+                                        press_params,finish=False)
         self.normal_params.polite_set("states hover",
                                       list([STATE_NORMAL, STATE_PRESSED]))
+        if finish:
+            self.finish()
 
     def finish(self):
         Pressable.finish(self)

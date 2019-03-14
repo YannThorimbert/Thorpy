@@ -26,7 +26,7 @@ class Ghost(object):
         g.finish()
         return g
 
-    def __init__(self, elements=None, normal_params=None):
+    def __init__(self, elements=None, normal_params=None, finish=True):
         """
         Element of an application that have no graphical existence, though its
         children might be graphicals. This is the base class for all the Elements.
@@ -67,6 +67,8 @@ class Ghost(object):
         self._is_in_family = True
         self.id = Ghost._current_id
         Ghost._current_id += 1
+        if finish:
+            self.finish()
 
 
     def finish(self):

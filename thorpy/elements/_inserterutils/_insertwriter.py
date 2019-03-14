@@ -5,14 +5,16 @@ from thorpy.miscgui import style
 
 class _InsertWriter(OneLineText):
 
-    def __init__(self, text="", margin=None, writer=None):
+    def __init__(self, text="", margin=None, writer=None,finish=True):
         margin = style.INSERTWRITER_MARGIN if margin is None else margin
-        OneLineText.__init__(self, text)
+        OneLineText.__init__(self, text,finish=False)
         self.margin = margin
         if not writer:
             self.writer = Writer()
         else:
             self.writer = writer
+        if finish:
+            self.finish()
 
     def get_zone(self):
         return self.father.get_clip()

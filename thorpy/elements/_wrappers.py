@@ -4,6 +4,7 @@ from thorpy.elements.element import Element
 from thorpy.elements.clickable import Clickable
 from thorpy.elements.ghost import Ghost
 from thorpy.elements.box import Box
+from thorpy.elements.inserter import Inserter
 from thorpy.miscgui.storage import store
 from thorpy.miscgui import constants, style, functions
 from thorpy.painting.painters.imageframe import ButtonImage
@@ -115,9 +116,18 @@ def launch_binary_choice(title_text, parent=None, title_fontsize=None,
         launch_choices(title_text, choices, parent, title_fontsize, title_fontcolor, main_color)
     return Choice.value
 
+def launch_inserter(title_text, initial_value="", parent=None, title_fontsize=None,
+                    title_fontcolor=None, main_color=None, blocking=True):
+    from thorpy.miscgui.launchers.launcher import make_ok_box, auto_ok, launch_blocking
+    ins = Inserter.make(title_text, value=initial_value)
+    ins.center()
+    ins.enter()
+    launch_blocking(ins)
+    parent.unblit_and_reblit()
+    return ins.get_value()
+
 def make_stored_ghost(elements, mode="h"):
     ghost = Ghost(elements)
-    ghost.finish()
     store(ghost, mode=mode)
     ghost.fit_children()
     return ghost
@@ -125,7 +135,6 @@ def make_stored_ghost(elements, mode="h"):
 
 def make_button(text, func=None, params=None):
     button = Clickable(text)
-    button.finish()
     button.scale_to_title()
     if func:
         button.user_func = func
@@ -135,7 +144,7 @@ def make_button(text, func=None, params=None):
 
 def make_image_button(img_normal, img_pressed=None, img_hover=None,
                         alpha=255, colorkey=None, text=""):
-    e = Clickable(text)
+    e = Clickable(text,finish=False)
     painter = ButtonImage(img_normal, img_pressed, img_hover, alpha, colorkey)
     e.set_painter(painter)
     e.finish()
@@ -143,7 +152,7 @@ def make_image_button(img_normal, img_pressed=None, img_hover=None,
 
 def make_image_button_with_frame(img_normal, img_pressed=None, img_hover=None,
                         alpha=255, colorkey=None, text=""):
-    e = Clickable(text)
+    e = Clickable(text,finish=False)
     painter = ButtonImage(img_normal, img_pressed, img_hover, alpha, colorkey)
     e.set_painter(painter)
     e.finish()
@@ -154,7 +163,7 @@ def make_text(text, font_size=None, font_color=None):
     if font_size is None: font_size = style.FONT_SIZE
     if font_color is None: font_color = style.FONT_COLOR
     params = {"font_color":font_color, "font_size":font_size}
-    button = Element(text, normal_params=params)
+    button = Element(text, normal_params=params, finish=False)
     if not "\n" in text:
         button.set_style("text")
     button.finish()
@@ -345,4 +354,73 @@ def make_menu_button(frame_size=(40,40), lines_size=(25,2), lines_radius=1,
     return e
 
 
+class SliderInserter:
 
+    def __init__(self, text, length, limvals, initial_value,
+                    reblit=None, type_=float, order="ins"):
+        import thorpy
+        self.text = thorpy.make_button(text, self.focus)
+        self.slider = thorpy.SliderX.make(length, limvals, "", type_, initial_value)
+        self.ins = thorpy.Inserter.make("", value=str(initial_value))
+        if order == "ins":
+            els = [self.text, self.ins, self.slider]
+        else:
+            els = [self.text, self.slider, self.ins]
+        self.e = thorpy.make_group(els)
+        reac_slide = thorpy.Reaction(reacts_to=thorpy.constants.THORPY_EVENT,
+                                reac_func=self.at_slide,
+                                event_args={"id":thorpy.constants.EVENT_SLIDE})
+        reac_ins = thorpy.Reaction(reacts_to=thorpy.constants.THORPY_EVENT,
+                                        reac_func=self.at_insert,
+                                        event_args={"id":thorpy.constants.EVENT_INSERT})
+        self.e.add_reactions([reac_slide, reac_ins])
+        self.e._manager = self
+        self.ins._manager = self
+        self.slider._manager = self
+        self.e.get_value = self.slider.get_value
+        self.reblit = reblit
+        if not self.reblit:
+            self.reblit = self.e.unblit_and_reblit
+
+    def ins2slide(self):
+        val = self.slider._value_type(self.ins.get_value())
+        if val > self.slider.limvals[1]:
+            val = self.slider.limvals[1]
+            self.ins.set_value(str(val))
+        elif val < self.slider.limvals[0]:
+            val = self.slider.limvals[1]
+            self.ins.set_value(str(val))
+        self.slider.set_value(val)
+
+    def slide2ins(self):
+        self.ins.set_value(str(self.slider.get_value()))
+
+    def at_slide(self, event):
+        if event.el._manager is self:
+            self.slide2ins()
+            self.reblit()
+
+    def at_insert(self, event):
+        if event.el._manager is self:
+            self.ins2slide()
+            self.reblit()
+
+    def focus(self):
+        self.ins.enter()
+
+
+def make_slider_inserter(text, length, limvals, initial_value, reblit=None, type_=float,
+                            order="ins"):
+    return SliderInserter(text, length, limvals, initial_value, reblit, type_, order).e
+
+
+
+def get_user_text(title, value, size=(None,None)):
+    from thorpy.miscgui.launchers.launcher import make_ok_box, auto_ok, launch_blocking
+    ins = Inserter.make(title,value=value,size=size)
+    box = make_ok_box([ins])
+    auto_ok(box)
+    box.center()
+    ins.enter()
+    launch_blocking(box)
+    return ins.get_value()

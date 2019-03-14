@@ -110,7 +110,7 @@ def set_as_cancel_button(button, element_to_unlaunch):
     button.user_func = post_cancel
     button.user_params = {"el":element_to_unlaunch}
 
-def make_ok_cancel_box(elements,ok_text="Ok",cancel_text="Cancel"):
+def make_ok_cancel_box(elements, ok_text="Ok", cancel_text="Cancel"):
     ok = make_button(ok_text)
     ok.user_func = post_done
     #
@@ -119,7 +119,7 @@ def make_ok_cancel_box(elements,ok_text="Ok",cancel_text="Cancel"):
     #
 ##    ghost = Ghost(elements=[ok, cancel])
 ##    ghost.finish()
-##    store(ghost, mode="h")
+##    thorpy.store(ghost, mode="h")
 ##    ghost.fit_children()
     ok_cancel = make_stored_ghost([ok,cancel])
     #
@@ -127,7 +127,6 @@ def make_ok_cancel_box(elements,ok_text="Ok",cancel_text="Cancel"):
     line = Line.make(linesize, "h")
     #
     box = Box(elements=elements+[line,ok_cancel])
-    box.finish()
     ok.user_params = {"el":box}
     cancel.user_params = {"el":box}
     box.e_ok = ok

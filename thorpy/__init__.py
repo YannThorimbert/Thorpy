@@ -1,4 +1,4 @@
-__version__ = "1.5.9"
+__version__ = "1.6"
 
 import sys
 import os
@@ -54,10 +54,12 @@ from thorpy.elements._wrappers import make_button, make_text, make_image_button,
 ##from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
 ##from thorpy.elements._wrappers import launch_blocking_choices
 ##from thorpy.elements._wrappers import launch_choices as launch_nonblocking_choices
+from thorpy.elements._wrappers import launch_inserter
 from thorpy.elements._wrappers import launch_binary_choice
 from thorpy.elements._wrappers import make_stored_ghost as make_group
 from thorpy.elements._wrappers import make_font_setter, make_fontsize_setter
 from thorpy.elements._wrappers import make_font_options_setter, make_display_options_setter, make_global_display_options
+from thorpy.elements._wrappers import get_user_text
 from thorpy.elements.colorsetter import ColorSetter
 from thorpy.elements.ddlf import DropDownListFast as DropDownList
 from thorpy.elements.draggable import Draggable, ClickDraggable
@@ -124,6 +126,7 @@ from thorpy.painting import mousecursor
 from thorpy.gamestools import basegrid
 from thorpy.gamestools import commands
 from thorpy.gamestools.basegrid import BaseGrid
+from thorpy.gamestools.drawgrid import DrawGrid
 from thorpy.gamestools.grid import Grid, PygameGrid
 from thorpy.gamestools.sound import SoundCollection #1.5.8
 from thorpy.gamestools import fx

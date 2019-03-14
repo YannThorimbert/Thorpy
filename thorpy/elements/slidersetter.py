@@ -10,7 +10,8 @@ class SliderXSetter(Ghost):
 
     @staticmethod
     def make(length, limvals=None, text="", type_=float, initial_value=None):
-        s = SliderXSetter(length, limvals, text, initial_value=initial_value, type_=type_)
+        s = SliderXSetter(length, limvals, text, initial_value=initial_value,
+                            type_=type_, finish=False)
         s.finish()
         return s
 
@@ -23,7 +24,8 @@ class SliderXSetter(Ghost):
                  namestyle=None,
                  valuestyle=None,
                  type_=float,
-                 initial_value=None):
+                 initial_value=None,
+                 finish=True):
         """Slider for choosing a value.
         <length>: single int value specifying the length of slider in pixels.
         <limvals>: 2-tuple specifying the min and max values.
@@ -33,10 +35,9 @@ class SliderXSetter(Ghost):
         """
         namestyle = style.STYLE_SLIDER_NAME if namestyle is None else namestyle
         valuestyle=style.STYLE_SLIDER_VALUE if valuestyle is None else valuestyle
-        Ghost.__init__(self, elements, normal_params)
+        Ghost.__init__(self, elements, normal_params, finish=False)
         self._slider_el=_SliderXSetter(length, limvals, "",
                                         initial_value=initial_value)
-        self._slider_el.finish()
         self.add_elements([self._slider_el])
         self._value_type = type_
         self._round_decimals = 2
@@ -50,6 +51,8 @@ class SliderXSetter(Ghost):
         self._storer_rect = None
         self._refresh_pos()
         self.limvals = self._slider_el.limvals
+        if finish:
+            self.finish()
 
     def finish(self):
         Ghost.finish(self)
@@ -75,7 +78,7 @@ class SliderXSetter(Ghost):
         painter = functions.obtain_valid_painter(
             painterstyle.CHECKER_NAME_PAINTER,
             size=style.SIZE)
-        el = Element(name)
+        el = Element(name,finish=False)
         el.set_painter(painter)
         if namestyle:
             el.set_style(namestyle)
@@ -86,7 +89,7 @@ class SliderXSetter(Ghost):
         painter = functions.obtain_valid_painter(
             painterstyle.CHECKER_VALUE_PAINTER,
             size=style.CHECK_SIZE)
-        el = Element(str(self.get_value()))
+        el = Element(str(self.get_value()),finish=False)
         el.set_painter(painter)
         if valuestyle:
             el.set_style(valuestyle)
@@ -145,3 +148,8 @@ class SliderXSetter(Ghost):
 
     def get_help_rect(self):
         return self._name_element.get_help_rect()
+
+    def set_active(self, value):
+        self.active = value
+        self._slider_el.set_active(value)
+        self._slider_el._drag_element.set_active(value)

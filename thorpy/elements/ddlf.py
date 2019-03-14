@@ -13,7 +13,7 @@ class DropDownListFast(Element):
     @staticmethod
     def make(titles, size="auto", heavy=False, folders=None, margins=None, x=None):
         ddlf = DropDownListFast(titles, size, heavy=heavy, folders=folders,
-                                margins=margins, x=x)
+                                margins=margins, x=x, finish=False)
         ddlf.finish()
         return ddlf
 
@@ -26,7 +26,8 @@ class DropDownListFast(Element):
                  folders=None,
                  margins=None,
                  x=None,
-                 has_lift=True):
+                 has_lift=True,
+                 finish=True):
         """Vertical list of multiple texts that can be selected.
         <titles>: a list of strings containing the different choices to display.
         <heavy>: if True, use more memory but is faster.
@@ -38,7 +39,8 @@ class DropDownListFast(Element):
         margins = style.DDL_MARGINS if margins is None else margins
         size_painter = style.DDL_SIZE if size == "auto" else size
         self._clicked = None
-        Element.__init__(self, elements=elements, normal_params=normal_params)
+        Element.__init__(self, elements=elements, normal_params=normal_params,
+                            finish=False)
         painter = functions.obtain_valid_painter(painterstyle.BOX_PAINTER,
                                                  pressed=True,
 ##                                                 color=style.DEF_COLOR2,
@@ -58,6 +60,8 @@ class DropDownListFast(Element):
         self._set_selecter()
         self._force_lift = False
         self._size = size
+        if finish:
+            self.finish()
 
     def add_lift(self, axis="vertical", type_="dv"): #! normal or dv?
         Element.add_lift(self, axis, type_)

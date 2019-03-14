@@ -14,7 +14,8 @@ class LiftY(SliderY):
                  elements=None,
                  dragsize=style.LIFT_DRAG_SIZE,
                  buttonsize=style.LIFT_BUTTON_SIZE,
-                 normal_params=None):
+                 normal_params=None,
+                 finish=True):
         """<link> is the element affected by the lift"""
         dragsize = style.LIFT_DRAG_SIZE if dragsize is None else dragsize
         buttonsize=style.LIFT_BUTTON_SIZE if buttonsize is None else buttonsize
@@ -25,7 +26,7 @@ class LiftY(SliderY):
                                        surplus=True)[1]
         length = link.get_fus_size()[1] - surplus_h  # compute proper height
         super(LiftY, self).__init__(length, limvals, text, elements,
-                                    normal_params)
+                                    normal_params,finish=False)
         self._add_buttons()
         self._linked = link
         self.finish()

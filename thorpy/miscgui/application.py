@@ -101,7 +101,7 @@ class Application(object):
                     pygame.font.quit()
                     pygame.quit()
                     exit()
-                elif e.type == pygame.constants.KEYUP:
+                elif e.type == pygame.constants.KEYDOWN:
                     stay = False
 
     def pause_until(self, event_type, **event_args):

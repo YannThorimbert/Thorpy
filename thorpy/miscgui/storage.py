@@ -2,6 +2,7 @@
 from pygame import Rect
 
 from thorpy.miscgui import style
+from thorpy.miscgui.functions import get_screen
 
 def _set_topleft(el, pos):
     """Set element <el>'s topleft using its storer_rect as reference."""
@@ -118,9 +119,11 @@ def store(frame, elements=None, mode="v", x="auto", y="auto", margin=None,
     <y>="auto", y coordinate begin
     <margin>=None, the margin to be used (this is a single value)
     <gap>=None, the gap to be used (this is a single value)
-    <align>="center" "left", "right", "top", "bottom" or "center"
+    <align>="center", "top" or "bottom"
     """
     #frame argument handling
+    if frame == "screen":
+        frame = get_screen().get_rect()
     if isinstance(frame, Rect):
         rect = frame
         if elements is None:

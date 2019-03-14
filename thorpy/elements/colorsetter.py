@@ -15,10 +15,10 @@ def get_example_element(color, size):
     else:
         color_size = size
     painter_example = BasicFrame(size=color_size, color=color)
-    example = Element()
+    example = Element(finish=False)
     example.set_painter(painter_example)
     example.finish()
-    frame = Element(elements=[example])
+    frame = Element(elements=[example],finish=False)
     frame.set_painter(painter_frame)
     frame.finish()
     example.set_center(frame.get_fus_center())
@@ -33,7 +33,7 @@ class ColorSetter(Box):
     def make(text="", elements=None, size=None, color_size=(50,50),
                 value=(255,0,0)):
         cs = ColorSetter(text, elements, size=size, color_size=color_size,
-                        value=value)
+                        value=value, finish=False)
         cs.finish()
         return cs
 
@@ -47,7 +47,8 @@ class ColorSetter(Box):
                  put_lift=True,
                  color_size=(50, 50),
                  value=(255, 0, 0),
-                 color_limvals=(0, 255)):
+                 color_limvals=(0, 255),
+                 finish=True):
         """Box in which three sliders and a visualization square provide a way to
         define a color.
         <text>: title text for the color box.
@@ -56,7 +57,7 @@ class ColorSetter(Box):
         <value>: 3-tuple defining the initial color value.
         """
         Box.__init__(self, elements, normal_params, storer_params, size,
-                     put_lift)
+                     put_lift, finish=False)
         self._color_size = color_size
         self._r_element = SliderXSetter(100, text="R: ", type_=int,
                                limvals=color_limvals, initial_value=value[0])
@@ -86,6 +87,9 @@ class ColorSetter(Box):
         self._example_element = get_example_element(value, color_size)
         self.add_elements([self._r_element, self._g_element, self._b_element,
                            self._example_element])
+        if finish:
+            self.finish()
+
 
     def get_color(self):
         r = self._r_element.get_value()

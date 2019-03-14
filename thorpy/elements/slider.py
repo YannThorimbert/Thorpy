@@ -43,11 +43,11 @@ class _Slider(object):
 class _GraphicalSlider(_Slider, Element):
 
     def __init__(self, length, limvals=None, text="", elements=None,
-                 normal_params=None):
+                 normal_params=None,finish=True):
         limvals = parameters.LIMVALS if limvals is None else limvals
         self._plus = None
         self._minus = None
-        Element.__init__(self, text, elements, normal_params)
+        Element.__init__(self, text, elements, normal_params,finish=False)
         _Slider.__init__(self, length, limvals)
         self.current_state.autoghost = False
 ##        self._set_wheel_reaction(parameters.BUTTON_UNPRESS_EVENT,
@@ -56,6 +56,8 @@ class _GraphicalSlider(_Slider, Element):
 ##                                  {"button": parameters.WHEELDOWN_BUTTON})
         self._setup()
         self.active_wheel = False
+        if finish:
+            self.finish()
 
 
     def get_storer_rect(self):
@@ -166,7 +168,8 @@ class SliderX(_GraphicalSlider):
                  text="",
                  elements=None,
                  normal_params=None,
-                 initial_value=None):
+                 initial_value=None,
+                 finish=True):
         if initial_value is None:
             initial_value = 0
         if limvals[0] <= initial_value <= limvals[1]: #will be False if initial_value is None
@@ -177,11 +180,14 @@ class SliderX(_GraphicalSlider):
                                     limvals range. Auto set to limvals[0].")
             self.initial_value = limvals[0]
         self._drag_element = DraggerX(self)
-        super(SliderX, self).__init__(length, limvals, text, elements)
+        super(SliderX, self).__init__(length, limvals, text, elements,
+                                        finish=False)
         self._drag_element.finish()
         self.add_elements(list([self._drag_element]))
         reac_click = Reaction(pygame.MOUSEBUTTONDOWN,self._func_reac_click)
         self.add_reaction(reac_click)
+        if finish:
+            self.finish()
 
     def _func_reac_click(self, e):
         rel = pygame.mouse.get_rel()
@@ -293,14 +299,17 @@ class SliderY(_GraphicalSlider):
                  limvals=None,
                  text="",
                  elements=None,
-                 normal_params=None):
+                 normal_params=None,
+                 finish=True):
         self._height = None
         self._drag_element = DraggerY(self)
         super(SliderY, self).__init__(length, limvals, text, elements,
-                                      normal_params)
+                                      normal_params,finish=False)
         self._drag_element.finish()
         self.add_elements(list([self._drag_element]))
         Ghost.fit_children(self)
+        if finish:
+            self.finish()
 
     def finish(self):
         Element.finish(self)

@@ -21,20 +21,22 @@ class Element(_Screened, Ghost):
     @classmethod
     def make(cls, text="", elements=None, size=None):
         if size is None: size=style.MAKE_SIZE
-        e = cls(text, elements)
+        e = cls(text, elements, finish=False)
         e.finish()
         e._make_size(size)
         return e
 
-    def __init__(self, text="", elements=None, normal_params=None):
+    def __init__(self, text="", elements=None, normal_params=None, finish=True):
         """Simplest graphical element of an application.
         <text>: the text to be displayed.
         <elements>: list of children elements."""
         _Screened.__init__(self)
-        Ghost.__init__(self, elements, normal_params)
+        Ghost.__init__(self, elements, normal_params, finish=False)
         self._finished = False
         self.normal_params.polite_set("txt", text)
         self.visible = self.normal_params.params.get("visible", True)
+        if finish:
+            self.finish()
 
     def finish(self):
         fusionner_attr = self.normal_params.get_fusionner()

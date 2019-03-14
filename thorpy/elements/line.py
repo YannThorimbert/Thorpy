@@ -12,18 +12,18 @@ class Line(Element):
         <color>: a 3 or 4-tuple specifying the color.
         <pressed>: if True, the line looks pressed.
         """
-        line = Line(size, type_, color, pressed)
+        line = Line(size, type_, color, pressed, finish=False)
         line.finish()
         return line
 
-    def __init__(self, size, type_, color=None, pressed=True):
+    def __init__(self, size, type_, color=None, pressed=True, finish=True):
         """Vertical or horizontal graphical separation Line.
         <size>: the size in pixel (single int value).
         <type>: either 'horizontal', 'h' or 'vertical', 'v'.
         <color>: a 3 or 4-tuple specifying the color.
         <pressed>: if True, the line looks pressed.
         """
-        Element.__init__(self)
+        Element.__init__(self, finish=False)
         self.size = size
         self.type = type_
         if type_ == "horizontal" or type_ == "h":
@@ -32,3 +32,5 @@ class Line(Element):
             size = (2, size)
         painter = ClassicFrame(size, color, pressed)
         self.set_painter(painter)
+        if finish:
+            self.finish()

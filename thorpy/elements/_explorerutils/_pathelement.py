@@ -7,7 +7,7 @@ from thorpy.miscgui import functions, style
 
 class PathElement(OneLineText):
 
-    def __init__(self, father, abspath):
+    def __init__(self, father, abspath,finish=True):
         OneLineText.__init__(self)
         self.father = father
         self._path = father.path
@@ -15,6 +15,8 @@ class PathElement(OneLineText):
         self._n = None
         self._path_list = self._get_strs()
         self._path = "".join(self._path_list)
+        if finish:
+            self.finish()
 
     def finish(self):
         OneLineText.finish(self)

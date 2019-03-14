@@ -19,7 +19,7 @@ class Inserter(Clickable):
 
     @staticmethod
     def make(name="", elements=None, value="", size=(None,None)):
-        i = Inserter(name, elements, value=value, size=size)
+        i = Inserter(name, elements, value=value, size=size,finish=False)
         i.finish()
         return i
 
@@ -33,7 +33,8 @@ class Inserter(Clickable):
                  namestyle=None,
                  varlink_func=None,
                  quit_on_click=False,
-                 value_type=str):
+                 value_type=str,
+                 finish=True):
         """Element fo text insertion.
         <name>: text of the title before the inserter.
         <value>: initial text inside the inserter.
@@ -54,11 +55,10 @@ class Inserter(Clickable):
         size = (s0, s1)
         self.cursor = None
         super(Inserter, self).__init__("", elements, normal_params,
-                                       press_params)
+                                       press_params,finish=False)
         self._name_element = self._get_name_element(name, namestyle)
         self.add_elements([self._name_element])
         self._iwriter = _InsertWriter(value)
-        self._iwriter.finish()
         self.add_elements([self._iwriter])
         self.quit_on_click = quit_on_click
         self._value_type = value_type
@@ -89,6 +89,8 @@ class Inserter(Clickable):
         self.auto_resize = True
         self.numeric_only = False
         self.int_only = False
+        if finish:
+            self.finish()
 
     def set_key_repeat(delay, interval):
         """Set delay to None for no repeat."""
@@ -125,7 +127,7 @@ class Inserter(Clickable):
         painter = functions.obtain_valid_painter(
             painterstyle.INSERTER_NAME_PAINTER,
             size=style.SIZE)
-        el = Clickable(name)
+        el = Clickable(name,finish=False)
         el.set_painter(painter)
         if namestyle:
             el.set_style(namestyle)
@@ -231,6 +233,9 @@ class Inserter(Clickable):
             mouse_set_visible(False)
         self._activated = True
         self.cursor._activated = True
+
+    def focus(self): #alias for enter
+        self.enter()
 
     def exit(self):
         key_set_repeat(parameters.KEY_DELAY, parameters.KEY_INTERVAL)

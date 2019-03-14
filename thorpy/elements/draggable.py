@@ -41,10 +41,10 @@ class Draggable(Clickable, BasicDraggable):
     #   _hover and _press reactions.
 
     def __init__(self, text="", elements=None, normal_params=None,
-                 press_params=None):
+                 press_params=None, finish=True):
         """Clickable that can be dragged/dropped."""
         super(Draggable, self).__init__(text, elements, normal_params,
-                                        press_params)
+                                        press_params, finish=False)
         # not polite set, because of standard _press painter args
         self.press_params.params["painter args"] = {"pressed": False,
                                                     "size": style.SIZE}
@@ -52,6 +52,8 @@ class Draggable(Clickable, BasicDraggable):
                                reac_name=constants.REAC_MOTION)
         self.add_reaction(reac_motion)
         self._constraints = (1., 1.)
+        if finish:
+            self.finish()
 
 
     def _reaction_drag(self, event):

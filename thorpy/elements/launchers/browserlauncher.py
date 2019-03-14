@@ -15,7 +15,7 @@ class BrowserLauncher(Clickable):
                 size=None):
         if size is None: size=style.MAKE_SIZE
         bl = BrowserLauncher(browser, const_text, var_text, show_select,
-                                click_cancel, text_ok, text_cancel)
+                                click_cancel, text_ok, text_cancel,finish=False)
         bl.finish()
         bl._make_size(size)
         return bl
@@ -27,7 +27,8 @@ class BrowserLauncher(Clickable):
                  show_select=True,
                  click_cancel=False,
                  text_ok="Ok",
-                 text_cancel="Cancel"):
+                 text_cancel="Cancel",
+                 finish=True):
         self.recenter=True
         self.const_text = const_text
         self.var_text = var_text
@@ -41,7 +42,9 @@ class BrowserLauncher(Clickable):
         box = launchmod.make_ok_cancel_box([browser], text_ok, text_cancel)
         self.launched = box
         self.browser = browser
-        Clickable.__init__(self, self.const_text+self.var_text)
+        Clickable.__init__(self, self.const_text+self.var_text,finish=False)
+        if finish:
+            self.finish()
 
     def finish(self):
         Clickable.finish(self)

@@ -5,24 +5,29 @@ class LifeBar(thorpy.Element):
 
     @staticmethod
     def make(text, color=(255,165,0), text_color=(0,0,0),
-                    size=(200,30), font_size=None):
-        return LifeBar(text,color,text_color,size,font_size)
+                    size=(200,30), font_size=None, type_="h"):
+        return LifeBar(text,color,text_color,size,font_size,type_)
 
     def __init__(self, text, color=(255,165,0), text_color=(0,0,0),
-                    size=(200,30), font_size=None):
+                    size=(200,30), font_size=None, type_="h"):
         thorpy.Element.__init__(self)
         painter = thorpy.painterstyle.ClassicFrame(size,
                                                     color=thorpy.style.DEF_COLOR,
                                                     pressed=True)
         self.set_painter(painter)
         self.finish()
+        if type_ == "v":
+            self.set_life = self.set_life_v
+        else:
+            self.set_life = self.set_life_h
         #
         self.life_text = thorpy.make_text(text,font_color=text_color,font_size=font_size)
         self.life_text.center(element=self)
         self.life_color = color
         self.add_elements([self.life_text])
         self.life_width = size[0]-2
-        self.life_rect = pygame.Rect(1,1, self.life_width,size[1]-2)
+        self.life_height = size[1]-2
+        self.life_rect = pygame.Rect(1,1, self.life_width,self.life_height)
 
     def set_text(self, text):
         self.life_text.set_text(text)
@@ -44,8 +49,13 @@ class LifeBar(thorpy.Element):
         thorpy.Element.move(self,shift)
         self.life_rect.move_ip(shift)
 
-    def set_life(self,life):
+    def set_life_h(self,life):
         self.life_rect.width = int(life*self.life_width)
+
+    def set_life_v(self,life):
+        tmp = self.life_rect.bottom
+        self.life_rect.height = int(life*self.life_height)
+        self.life_rect.bottom = tmp
 
 class SkillBar(LifeBar):
 

@@ -113,7 +113,7 @@ class HoverZone(Ghost):
         self._hovered = False
 
     def add_basic_help(self, text, wait_time=None, jail=None):
-        helper = Element(text)
+        helper = Element(text,finish=False)
         helper._is_in_family = False
         helper.set_style("help")
         helper.finish()

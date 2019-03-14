@@ -10,7 +10,7 @@ class Checker(Clickable):
 
     @staticmethod
     def make(text="", value=False, type_="checkbox"):
-        checker = Checker(text, value=value, type_=type_)
+        checker = Checker(text, value=value, type_=type_, finish=False)
         checker.finish()
         return checker
 
@@ -22,7 +22,8 @@ class Checker(Clickable):
                  value=False,
                  namestyle=None,
                  type_="checkbox",
-                 check_img=None):
+                 check_img=None,
+                 finish=True):
         """Checkable check or radio box.
         <text>: text before the box.
         <value>: True for checked, False for not checked.
@@ -31,7 +32,7 @@ class Checker(Clickable):
         """
         namestyle=style.STYLE_INSERTER_NAME if namestyle is None else namestyle
         super(Checker, self).__init__("", elements, normal_params,
-                                      press_params)
+                                      press_params,finish=False)
         if value:
             self._checked = value
         else:
@@ -53,6 +54,8 @@ class Checker(Clickable):
             "params hover", {
                 "painter": painter_class, "params": params})
         self.normal_params.polite_set("typ hover", "redraw")
+        if finish:
+            self.finish()
 
     def set_value(self, new_value):
         self._checked = new_value
@@ -131,7 +134,7 @@ class Checker(Clickable):
         painter = functions.obtain_valid_painter(
             painterstyle.CHECKER_NAME_PAINTER,
             size=style.SIZE)
-        el = Clickable(name)
+        el = Clickable(name,finish=False)
         el.set_painter(painter)
         if namestyle:
             el.set_style(namestyle)

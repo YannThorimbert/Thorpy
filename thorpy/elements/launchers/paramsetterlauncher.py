@@ -25,7 +25,7 @@ class ParamSetterLauncher(Clickable):
                 size=None):
         if size is None: size=style.MAKE_SIZE
         psl = ParamSetterLauncher(params, text, title, click_cancel, text_ok,
-                                    text_cancel, paramsetter_elements)
+                                    text_cancel, paramsetter_elements, finish=False)
         psl.finish()
         psl._make_size(size)
         return psl
@@ -37,14 +37,14 @@ class ParamSetterLauncher(Clickable):
                  click_cancel=False,
                  text_ok="Ok",
                  text_cancel="Cancel",
-                 paramsetter_elements=None):
+                 paramsetter_elements=None,
+                 finish=True):
         """params can either be a varset or a paramsetter.
         title can either be a string or an element."""
         if isinstance(params, ParamSetter):
             self.paramsetter = params
         else:
             self.paramsetter = ParamSetter(params, elements=paramsetter_elements)
-            self.paramsetter.finish()
         self.click_cancel = click_cancel
         self.max_chars = float("inf")
         self.cut_text = ".."
@@ -56,7 +56,9 @@ class ParamSetterLauncher(Clickable):
             elements = [self.paramsetter]
         box = launchmod.make_ok_cancel_box(elements, text_ok, text_cancel)
         self.launched = box
-        Clickable.__init__(self, text)
+        Clickable.__init__(self, text, finish=False)
+        if finish:
+            self.finish()
 
     def finish(self):
         Clickable.finish(self)

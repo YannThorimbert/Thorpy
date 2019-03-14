@@ -54,18 +54,20 @@ def get_handler_for(variable):
     elif type_ is tuple:
         if len(value) == 3:
 ##            handler = ColorSetter(text=text, value=value)
-            handler = ColorSetterLauncher(value, text)
+            handler = ColorSetterLauncher(value, text, finish=False)
     elif type_ is list:
         var_text = more.get("var_text", value[0])
         ddlf_size = more.get("ddlf_size", "auto")
         handler = DropDownListLauncher(const_text=text, var_text=var_text,
-                                        titles=value, ddlf_size=ddlf_size)
+                                        titles=value, ddlf_size=ddlf_size,
+                                        finish=False)
     elif ((type_ is str) or not(limits)) and not(type_ is bool):
         if not(limits) or isinstance(limits,str):
             ilimits = (None, None)
         else:
             ilimits = limits
-        handler = Inserter(text, value=str(value), value_type=type_, size=ilimits)
+        handler = Inserter(text, value=str(value), value_type=type_,
+                            size=ilimits, finish=False)
         if limits == "float":
             handler.numeric_only = True
             handler.int_only = False
@@ -80,9 +82,10 @@ def get_handler_for(variable):
                                 limits,
                                 text,
                                 type_=type_,
-                                initial_value=value)
+                                initial_value=value,
+                                finish=False)
     elif type_ is bool:
-        handler = Checker(variable.text, value=variable.value)
+        handler = Checker(variable.text, value=variable.value, finish=False)
     if handler:
         handler.rank = variable.rank
         return handler

@@ -8,17 +8,17 @@ class Box(Element):
 
     @staticmethod
     def make(elements, size=None):
-        box = Box(elements=elements, size=size)
+        box = Box(elements=elements, size=size, finish=False)
         box.finish()
         return box
 
     def __init__(self, elements=None, normal_params=None,
-                 storer_params=None, size=None, put_lift=True):
+                 storer_params=None, size=None, put_lift=True, finish=True):
         """Box containing other elements.
         <bartext>: the text of the box bar. If no text, no bar is added.
         <size>: if not None, force the size of the box. Else the box
             automatically fit children."""
-        Element.__init__(self, "", elements, normal_params)
+        Element.__init__(self, "", elements, normal_params, finish=False)
         self.storer_params = storer_params
         if self.storer_params is None:
             self.storer_params = dict()
@@ -30,6 +30,8 @@ class Box(Element):
                                                  size=size,
                                                  radius_ext=style.BOX_RADIUS)
         self.set_painter(painter)
+        if finish:
+            self.finish()
 
     def add_lift(self, axis="vertical", type_="normal"):
         Element.add_lift(self, axis, type_)

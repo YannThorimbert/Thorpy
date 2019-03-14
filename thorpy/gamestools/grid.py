@@ -48,6 +48,11 @@ class Grid(BaseGrid):
         self.frame.center = pos
         self.cell_rect = self.build_cell_rect()
 
+    def center_on(self, pos):
+        if isinstance(pos, pygame.Rect):
+            pos = pos.center
+        self.set_center(pos)
+
     def iterrects(self):
         for coord in self:
             yield self.get_rect_at_coord(coord)

@@ -20,7 +20,7 @@ class DropDownListLauncher(Clickable):
              size=None):
         if size is None: size=style.MAKE_SIZE
         ddll = DropDownListLauncher(const_text, var_text, titles, ddlf_size,
-                                    show_select, click_cancel)
+                                    show_select, click_cancel,finish=False)
         ddll.finish()
         ddll._make_size(size)
         return ddll
@@ -31,7 +31,8 @@ class DropDownListLauncher(Clickable):
                  titles=None,
                  ddlf_size="auto",
                  show_select=True,
-                 click_cancel=True):
+                 click_cancel=True,
+                 finish=True):
         self.recenter = True
         self.const_text = const_text
         self.var_text = var_text
@@ -44,12 +45,13 @@ class DropDownListLauncher(Clickable):
         if not isinstance(titles, DropDownListFast):
             titles = [] if titles is None else titles
             self.launched = DropDownListFast(size=ddlf_size, titles=titles, x=2)
-            self.launched.finish()
         else:
             self.launched = titles
         self.show_select = show_select
         self.launcher = None
-        Clickable.__init__(self, self.const_text+self.var_text)
+        Clickable.__init__(self, self.const_text+self.var_text,finish=False)
+        if finish:
+            self.finish()
 
     def finish(self):
         Clickable.finish(self)

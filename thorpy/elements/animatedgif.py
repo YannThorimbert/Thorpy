@@ -106,15 +106,19 @@ class AnimatedGif(ThorpyImage):
         <path>: the path to the image.
         <color>: if path is None, use this color instead of image.
         """
-        img = AnimatedGif(path, colorkey=colorkey, low=low, nread=nread)
+        img = AnimatedGif(path, colorkey=colorkey, low=low, nread=nread,
+                            finish=False)
         img.finish()
         return img
 
     def __init__(self, path, elements=None, normal_params=None, colorkey=None,
-                 start_frame=0, low=2, nread=float("inf")):
+                 start_frame=0, low=2, nread=float("inf"),finish=True):
+        low = 1 if low < 1 else low
         if not HAS_PIL:
             print("You need to have PIL installed in order to use animated gifs")
-        ThorpyImage.__init__(self, path=path, elements=elements, normal_params=normal_params, colorkey=colorkey)
+        ThorpyImage.__init__(self, path=path, elements=elements,
+                            normal_params=normal_params, colorkey=colorkey,
+                            finish=False)
         self.colorkey = colorkey
         if isinstance(path,list):
             self.frames = frames
@@ -127,6 +131,8 @@ class AnimatedGif(ThorpyImage):
         thorpy.add_time_reaction(self, self.next_frame)
         for img in self.frames:
             img.set_colorkey(self.colorkey)
+        if finish:
+            self.finish()
 
     def next_frame(self):
         if self.i%self.low == 0 and self.nread>0:

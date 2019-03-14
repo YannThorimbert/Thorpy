@@ -106,6 +106,15 @@ def linear_combination(c1, c2, k1):
     b = int(k1*c1[2] + k2*c2[2])
     return (r,g,b)
 
+def linear_combination_rgba(c1, c2, k1):
+    """Returns medium color between c1 and c2"""
+    k2 = 1. - k1
+    r = int(k1*c1[0] + k2*c2[0])
+    g = int(k1*c1[1] + k2*c2[1])
+    b = int(k1*c1[2] + k2*c2[2])
+    a = int(k1*c1[3] + k2*c2[3])
+    return (r,g,b)
+
 def difference(c1, c2):
     return (c1[0] - c2[0], c1[1] - c2[1], c1[2] - c2[2])
 

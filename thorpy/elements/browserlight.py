@@ -19,7 +19,7 @@ class BrowserLight(Element):
     @staticmethod
     def make(path="./", ddl_size=None, folders=True, files=True, file_types=None, text=""):
         browser = BrowserLight(path, ddl_size, folders=folders, files=files,
-                            file_types=file_types, text=text)
+                            file_types=file_types, text=text, finish=False)
         browser.finish()
         return browser
 
@@ -30,7 +30,8 @@ class BrowserLight(Element):
                  folders=True,
                  files=True,
                  file_types=None,
-                 text=""):
+                 text="",
+                 finish=True):
         """File and folder browser.
         <path>: the path of the folder in which browser browse files.
         <ddl_size>: if not None, force the size of the dropdown list of files.
@@ -41,7 +42,7 @@ class BrowserLight(Element):
         <text>: title text of the browser.
         """
         ddl_size = style.BROWSERLIGHT_DDL_SIZE if ddl_size is None else ddl_size
-        super(BrowserLight, self).__init__(normal_params=normal_params)
+        super(BrowserLight, self).__init__(normal_params=normal_params,finish=False)
         self.path = path
         self._ddl_size = ddl_size
         if not hasattr(file_types, "__iter__") and file_types is not None:
@@ -55,16 +56,14 @@ class BrowserLight(Element):
         if not files:
             actual_files = []
         self._ddlf = DropDownListFast(size=self._ddl_size, titles=actual_files,
-                                      folders=actual_folders)
+                                      folders=actual_folders,finish=False)
         # selection button
         inserter_width = 3 * ddl_size[0] // 4
 ##        if inserter_width > style.MAX_INSERTER_WIDTH:
 ##            inserter_width = style.MAX_INSERTER_WIDTH
         self._selected = Inserter("Selected : ", size=(inserter_width, None))
-        self._selected.finish()
         if isinstance(text, str):
             self.text_element = OneLineText(text)
-            self.text_element.finish()
         else:
             self.text_element = text
         self.add_elements([self.text_element, self._ddlf, self._selected])
@@ -81,6 +80,8 @@ class BrowserLight(Element):
                                                  radius=style.BOX_RADIUS)
         self.set_painter(painter)
         self._refresh_ddlf_lift()
+        if finish:
+            self.finish()
 
     def finish(self):
         Element.finish(self)

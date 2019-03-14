@@ -21,10 +21,11 @@ class Pressable(Element):
         return e
 
     def __init__(self, text="", elements=None, normal_params=None,
-                 press_params=None):
+                 press_params=None, finish=True):
         """Pressable element."""
         self.press_params = init_params(press_params)
-        super(Pressable, self).__init__(text, elements, normal_params)
+        super(Pressable, self).__init__(text, elements, normal_params,
+                                        finish=False)
         # painters
         if not press_params or not "painter" in press_params:
             painter = copy(self.normal_params.params.get("painter"))
@@ -38,6 +39,8 @@ class Pressable(Element):
                                  {"button": parameters.LEFT_CLICK_BUTTON})
         self._set_unpress_reaction(parameters.BUTTON_UNPRESS_EVENT,
                                    {"button": parameters.LEFT_CLICK_BUTTON})
+        if finish:
+            self.finish()
 
     def finish(self):
         Element.finish(self)

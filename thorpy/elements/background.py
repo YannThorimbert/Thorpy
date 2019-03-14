@@ -21,12 +21,12 @@ class Background(Element):
             'cut to screen' : if an image is passed, it is shrinked to fit
                 the screen. Otherwise, use behaviour for None.
         """
-        background = Background(color, image, elements, mode=mode)
+        background = Background(color, image, elements, mode=mode, finish=False)
         background.finish()
         return background
 
     def __init__(self, color=None, image=None, elements=None,
-                 normal_params=None, mode="scale to screen"):
+                 normal_params=None, mode="scale to screen", finish=True):
         """Background element for another element or menu.
         <color>: if not None, define the color for the background.
         <image>: if not None, define the image of the background.
@@ -39,7 +39,7 @@ class Background(Element):
             'cut to screen' : if an image is passed, it is shrinked to fit
                 the screen. Otherwise, use behaviour for None.
         """
-        super(Background, self).__init__("", elements, normal_params)
+        super(Background, self).__init__("", elements, normal_params, finish=False)
         W, H = functions.get_screen_size()
         if image:
             painter = ImageFrame(image, mode=mode)
@@ -49,3 +49,5 @@ class Background(Element):
             else:
                 painter = BasicFrame((W, H), (255, 255, 255))
         self.set_painter(painter)
+        if finish:
+            self.finish()

@@ -19,7 +19,7 @@ class Browser(BrowserLight):
     @staticmethod
     def make(path="./", ddl_size=None, folders=True, files=True, file_types=None, text=""):
         browser = Browser(path, ddl_size, folders=folders, files=files,
-                            file_types=file_types, text=text)
+                            file_types=file_types, text=text, finish=False)
         browser.finish()
         return browser
 
@@ -30,7 +30,8 @@ class Browser(BrowserLight):
                  folders=True,
                  files=True,
                  file_types=None,
-                 text=""):
+                 text="",
+                 finish=True):
         """File and folder browser for a.
         <path>: the path of the folder in which browser browse files.
         <ddl_size>: if not None, force the size of the dropdown list of files.
@@ -41,7 +42,7 @@ class Browser(BrowserLight):
         <text>: title text of the browser.
         """
         ddl_size = style.BROWSERLIGHT_DDL_SIZE if ddl_size is None else ddl_size
-        super(BrowserLight, self).__init__(normal_params=normal_params)
+        super(BrowserLight, self).__init__(normal_params=normal_params,finish=False)
         self.path = self.set_path(path)
         self.last_done_path = str(self.path)
         self._ddl_size = ddl_size
@@ -56,21 +57,19 @@ class Browser(BrowserLight):
         if not files:
             actual_files = []
         self._ddlf = DropDownListFast(size=self._ddl_size, titles=actual_files,
-                                      folders=actual_folders, has_lift=True)
+                                      folders=actual_folders, has_lift=True,
+                                      finish=False)
 ##        self._ddlf.finish()
         # selection button
         inserter_width = 3*ddl_size[0]//4
 ##        if inserter_width > style.MAX_INSERTER_WIDTH:
 ##            inserter_width = style.MAX_INSERTER_WIDTH
         self._selected = Inserter("Selected : ", size=(inserter_width, None))
-        self._selected.finish()
         if isinstance(text, str):
             self.text_element = OneLineText(text)
-            self.text_element.finish()
         else:
             self.text_element = text
-        self._path_element = PathElement(self, True)
-        self._path_element.finish()
+        self._path_element = PathElement(father=self, abspath=True)
         self.add_elements([self.text_element, self._path_element, self._ddlf,
                            self._selected])
         reac_pressed = Reaction(parameters.BUTTON_UNPRESS_EVENT,
@@ -87,6 +86,8 @@ class Browser(BrowserLight):
                                                  radius=style.BOX_RADIUS)
         self.set_painter(painter)
         self._last_click = -2 * parameters.DOUBLE_CLICK_DELAY
+        if finish:
+            self.finish()
 
     def finish(self):
         self._path_element._set_path_elements()

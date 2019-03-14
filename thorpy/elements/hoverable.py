@@ -11,9 +11,9 @@ from thorpy.miscgui import constants, functions, parameters, style
 class Hoverable(Element):
     """Hoverable Element."""
 
-    def __init__(self, text="", elements=None, normal_params=None):
+    def __init__(self, text="", elements=None, normal_params=None, finish=True):
         """Hoverable Element."""
-        super(Hoverable, self).__init__(text, elements, normal_params)
+        super(Hoverable, self).__init__(text, elements, normal_params, finish=False)
         self._hover_imgs = {}
         self._normal_imgs = {}
         self._updates = {}
@@ -28,6 +28,8 @@ class Hoverable(Element):
         self._help_pos = None
         self._help_reaction = None
         self._help_blitted = False
+        if finish:
+            self.finish()
 
     def finish(self):
         Element.finish(self)
@@ -313,7 +315,7 @@ class Hoverable(Element):
             self.remove_hovered_state(state)
 
     def add_basic_help(self, text, wait_time=None, jail=None):
-        helper = Element(text)
+        helper = Element(text,finish=False)
         helper.set_style("help")
         helper.finish()
         helper.scale_to_title()

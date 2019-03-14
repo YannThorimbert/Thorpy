@@ -22,7 +22,7 @@ class _Cursor(Element):
         timed_painter = painterstyle.CURSOR_PAINTER(
             size=cursor_size,
             color=constants.TRANSPARENT)
-        super(_Cursor, self).__init__()
+        super(_Cursor, self).__init__(finish=False)
         self.normal_params.params["painter"] = normal_painter
         self.time_params = Initializer()
         self.time_params.params["painter"] = timed_painter

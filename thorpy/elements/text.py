@@ -7,9 +7,11 @@ from thorpy.miscgui.constants import STATE_NORMAL
 class OneLineText(Element):
     """Simpe text on only one line."""
 
-    def __init__(self, text="", elements=None, normal_params=None):
+    def __init__(self, text="", elements=None, normal_params=None, finish=True):
         """Simpe text on only one line."""
-        Element.__init__(self, text, elements, normal_params)
+        Element.__init__(self, text, elements, normal_params, finish=False)
+        if finish:
+            self.finish()
 
     def finish(self):
         self.set_style("text")
@@ -19,13 +21,16 @@ class OneLineText(Element):
 class MultilineText(Element):
     """Simple text on multiple lines."""
 
-    def __init__(self, text="", size=None, elements=None, normal_params=None):
+    def __init__(self, text="", size=None, elements=None, normal_params=None,
+                    finish=True):
         """Simple text on multiple lines.
         <size>: the size of the area on which the text is displayed.
         """
-        Element.__init__(self, text, elements, normal_params)
+        Element.__init__(self, text, elements, normal_params,finish=False)
         self._size = size
         self.visible = False
+        if finish:
+            self.finish()
 
     def finish(self):
         Element.finish(self)
