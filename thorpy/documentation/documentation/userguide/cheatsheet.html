@@ -47,6 +47,8 @@
                                 This does not embrace all the parameters of the different elements. Finally, many composite elements are available, such as alerts,
                                 dialog and choice boxes, image buttons, ... You can find them on the <a href="../../examples.html">examples</a> page.</p>
 
+                            <p> As a user, remember that the wrappers <code>thorpy.make_button("my button", my_function)</code> and <code>thorpy.make_text("my text")</code> most of the time do the job for planty of functionalities.</p>
+
                             <p><code>AnimatedGif</code>: read and play an animated gif.<br>
                             Example: <code>AnimatedGif("path/to/myGif")</code>
 							<br>Full prototype: <code>AnimatedGif(path, colorkey=None, low=2, nread=float("inf"))</code></p>
@@ -68,7 +70,7 @@
 							Example: <code>BrowserLauncher(a_browser, "Choose a file")</code>
 							<br>Full prototype: <code>BrowserLauncher(browser, const_text="", var_text="", show_select=True, click_cancel=False, text_ok="Ok", text_cancel="Cancel", size=style.MAKE_SIZE)</code></p>
 
-							<p><code>BrowserLight</code>: file and folder browser for a given directory<br>
+							<p><code>BrowserLight</code>: file and folder browser restricted to a given directory<br>
 							Example: <code>BrowserLight(path="/my/path/")</code>, <code>BrowserLight("./", folders=False, file_types=(".txt", ".png"))</code>
 							<br>Full prototype: <code>BrowserLight(path="./", ddl_size=None, folders=True, files=True, file_types=None, text="")</code></p>
 
@@ -194,7 +196,7 @@
 						<div class="tutotitle"><h2>List of ThorPy events</h2></div>
 							<div class="cheat">
 							<p>Here are summarized the <code>id</code> attribute of events automatically posted by built-in ThorPy elements. They are all stored in <code>thorpy.constants</code> module. They are all regrouped under the pygame event whose type is <code>thorpy.constants.THORPY_EVENT</code> (see this <a href="reactions.html#thorpy_events">important note on thorpy events</a>). We summarize below the thorpy events avalaible, giving for each of them the constant name corresponding to their <code>id</code> attribute. With each event are listed its other attributes.</p>
-
+                            <p>A tutorial on reactions can be found <a href="../../tutorials/reactions.html">here</a>.
 							<div class="CSSTableGenerator" >
 								<table >
 									<tr>
@@ -318,7 +320,7 @@
             </section>
 
             <footer>
-			  <p>&copy; Copyright 2017, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../../about.html">About</a> | <a href="../../phpBB3/index.php">Forum</a></p>
+			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../../about.html">About</a> | <a href="../../phpBB3/index.php">Forum</a></p>
             </footer>
         </div>
     </body>
