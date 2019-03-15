@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section>
+                <article>
+                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Launching elements</span></h1></h1>
+
+<a name="fullcode"></a>
+<h2>Full code</h2>
+<p>The code below present different ways to launch elements into the current menu.</p>
+
+<div class="tutoframe">
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;Script showing several ways to launch things.</span>
+
+<span class="sd">Note: never call set_launcher(launching, launched) if &lt;launched&gt; can be launched</span>
+<span class="sd">by another element and &lt;launching&gt; is NOT in the same menu.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">thorpy</span><span class="o">,</span> <span class="nn">pygame</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s">&quot;Launching alerts&quot;</span><span class="p">)</span>
+
+<span class="c"># ****************** First launcher : button 1 ******************</span>
+<span class="c">#This launcher launches a simple button</span>
+<span class="n">my_element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;I am a useless button</span><span class="se">\n</span><span class="s">Click outside to quit.&quot;</span><span class="p">)</span>
+<span class="n">button1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Launcher 1&quot;</span><span class="p">)</span>
+<span class="c">#we set click_quit=True below, because we did not provide a &quot;ok&quot; and/or &quot;cancel&quot;</span>
+<span class="c">#button to the user. Element disappears When user clicks outside it.</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">set_launcher</span><span class="p">(</span><span class="n">button1</span><span class="p">,</span> <span class="n">my_element</span><span class="p">,</span> <span class="n">click_quit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c"># ****************** Second launcher : button 2 ******************</span>
+<span class="c">#here the element to be launched is a box with ok and cancel buttons + custom</span>
+<span class="c">#elements. We can also use make_ok_box, with only 1 text.</span>
+<span class="c">#Note that DONE_EVENT and CANCEL_EVENT are posted accordingly at unlaunch.</span>
+<span class="n">box</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_ok_cancel_box</span><span class="p">([</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)],</span>
+                                 <span class="n">ok_text</span><span class="o">=</span><span class="s">&quot;Ok&quot;</span><span class="p">,</span> <span class="n">cancel_text</span><span class="o">=</span><span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
+<span class="n">button2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Launcher 2&quot;</span><span class="p">)</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">set_launcher</span><span class="p">(</span><span class="n">button2</span><span class="p">,</span> <span class="n">box</span><span class="p">)</span>
+
+<span class="c"># ****************** Third launcher : button 3 ******************</span>
+<span class="c">#This launcher launches a box, set it green, and changes screen color when</span>
+<span class="c">#unlaunched.</span>
+<span class="n">button3</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Launcher 3&quot;</span><span class="p">)</span>
+<span class="n">other_box</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_ok_box</span><span class="p">([</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Color is gonna change...&quot;</span><span class="p">)])</span>
+<span class="n">my_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">set_launcher</span><span class="p">(</span><span class="n">button3</span><span class="p">,</span> <span class="n">other_box</span><span class="p">)</span><span class="c">#this time get the launcher</span>
+<span class="c">#we specify some custom operations that have to be done before/after launching:</span>
+<span class="k">def</span> <span class="nf">my_func_before</span><span class="p">():</span>
+    <span class="n">my_launcher</span><span class="o">.</span><span class="n">launched</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c">#change launched box color</span>
+    <span class="n">my_launcher</span><span class="o">.</span><span class="n">default_func_before</span><span class="p">()</span> <span class="c">#default stuff</span>
+<span class="k">def</span> <span class="nf">my_func_after</span><span class="p">():</span>
+    <span class="n">background</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span> <span class="c">#change background color</span>
+    <span class="n">my_launcher</span><span class="o">.</span><span class="n">default_func_after</span><span class="p">()</span> <span class="c">#default stuff</span>
+
+<span class="n">my_launcher</span><span class="o">.</span><span class="n">func_before</span> <span class="o">=</span> <span class="n">my_func_before</span>
+<span class="n">my_launcher</span><span class="o">.</span><span class="n">func_after</span> <span class="o">=</span> <span class="n">my_func_after</span>
+
+<span class="c"># ****************** Fourth launcher : event ******************</span>
+<span class="c">#This launcher is not linked to a ThorPy element, but instead user can activate</span>
+<span class="c">#it by pressing SPACE</span>
+<span class="n">unlaunch_button</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_ok_box</span><span class="p">([</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Ready to unlaunch?&quot;</span><span class="p">)])</span>
+<span class="n">unlaunch_button</span><span class="o">.</span><span class="n">stick_to</span><span class="p">(</span><span class="s">&quot;screen&quot;</span><span class="p">,</span> <span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="s">&quot;top&quot;</span><span class="p">)</span>
+<span class="n">invisible_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">get_launcher</span><span class="p">(</span><span class="n">unlaunch_button</span><span class="p">,</span> <span class="n">autocenter</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="c"># set focus to False for non-blocking behaviour:</span>
+<span class="c">##invisible_launcher.focus = False</span>
+<span class="c">#this reaction will be added to the background:</span>
+<span class="n">reac</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ConstantReaction</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">,</span> <span class="n">invisible_launcher</span><span class="o">.</span><span class="n">launch</span><span class="p">,</span>
+                                <span class="p">{</span><span class="s">&quot;key&quot;</span><span class="p">:</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">})</span>
+<span class="c">#add a text so user knows what to do</span>
+<span class="n">text4</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Press space to launch invisible_launcher&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span>
+
+
+<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">text4</span><span class="p">,</span> <span class="n">button1</span><span class="p">,</span> <span class="n">button2</span><span class="p">,</span> <span class="n">button3</span><span class="p">])</span>
+<span class="n">background</span><span class="o">.</span><span class="n">add_reaction</span><span class="p">(</span><span class="n">reac</span><span class="p">)</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+
+<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></body>
+
+
+</div></a>
+	
+                </article>
+            </section>
+            
+            <footer>
+			  <p>&copy; Copyright 2017, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

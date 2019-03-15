@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section>
+                <article>
+                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Elements overview</span></h1></h1>
+
+<a name="fullcode"></a>
+<h2>Full code</h2>
+<p>The code below produces an application summarizing most of the common built-in elements that one would use in a program. In addition, an help element has been added to each element presented in order to show dynamic help to the user during execution. Note that there is many other available built-in elements : you can check them on the <a href="../documentation/userguide/cheatsheet.html#elements">cheat sheet</a>.</p>
+<div class="tutoframe">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">thorpy</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="s">&quot;ThorPy Overview&quot;</span><span class="p">)</span>
+
+<span class="n">element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Element</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;Element&quot;</span><span class="p">)</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_basic_help</span><span class="p">(</span><span class="n">element</span><span class="p">,</span><span class="s">&quot;Element:</span><span class="se">\n</span><span class="s">Most simple graphical element.&quot;</span><span class="p">)</span>
+
+<span class="n">clickable</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Clickable</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;Clickable&quot;</span><span class="p">)</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_basic_help</span><span class="p">(</span><span class="n">clickable</span><span class="p">,</span><span class="s">&quot;Clickable:</span><span class="se">\n</span><span class="s">Can be hovered and pressed.&quot;</span><span class="p">)</span>
+
+<span class="n">draggable</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Draggable</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;Draggable&quot;</span><span class="p">)</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_basic_help</span><span class="p">(</span><span class="n">draggable</span><span class="p">,</span><span class="s">&quot;Draggable:</span><span class="se">\n</span><span class="s">You can drag it.&quot;</span><span class="p">)</span>
+
+<span class="n">checker_check</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Checker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;Checker&quot;</span><span class="p">)</span>
+
+<span class="n">checker_radio</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Checker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;Radio&quot;</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="s">&quot;radio&quot;</span><span class="p">)</span>
+
+<span class="n">browser</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Browser</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;../../&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">&quot;Browser&quot;</span><span class="p">)</span>
+
+<span class="n">browserlauncher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">BrowserLauncher</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">browser</span><span class="p">,</span> <span class="n">const_text</span><span class="o">=</span><span class="s">&quot;Choose file:&quot;</span><span class="p">,</span>
+                                                <span class="n">var_text</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">browserlauncher</span><span class="o">.</span><span class="n">max_chars</span> <span class="o">=</span> <span class="mi">15</span> <span class="c">#limit size of browser launcher</span>
+
+<span class="n">dropdownlist</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">DropDownListLauncher</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">const_text</span><span class="o">=</span><span class="s">&quot;Choose:&quot;</span><span class="p">,</span>
+                                                <span class="n">var_text</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span>
+                                         <span class="n">titles</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)])</span>
+<span class="n">dropdownlist</span><span class="o">.</span><span class="n">scale_to_title</span><span class="p">()</span>
+<span class="n">dropdownlist</span><span class="o">.</span><span class="n">max_chars</span> <span class="o">=</span> <span class="mi">12</span> <span class="c">#limit size of drop down list</span>
+
+<span class="n">slider</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">SliderX</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="s">&quot;Slider: &quot;</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+                                <span class="n">initial_value</span><span class="o">=</span><span class="mf">8.4</span><span class="p">)</span>
+
+<span class="n">inserter</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Inserter</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Inserter: &quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;Write here.&quot;</span><span class="p">)</span>
+
+<span class="n">title_element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Overview example&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span><span class="p">,</span> <span class="n">clickable</span><span class="p">,</span> <span class="n">draggable</span><span class="p">,</span> <span class="n">checker_check</span><span class="p">,</span> <span class="n">checker_radio</span><span class="p">,</span>
+            <span class="n">dropdownlist</span><span class="p">,</span> <span class="n">browserlauncher</span><span class="p">,</span> <span class="n">slider</span><span class="p">,</span> <span class="n">inserter</span><span class="p">]</span>
+<span class="n">central_box</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Box</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">)</span>
+<span class="n">central_box</span><span class="o">.</span><span class="n">fit_children</span><span class="p">(</span><span class="n">margins</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span> <span class="c">#we want big margins</span>
+<span class="n">central_box</span><span class="o">.</span><span class="n">center</span><span class="p">()</span> <span class="c">#center on screen</span>
+<span class="n">central_box</span><span class="o">.</span><span class="n">add_lift</span><span class="p">()</span> <span class="c">#add a lift (useless since box fits children)</span>
+<span class="n">central_box</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">220</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">180</span><span class="p">))</span> <span class="c">#set box color and opacity</span>
+
+<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
+                                    <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">title_element</span><span class="p">,</span> <span class="n">central_box</span><span class="p">])</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+
+<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+
+<a href="overview.png"><img src="overview.png" valign="top" class="tutoimg"/></div></a>
+	
+                </article>
+            </section>
+            
+            <footer>
+			  <p>&copy; Copyright 2017, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

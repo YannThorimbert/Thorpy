@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section>
+                <article>
+                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - User choices</span></h1></h1>
+
+<a name="fullcode"></a>
+<h2>Full code</h2>
+<p>ThorPy provides a fast way to let user decide between a list of choices. As for alerts, you may either need blocking or non-blocking choices.</p>
+<div class="tutoframe">
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">thorpy</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In this example, a box opens in which the user can choose between turning the</span>
+<span class="sd">background blue or red (or do nothing).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">set_blue</span><span class="p">():</span>
+    <span class="n">background</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span>
+    <span class="n">background</span><span class="o">.</span><span class="n">unblit_and_reblit</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">set_red</span><span class="p">():</span>
+    <span class="n">background</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">background</span><span class="o">.</span><span class="n">unblit_and_reblit</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">my_choices_1</span><span class="p">():</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&quot;I like blue&quot;</span><span class="p">,</span><span class="n">set_blue</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;No! red&quot;</span><span class="p">,</span><span class="n">set_red</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;cancel&quot;</span><span class="p">,</span><span class="bp">None</span><span class="p">)]</span>
+    <span class="n">thorpy</span><span class="o">.</span><span class="n">launch_nonblocking_choices</span><span class="p">(</span><span class="s">&quot;This is a non-blocking choices box!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Proof that it is non-blocking : this sentence is printing!&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">my_choices_2</span><span class="p">():</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&quot;I like blue&quot;</span><span class="p">,</span><span class="n">set_blue</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;No! red&quot;</span><span class="p">,</span><span class="n">set_red</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;cancel&quot;</span><span class="p">,</span><span class="bp">None</span><span class="p">)]</span>
+    <span class="n">thorpy</span><span class="o">.</span><span class="n">launch_blocking_choices</span><span class="p">(</span><span class="s">&quot;Blocking choices box!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span>
+                                    <span class="n">parent</span><span class="o">=</span><span class="n">background</span><span class="p">)</span> <span class="c">#for auto unblit</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;This sentence will print only after you clicked ok&quot;</span><span class="p">)</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s">&quot;Launching alerts&quot;</span><span class="p">)</span>
+
+<span class="n">button1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Non-blocking version&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">my_choices_1</span><span class="p">)</span>
+<span class="n">button2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Blocking version&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">my_choices_2</span><span class="p">)</span>
+
+<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">button1</span><span class="p">,</span><span class="n">button2</span><span class="p">])</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+
+<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+</body>
+
+</div></a>
+	
+                </article>
+            </section>
+            
+            <footer>
+			  <p>&copy; Copyright 2017, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

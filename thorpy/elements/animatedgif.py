@@ -105,6 +105,8 @@ class AnimatedGif(ThorpyImage):
         """Image element.
         <path>: the path to the image.
         <color>: if path is None, use this color instead of image.
+        <low>: increase this parameter to lower the gif speed.
+        <nread>: number of times the gif is played
         """
         img = AnimatedGif(path, colorkey=colorkey, low=low, nread=nread,
                             finish=False)
@@ -154,4 +156,3 @@ class AnimatedGif(ThorpyImage):
             newone.set_colorkey(self.colorkey)
             new_frames.append(newone)
         self.frames = new_frames
-

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section>
+                <article>
+                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Exclusion Pools</span></h1></h1>
+
+<a name="fullcode"></a>
+<h2>Full code</h2>
+<p>The code below shows how to set up radio buttons so that there is always only one that is selected. Also, togglable buttons are defined, which behave the same way, except that we allow them to be all unselected.</p>
+<div class="tutoframe">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">thorpy</span>
+
+<span class="n">ap</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="p">))</span>
+
+<span class="c">#format of a Pool : thorpy.Pool(elements, first_value, always_value)</span>
+<span class="c">#   &lt;first_value&gt; can be None, and is the element that is &#39;on&#39; at the beginning</span>
+<span class="c">#   &lt;always_value&gt;=True means that there must always be an element which is &#39;on&#39;</span>
+
+<span class="c">#make radios</span>
+<span class="n">radios</span> <span class="o">=</span> <span class="p">[</span><span class="n">thorpy</span><span class="o">.</span><span class="n">Checker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;radio&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">type_</span><span class="o">=</span><span class="s">&quot;radio&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">radio_pool</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">RadioPool</span><span class="p">(</span><span class="n">radios</span><span class="p">,</span> <span class="n">first_value</span><span class="o">=</span><span class="n">radios</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">always_value</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c">#make togglable buttons</span>
+<span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span><span class="n">thorpy</span><span class="o">.</span><span class="n">Togglable</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;togglable&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">togglable_pool</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">TogglablePool</span><span class="p">(</span><span class="n">buttons</span><span class="p">,</span> <span class="n">first_value</span><span class="o">=</span><span class="n">buttons</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                        <span class="n">always_value</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c">#cosmetic separation line</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Line</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">&quot;h&quot;</span><span class="p">)</span>
+
+<span class="n">bck</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="o">.</span><span class="n">make</span><span class="p">((</span><span class="mi">220</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">elements</span><span class="o">=</span><span class="n">radios</span><span class="o">+</span><span class="p">[</span><span class="n">line</span><span class="p">]</span><span class="o">+</span><span class="n">buttons</span><span class="p">)</span>
+<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">bck</span><span class="p">)</span>
+<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">bck</span><span class="p">)</span>
+<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+
+</body>
+
+</div></a>
+	
+                </article>
+            </section>
+            
+            <footer>
+			  <p>&copy; Copyright 2017, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

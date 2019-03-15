@@ -18,8 +18,10 @@ class LifeBar(thorpy.Element):
         self.finish()
         if type_ == "v":
             self.set_life = self.set_life_v
+            self.get_life = self.get_life_v
         else:
             self.set_life = self.set_life_h
+            self.get_life = self.get_life_h
         #
         self.life_text = thorpy.make_text(text,font_color=text_color,font_size=font_size)
         self.life_text.center(element=self)
@@ -56,6 +58,12 @@ class LifeBar(thorpy.Element):
         tmp = self.life_rect.bottom
         self.life_rect.height = int(life*self.life_height)
         self.life_rect.bottom = tmp
+
+    def get_life_h(self,life):
+        return self.life_rect.width / float(self.life_width)
+
+    def get_life_v(self,life):
+        return self.life_rect.height / float(self.life_height)
 
 class SkillBar(LifeBar):
 

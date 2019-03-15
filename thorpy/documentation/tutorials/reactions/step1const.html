@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #ffffff; }
+body .c { color: #888888 } /* Comment */
+body .err { color: #FF0000; background-color: #FFAAAA } /* Error */
+body .k { color: #008800; font-weight: bold } /* Keyword */
+body .o { color: #333333 } /* Operator */
+body .cm { color: #888888 } /* Comment.Multiline */
+body .cp { color: #557799 } /* Comment.Preproc */
+body .c1 { color: #888888 } /* Comment.Single */
+body .cs { color: #cc0000; font-weight: bold } /* Comment.Special */
+body .gd { color: #A00000 } /* Generic.Deleted */
+body .ge { font-style: italic } /* Generic.Emph */
+body .gr { color: #FF0000 } /* Generic.Error */
+body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+body .gi { color: #00A000 } /* Generic.Inserted */
+body .go { color: #888888 } /* Generic.Output */
+body .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+body .gs { font-weight: bold } /* Generic.Strong */
+body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+body .gt { color: #0044DD } /* Generic.Traceback */
+body .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #003388; font-weight: bold } /* Keyword.Pseudo */
+body .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #333399; font-weight: bold } /* Keyword.Type */
+body .m { color: #6600EE; font-weight: bold } /* Literal.Number */
+body .s { background-color: #fff0f0 } /* Literal.String */
+body .na { color: #0000CC } /* Name.Attribute */
+body .nb { color: #007020 } /* Name.Builtin */
+body .nc { color: #BB0066; font-weight: bold } /* Name.Class */
+body .no { color: #003366; font-weight: bold } /* Name.Constant */
+body .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+body .ni { color: #880000; font-weight: bold } /* Name.Entity */
+body .ne { color: #FF0000; font-weight: bold } /* Name.Exception */
+body .nf { color: #0066BB; font-weight: bold } /* Name.Function */
+body .nl { color: #997700; font-weight: bold } /* Name.Label */
+body .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+body .nt { color: #007700 } /* Name.Tag */
+body .nv { color: #996633 } /* Name.Variable */
+body .ow { color: #000000; font-weight: bold } /* Operator.Word */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mb { color: #6600EE; font-weight: bold } /* Literal.Number.Bin */
+body .mf { color: #6600EE; font-weight: bold } /* Literal.Number.Float */
+body .mh { color: #005588; font-weight: bold } /* Literal.Number.Hex */
+body .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+body .mo { color: #4400EE; font-weight: bold } /* Literal.Number.Oct */
+body .sb { background-color: #fff0f0 } /* Literal.String.Backtick */
+body .sc { color: #0044DD } /* Literal.String.Char */
+body .sd { color: #DD4422 } /* Literal.String.Doc */
+body .s2 { background-color: #fff0f0 } /* Literal.String.Double */
+body .se { color: #666666; font-weight: bold; background-color: #fff0f0 } /* Literal.String.Escape */
+body .sh { background-color: #fff0f0 } /* Literal.String.Heredoc */
+body .si { background-color: #eeeeee } /* Literal.String.Interpol */
+body .sx { color: #DD2200; background-color: #fff0f0 } /* Literal.String.Other */
+body .sr { color: #000000; background-color: #fff0ff } /* Literal.String.Regex */
+body .s1 { background-color: #fff0f0 } /* Literal.String.Single */
+body .ss { color: #AA6600 } /* Literal.String.Symbol */
+body .bp { color: #007020 } /* Name.Builtin.Pseudo */
+body .vc { color: #336699 } /* Name.Variable.Class */
+body .vg { color: #dd7700; font-weight: bold } /* Name.Variable.Global */
+body .vi { color: #3333BB } /* Name.Variable.Instance */
+body .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+
+.tutoframe
+{
+	padding: 4px 4px 4px 4px;
+	halign: center;
+}
+
+.tutocode
+{
+	margin: auto;
+	width: 50%;
+}
+
+.tutoimg
+{
+	width:200px;
+	margin-left: 10px;
+}
+
+.highlighttable
+{
+	background-color: #f0f0f0;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	border-radius: 3px;
+	width: 620px;
+	display: inline-block;
+}
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#ThorPy reactions tutorial : step 1</span>
+<span class="kn">import</span> <span class="nn">thorpy</span><span class="o">,</span> <span class="nn">pygame</span>
+
+<span class="c">#constant reaction func : it does not take the event as first argument</span>
+<span class="k">def</span> <span class="nf">my_const_func_reaction</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">&quot;I&#39;m b&quot;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;My constant reaction:&quot;</span><span class="p">,</span> <span class="s">&quot;a =&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&quot;, b =&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c">#We declare a ConstantReaction. Note that we do not filter the event here.</span>
+<span class="n">my_reaction</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ConstantReaction</span><span class="p">(</span><span class="n">reacts_to</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">MOUSEBUTTONDOWN</span><span class="p">,</span>
+                                      <span class="n">reac_func</span><span class="o">=</span><span class="n">my_const_func_reaction</span><span class="p">,</span>
+                                      <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;a&quot;</span> <span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="n">caption</span><span class="o">=</span><span class="s">&quot;Reaction tuto&quot;</span><span class="p">)</span>
+
+<span class="n">ghost</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Ghost</span><span class="p">()</span>
+<span class="n">button</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;my button&quot;</span><span class="p">)</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">button</span><span class="p">,</span> <span class="n">ghost</span><span class="p">])</span>
+<span class="n">background</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+<span class="n">background</span><span class="o">.</span><span class="n">add_reaction</span><span class="p">(</span><span class="n">my_reaction</span><span class="p">)</span> <span class="c">#add my_reaction to background&#39;s reactions</span>
+
+<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span> <span class="c">#create a menu for auto events handling</span>
+<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span> <span class="c">#launch the menu</span>
+
+<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></body>
+</html>
