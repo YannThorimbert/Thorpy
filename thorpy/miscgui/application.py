@@ -21,7 +21,7 @@ class Application(object):
     location.
     """
 
-    def __init__(self, size, caption=None, icon="thorpy", center=True, flags=pygame.FULLSCREEN):
+    def __init__(self, size, caption=None, icon="thorpy", center=True, flags=0):
         """This object handles the pygame variables needed to create a graphical
         program, such as screen, screen's size window caption and window
         location.

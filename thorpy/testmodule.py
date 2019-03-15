@@ -40,10 +40,12 @@ def run():
 
     inserter = thorpy.Inserter(name="Inserter: ", value="Write here.")
 
+    quit = thorpy.make_button("Quit",func=thorpy.functions.quit_menu_func)
+
     title_element = thorpy.make_text("Overview example", 22, (255,255,0))
 
     elements = [element, clickable, draggable, checker_check, checker_radio,
-                dropdownlist, browserlauncher, slider, inserter]
+                dropdownlist, browserlauncher, slider, inserter, quit]
     central_box = thorpy.Box(elements=elements)
     central_box.fit_children(margins=(30,30)) #we want big margins
     central_box.center() #center on screen
