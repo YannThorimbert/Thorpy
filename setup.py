@@ -3,7 +3,8 @@ from setuptools import find_packages, setup
 
 setup(name='thorpy',
       version='1.6.1',
-      description='pygame GUI library',
+      description='GUI library for pygame',
+      long_description='GUI library for pygame',
       author='Yann Thorimbert',
       author_email='yann.thorimbert@gmail.com',
       url='http://www.thorpy.org/',
