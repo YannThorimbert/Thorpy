@@ -41,13 +41,40 @@
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
+
+<div class="tutoframe">
+
+    <pre><code>
+0 """Example from www.thorpy.org/examples.html"""
+1 import thorpy
+2 
+3 application = thorpy.Application((800, 600), "Example of animated gif")
+4 
+5 gif_element = thorpy.AnimatedGif("../documentation/examples/myGif.gif")
+6 gif_element.center()
+7 
+8 menu = thorpy.Menu(gif_element)
+9 menu.play()
+10 
+11 application.quit()
+12 
+13 """
+14 Other parameters to pass to the constructor of AnimatedGif:
+15         <path>: the path to the image.
+16         <color>: if path is None, use this color instead of image.
+17         <low>: increase this parameter to lower the gif speed.
+18         <nread>: number of times the gif is played
+19 """
+    </code></pre>
+</div>
+
 <p>The code below shows how to set up an animated gif.</p>
 <div class="tutoframe">
 
-    <pre><code class="language-python">
+    <pre><code>
         import thorpy
 
-        application = thorpy.Application((800, 600), "ThorPy Overview")
+        application = thorpy.Application((800, 600), "Example of animated gif")
 
         gif_element = thorpy.AnimatedGif("../documentation/examples/myGif.gif")
         gif_element.center()

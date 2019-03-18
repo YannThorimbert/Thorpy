@@ -1,7 +1,7 @@
 """Example from www.thorpy.org/examples.html"""
 import thorpy
 
-application = thorpy.Application((800, 600), "ThorPy Overview")
+application = thorpy.Application((800, 600), "Example of animated gif")
 
 gif_element = thorpy.AnimatedGif("../documentation/examples/myGif.gif")
 gif_element.center()
