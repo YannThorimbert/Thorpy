@@ -103,30 +103,30 @@
 <span class="n">thorpy</span><span class="o">.</span><span class="n">theme</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="s">&#39;human&#39;</span><span class="p">)</span>
 
 <span class="c">#Declaration of some elements...</span>
-<span class="n">useless1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Element</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;This button is useless.</span><span class="se">\n</span><span class="s">And you can&#39;t click it.&quot;</span><span class="p">)</span>
+<span class="n">useless1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;This button is useless.</span><span class="se">\n</span><span class="s">And you can&#39;t click it.&quot;</span><span class="p">)</span>
 
 <span class="n">text</span> <span class="o">=</span> <span class="s">&quot;This button also is useless.</span><span class="se">\n</span><span class="s">But you can click it anyway.&quot;</span>
-<span class="n">useless2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Clickable</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">useless2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Clickable</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-<span class="n">draggable</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Draggable</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;Drag me!&quot;</span><span class="p">)</span>
+<span class="n">draggable</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Draggable</span><span class="p">(</span><span class="s">&quot;Drag me!&quot;</span><span class="p">)</span>
 
 <span class="n">box1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_ok_box</span><span class="p">([</span><span class="n">useless1</span><span class="p">,</span> <span class="n">useless2</span><span class="p">,</span> <span class="n">draggable</span><span class="p">])</span>
 <span class="n">options1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Some useless things...&quot;</span><span class="p">)</span>
 <span class="n">thorpy</span><span class="o">.</span><span class="n">set_launcher</span><span class="p">(</span><span class="n">options1</span><span class="p">,</span> <span class="n">box1</span><span class="p">)</span>
 
 
-<span class="n">inserter</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Inserter</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Tip text: &quot;</span><span class="p">,</span>
+<span class="n">inserter</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Inserter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Tip text: &quot;</span><span class="p">,</span>
                                 <span class="n">value</span><span class="o">=</span><span class="s">&quot;This is a default text.&quot;</span><span class="p">,</span>
                                 <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 
-<span class="n">file_browser</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Browser</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;C:/Users/&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">&quot;Please have a look.&quot;</span><span class="p">)</span>
+<span class="n">file_browser</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Browser</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;C:/Users/&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">&quot;Please have a look.&quot;</span><span class="p">)</span>
 
-<span class="n">browser_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">BrowserLauncher</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">browser</span><span class="o">=</span><span class="n">file_browser</span><span class="p">,</span>
+<span class="n">browser_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">BrowserLauncher</span><span class="p">(</span><span class="n">browser</span><span class="o">=</span><span class="n">file_browser</span><span class="p">,</span>
                                                 <span class="n">const_text</span><span class="o">=</span><span class="s">&quot;Choose a file: &quot;</span><span class="p">,</span>
                                                 <span class="n">var_text</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
 
 <span class="n">color_setter</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ColorSetter</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
-<span class="n">color_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ColorSetterLauncher</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">color_setter</span><span class="p">,</span>
+<span class="n">color_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ColorSetterLauncher</span><span class="p">(</span><span class="n">color_setter</span><span class="p">,</span>
                                                     <span class="s">&quot;Launch color setter&quot;</span><span class="p">)</span>
 
 <span class="n">options2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Useful things&quot;</span><span class="p">)</span>
@@ -141,7 +141,7 @@
 <span class="n">central_box</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
 
 <span class="c">#Declaration of a background element - include your own path!</span>
-<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
                                     <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">central_box</span><span class="p">])</span>
 
 <span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="n">background</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
