@@ -1,12 +1,6 @@
-
-
-#raison de bug possible: argument de make est passé dans le non make
-#grepper toutes les classes pour voir ou objets sont construits !!!!
-#updater les wrappers
+import thorpy
 
 def run():
-    import thorpy
-
     application = thorpy.Application((800, 600), "ThorPy Overview")
 
     element = thorpy.Element("Element")
@@ -26,14 +20,13 @@ def run():
 
     browserlauncher = thorpy.BrowserLauncher.make(browser, const_text="Choose file:",
                                                     var_text="")
-    browserlauncher.max_chars = 15 #limit size of browser launcher
-##    browserlauncher = thorpy.make_button("lol")
+    browserlauncher.max_chars = 20 #limit size of browser launcher
 
     dropdownlist = thorpy.DropDownListLauncher(const_text="Choose number:",
                                                     var_text="",
                                              titles=[str(i)*i for i in range(1, 9)])
     dropdownlist.scale_to_title()
-    dropdownlist.max_chars = 12 #limit size of drop down list
+    dropdownlist.max_chars = 20 #limit size of drop down list
 
     slider = thorpy.SliderX(80, (5, 12), "Slider: ", type_=float,
                                     initial_value=8.4)
