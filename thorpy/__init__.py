@@ -27,7 +27,6 @@ import thorpy.elements
 import thorpy.menus
 import thorpy._utils
 import thorpy.miscgui
-from thorpy.miscgui import get_max_screen_size
 import thorpy.painting as painting
 import thorpy.miscgui.application as application
 import thorpy.miscgui.storage as storage
