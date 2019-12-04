@@ -272,7 +272,7 @@ def make_display_options_setter(fn, const_text="",
     import os, sys
     varset = VarSet()
     w,h = functions.get_screen_size()
-    maxsize = functions.get_current_application().max_screen_size
+    maxsize = functions.get_max_screen_size()
     if limvalsw[1] is None: limvalsw = (limvalsw[0], maxsize[0])
     if limvalsh[1] is None: limvalsh = (limvalsh[0], maxsize[1])
     fullscreen = bool(functions.get_screen().get_flags()&pygame.FULLSCREEN)

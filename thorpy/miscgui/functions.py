@@ -4,6 +4,10 @@ import pygame
 
 from thorpy.miscgui import constants, application, parameters
 
+def get_max_screen_size():
+    infoObject = pygame.display.Info()
+    w,h = (infoObject.current_w, infoObject.current_h)
+
 def obtain_valid_painter(painter_class, **kwargs):
     """Returns a valid painter whose class is <painter_class>. You can try any
     argument you want ; only arguments existing in painter's __init__ method
@@ -53,10 +57,11 @@ def get_current_application():
     return application._CURRENT_APPLICATION
 
 def get_screen():
-    return application._SCREEN
+    return pygame.display.get_surface()
+##    return application._SCREEN
 
 def get_screen_size():
-    return get_current_application().size
+    return get_screen().get_rect().size
 
 def refresh_current_menu():
     """Refreshes the current menu events. Use it to include newly added

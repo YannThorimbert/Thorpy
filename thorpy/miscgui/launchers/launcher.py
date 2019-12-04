@@ -203,8 +203,8 @@ class Launcher(object):
 
     def prelaunch(self): #handles func_before (unblittings, blittings, reactions deactivations)
         if parameters.FILL_SCREEN_AT_SUBMENUS:
-            functions.get_current_application().fill(parameters.SCREEN_FILL)
-            functions.get_current_application().update()
+            functions.get_screen().fill(parameters.SCREEN_FILL)
+            pygame.display.flip()
         if self.func_before is None:
             self.default_func_before()
         else:

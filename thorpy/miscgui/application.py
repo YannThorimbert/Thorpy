@@ -15,6 +15,10 @@ TICK_BUSY = False
 USE_IMG_DICT = False
 _loaded = {}
 
+def get_max_screen_size():
+    infoObject = pygame.display.Info()
+    w,h = (infoObject.current_w, infoObject.current_h)
+
 class Application(object):
     """An Application object handles the pygame variables needed to create a
     graphical program, such as screen, screen's size window caption and window
