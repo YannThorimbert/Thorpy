@@ -1,5 +1,6 @@
 import pygame
 
+from thorpy.painting.writer import Writer
 from thorpy.elements.element import Element
 from thorpy.elements.clickable import Clickable
 from thorpy.elements.ghost import Ghost
@@ -424,3 +425,35 @@ def get_user_text(title, value, size=(None,None)):
     ins.enter()
     launch_blocking(box)
     return ins.get_value()
+
+
+def bicolor_text(text, font_size, color1, color2, space=0):
+    import thorpy
+    get_shadow = thorpy.graphics.get_shadow
+    writer = Writer(size=font_size)
+    width = writer.get_width(text) + (len(text)-1)*space
+    height = writer.get_height()
+    surface = pygame.Surface((width, height))
+    alpha_color = (50,100,150)
+    surface.fill(alpha_color)
+    surface.set_colorkey(alpha_color)
+    x = 0
+    for letter in text:
+        img = make_text(letter, font_size-20, color1).get_image()
+        shad = get_shadow(img, shadow_radius=0, black=255,
+                            color_format="RGBA", alpha_factor=1.,
+                            decay_mode="exponential", color=color2,
+                            sun_angle=45., vertical=True, angle_mode="flip",
+                            mode_value=(False, False))
+        size = shad.get_rect().inflate(6,6).size
+        shad = pygame.transform.smoothscale(shad, size)
+        img1 = shad
+        img2 = img
+        r1 = img1.get_rect()
+        r1.left = x
+        r2 = img2.get_rect()
+        r2.center = r1.center
+        surface.blit(img1, r1)
+        surface.blit(img2, r2)
+        x += img1.get_width() + space
+    return surface

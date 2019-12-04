@@ -2,6 +2,7 @@ import pygame
 
 from thorpy.menus.basicmenu import BasicMenu
 from thorpy.miscgui import constants
+from thorpy.elements.ghost import Ghost
 
 
 class TickedMenu(BasicMenu):
@@ -19,3 +20,11 @@ class TickedMenu(BasicMenu):
         self.post_time_event()
         for event in pygame.event.get():
             self.treatement(event)
+
+def interactive_pause(max_time_in_seconds, element=None, fps=45):
+    if element is None:
+        element = Ghost()
+    menu = TickedMenu(element, fps=fps)
+    menu.kill_after(menu.fps * max_time_in_seconds)
+    menu.play()
+    return menu.kill_after

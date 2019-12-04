@@ -4,6 +4,7 @@ from thorpy.miscgui import functions, parameters
 from thorpy.miscgui import application
 
 
+
 class BasicMenu(object):
 
     def __init__(self, elements=None, fps=45):
@@ -16,6 +17,7 @@ class BasicMenu(object):
         self.population = self.get_population()
         self.events = self.get_events()
         self.finish_population()
+        self.time_before_kill = None
         self.clock = pygame.time.Clock()
         if application.TICK_BUSY:
             self.clock_tick = self.clock.tick_busy_loop
@@ -24,6 +26,9 @@ class BasicMenu(object):
         self.something_to_add = []
         self.ask_for_refresh = False
         pygame.key.set_repeat(parameters.KEY_DELAY, parameters.KEY_INTERVAL)
+
+    def kill_after(self, duration_in_frames):
+        self.time_before_kill = duration_in_frames
 
     def rebuild(self, elements=None):
         self.__init__(elements)
@@ -144,7 +149,21 @@ class BasicMenu(object):
         if preblit:
             self.blit_and_update()
         while not self.leave:
+            if self.time_before_kill is not None:
+                self.time_before_kill -= 1
+                if self.time_before_kill < 0:
+                    self.leave = True
+                    break
             if application.SHOW_FPS:
                 print(self.clock.get_fps())
             self.clock_tick(self.fps)
             self.react_to_all_events()
+
+
+def interactive_pause(max_time_in_seconds, element=None, fps=45):
+    if element is None:
+        element = Ghost()
+    menu = BasicMenu(element, fps=fps)
+    menu.kill_after(menu.fps * max_time_in_seconds)
+    menu.play()
+    return menu.kill_after

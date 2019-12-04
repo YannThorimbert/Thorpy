@@ -58,8 +58,7 @@ class Application(object):
         if center:
             os.environ['SDL_VIDEO_CENTERED'] = '1'
         self.set_icon(icon)
-        infoObject = pygame.display.Info()
-        w,h = (infoObject.current_w, infoObject.current_h)
+        w,h = pygame.display.set_mode((0,0),pygame.FULLSCREEN).get_size()
         self.max_screen_size = (w,h)
         screen = pygame.display.set_mode(self.size, flags)
         if self.caption:

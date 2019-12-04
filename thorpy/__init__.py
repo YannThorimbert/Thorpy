@@ -1,4 +1,4 @@
-__version__ = "1.6.2"
+__version__ = "1.5.9"
 
 import sys
 import os
@@ -60,7 +60,7 @@ from thorpy.elements._wrappers import launch_binary_choice
 from thorpy.elements._wrappers import make_stored_ghost as make_group
 from thorpy.elements._wrappers import make_font_setter, make_fontsize_setter
 from thorpy.elements._wrappers import make_font_options_setter, make_display_options_setter, make_global_display_options
-from thorpy.elements._wrappers import get_user_text
+from thorpy.elements._wrappers import get_user_text, bicolor_text
 from thorpy.elements.colorsetter import ColorSetter
 from thorpy.elements.ddlf import DropDownListFast as DropDownList
 from thorpy.elements.draggable import Draggable, ClickDraggable
@@ -86,6 +86,7 @@ from thorpy.elements.animatedgif import AnimatedGif
 
 # menus:
 from thorpy.menus.tickedmenu import TickedMenu as Menu
+from thorpy.menus.tickedmenu import interactive_pause
 from thorpy.menus.basicmenu import BasicMenu
 
 # miscellaneous stuff, constants, parameters
