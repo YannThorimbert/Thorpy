@@ -1,5 +1,10 @@
 from setuptools import find_packages, setup
 
+"""Upload on PyPi :
+1. python setup.py bdist_wheel --universal
+
+2. twine upload dist/*
+"""
 
 setup(name='thorpy',
       version='1.6.3',
