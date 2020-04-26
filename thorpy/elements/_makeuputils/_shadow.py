@@ -30,7 +30,8 @@ VERTICAL = True
 class StaticShadow(Element):
 
     def __init__(self, target, elements=None, normal_params=None):
-        Element.__init__(self, "", elements, normal_params)
+        Element.__init__(self, "", elements, normal_params, finish=False)
+        self.target = None
         self.link(target)
         self.sun_angle = SUN_ANGLE
         self.sun_angle2 = SUN_ANGLE2
