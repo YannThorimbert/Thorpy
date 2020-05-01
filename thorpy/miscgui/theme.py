@@ -41,7 +41,7 @@ def set_theme(name):
         functions.debug_msg("Setting default theme.")
         set_default_theme_as_current()
     elif name == "classic":
-        functions.debug_msg("Setting classic theme.")
+        style.MARGINS = (5,5)
         painterstyle.DEF_PAINTER = painterstyle.painters[name]
         painterstyle.INSERTER_PAINTER = painterstyle.painters[name]
         painterstyle.BROWSER_PAINTER = painterstyle.painters[name]
@@ -51,10 +51,22 @@ def set_theme(name):
         painterstyle.BOX_PAINTER = painterstyle.painters[name]
 ##        style.DARK_FACTOR = 0.75
     elif name == "human":
-        functions.debug_msg("Setting human theme.")
         style.DARK_FACTOR = 0.8
         style.DEF_COLOR = constants.BRIGHT
         style.DEF_RADIUS = 10
+        style.MARGINS = (5,5)
+        painterstyle.DEF_PAINTER = painterstyle.painters[name]
+        painterstyle.INSERTER_PAINTER = painterstyle.painters[name]
+        painterstyle.BROWSER_PAINTER = painterstyle.painters[name]
+        painterstyle.BAR_PAINTER = painterstyle.painters[name]
+        painterstyle.CHECKBOX_PAINTER = painterstyle.painters[name]
+        painterstyle.BROWSER_LAUNCHER_PAINTER = painterstyle.painters[name]
+        painterstyle.BOX_PAINTER = painterstyle.painters[name]
+    elif name == "round":
+        style.DARK_FACTOR = 0.8
+        style.DEF_COLOR = constants.BRIGHT
+        style.DEF_RADIUS = 12
+        style.MARGINS = (5,5)
         painterstyle.DEF_PAINTER = painterstyle.painters[name]
         painterstyle.INSERTER_PAINTER = painterstyle.painters[name]
         painterstyle.BROWSER_PAINTER = painterstyle.painters[name]
@@ -72,6 +84,20 @@ def set_theme(name):
         painterstyle.BOX_PAINTER = painterstyle.painters[name]
         style.LIGHT_FACTOR = 1.1
         style.DARK_FACTOR = 0.9
+        style.MARGINS = (5,5)
+    elif name == "windows10":
+        painterstyle.DEF_PAINTER = painterstyle.painters[name]
+        painterstyle.INSERTER_PAINTER = painterstyle.painters[name]
+        painterstyle.BROWSER_PAINTER = painterstyle.painters[name]
+        painterstyle.BAR_PAINTER = painterstyle.painters[name]
+        painterstyle.CHECKBOX_PAINTER = painterstyle.painters[name]
+        painterstyle.BROWSER_LAUNCHER_PAINTER = painterstyle.painters[name]
+        painterstyle.BOX_PAINTER = painterstyle.painters[name]
+        style.DEF_COLOR = (100,100,255)
+        style.COLOR_TXT_HOVER = style.FONT_COLOR
+        style.LIGHT_FACTOR = 1.1
+        style.DARK_FACTOR = 0.9
+        style.MARGINS = (5,5)
 
 def increment_font_sizes(incr):
     functions.debug_msg("Incrementing font sizes")

@@ -102,6 +102,12 @@ class Pressable(Element):
                              el=self)
             post(ev_press)
 
+    def set_pressed_state(self, grayed_color=(100,100,100)):
+        if grayed_color:
+            self.set_main_color(grayed_color,constants.STATE_PRESSED)
+        self.change_state(constants.STATE_PRESSED)
+
+
     def _unpress(self):
         state_ok = (self.current_state_key == constants.STATE_PRESSED)
         if state_ok:

@@ -14,7 +14,6 @@ from thorpy.elements.browser import Browser
 from thorpy.elements.browserlight import BrowserLight
 from thorpy.elements.paramsetter import ParamSetter
 from thorpy.elements.launchers.dropdownlistlauncher import DropDownListLauncher
-from thorpy.miscgui import constants
 
 
 def get_handler_for(variable):

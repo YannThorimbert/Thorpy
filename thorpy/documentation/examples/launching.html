@@ -7,6 +7,33 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
     </head>
     
     <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
@@ -34,25 +61,26 @@
                 </nav>
             </header>
             
-            <section>
-                <article>
-                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Launching elements</span></h1></h1>
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+Advanced menus and launching elements</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
 <p>The code below present different ways to launch elements into the current menu.</p>
-
-<div class="tutoframe">
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -108,83 +136,97 @@
 62
 63
 64
-65</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;Script showing several ways to launch things.</span>
+65
+</div>
 
-<span class="sd">Note: never call set_launcher(launching, launched) if &lt;launched&gt; can be launched</span>
-<span class="sd">by another element and &lt;launching&gt; is NOT in the same menu.&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">thorpy</span><span class="o">,</span> <span class="nn">pygame</span>
+<div class="thorpycode" id="code1">
+<span class='comment'>"""Script showing several ways to launch things.
+</span><span class='comment'>
+</span><span class='comment'>Note: never call set_launcher(launching, launched) if <launched> can be launched
+</span><span class='comment'>by another element and <launching> is NOT in the same menu.
+</span><span class='comment'>"""
+</span><span class='keyword'>import </span>thorpy, pygame
 
-<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s">&quot;Launching alerts&quot;</span><span class="p">)</span>
+application = thorpy.Application((<span class='number'>500</span>,<span class='number'>500</span>), <span class='str'>"Advanced menus"</span>)
 
-<span class="c"># ****************** First launcher : button 1 ******************</span>
-<span class="c">#This launcher launches a simple button</span>
-<span class="n">my_element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;I am a useless button</span><span class="se">\n</span><span class="s">Click outside to quit.&quot;</span><span class="p">)</span>
-<span class="n">button1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Launcher 1&quot;</span><span class="p">)</span>
-<span class="c">#we set click_quit=True below, because we did not provide a &quot;ok&quot; and/or &quot;cancel&quot;</span>
-<span class="c">#button to the user. Element disappears When user clicks outside it.</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">set_launcher</span><span class="p">(</span><span class="n">button1</span><span class="p">,</span> <span class="n">my_element</span><span class="p">,</span> <span class="n">click_quit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class='comment'>## ****************** First launcher : button 1 ******************
+</span><span class='comment'>##This launcher launches a simple button
+</span>my_element = thorpy.make_button(<span class='str'>"I am a useless button\nClick outside to quit."</span>)
+button1 = thorpy.make_button(<span class='str'>"Launcher 1"</span>)
+<span class='comment'>##we set click_quit=True below, because we did not provide a "ok" and/or "cancel"
+</span><span class='comment'>##button to the user. Element disappears When user clicks outside it.
+</span>thorpy.set_launcher(button1, my_element, click_quit=True)
 
-<span class="c"># ****************** Second launcher : button 2 ******************</span>
-<span class="c">#here the element to be launched is a box with ok and cancel buttons + custom</span>
-<span class="c">#elements. We can also use make_ok_box, with only 1 text.</span>
-<span class="c">#Note that DONE_EVENT and CANCEL_EVENT are posted accordingly at unlaunch.</span>
-<span class="n">box</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_ok_cancel_box</span><span class="p">([</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)],</span>
-                                 <span class="n">ok_text</span><span class="o">=</span><span class="s">&quot;Ok&quot;</span><span class="p">,</span> <span class="n">cancel_text</span><span class="o">=</span><span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
-<span class="n">button2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Launcher 2&quot;</span><span class="p">)</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">set_launcher</span><span class="p">(</span><span class="n">button2</span><span class="p">,</span> <span class="n">box</span><span class="p">)</span>
+<span class='comment'>## ****************** Second launcher : button 2 ******************
+</span><span class='comment'>##here the element to be launched is a box with ok and cancel buttons + custom
+</span><span class='comment'>##elements. We can also use make_ok_box, with only 1 text.
+</span><span class='comment'>##Note that DONE_EVENT and CANCEL_EVENT are posted accordingly at unlaunch.
+</span>box = thorpy.make_ok_cancel_box([thorpy.make_button(str(i)) <span class='keyword'>for </span>i in range(<span class='number'>8</span>)],
+                                 ok_text=<span class='str'>"Ok"</span>, cancel_text=<span class='str'>"Cancel"</span>)
+button2 = thorpy.make_button(<span class='str'>"Launcher 2"</span>)
+thorpy.set_launcher(button2, box)
 
-<span class="c"># ****************** Third launcher : button 3 ******************</span>
-<span class="c">#This launcher launches a box, set it green, and changes screen color when</span>
-<span class="c">#unlaunched.</span>
-<span class="n">button3</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Launcher 3&quot;</span><span class="p">)</span>
-<span class="n">other_box</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_ok_box</span><span class="p">([</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Color is gonna change...&quot;</span><span class="p">)])</span>
-<span class="n">my_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">set_launcher</span><span class="p">(</span><span class="n">button3</span><span class="p">,</span> <span class="n">other_box</span><span class="p">)</span><span class="c">#this time get the launcher</span>
-<span class="c">#we specify some custom operations that have to be done before/after launching:</span>
-<span class="k">def</span> <span class="nf">my_func_before</span><span class="p">():</span>
-    <span class="n">my_launcher</span><span class="o">.</span><span class="n">launched</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c">#change launched box color</span>
-    <span class="n">my_launcher</span><span class="o">.</span><span class="n">default_func_before</span><span class="p">()</span> <span class="c">#default stuff</span>
-<span class="k">def</span> <span class="nf">my_func_after</span><span class="p">():</span>
-    <span class="n">background</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span> <span class="c">#change background color</span>
-    <span class="n">my_launcher</span><span class="o">.</span><span class="n">default_func_after</span><span class="p">()</span> <span class="c">#default stuff</span>
+<span class='comment'>## ****************** Third launcher : button 3 ******************
+</span><span class='comment'>##This launcher launches a box, set it green, and changes screen color when
+</span><span class='comment'>##unlaunched.
+</span>button3 = thorpy.make_button(<span class='str'>"Launcher 3"</span>)
+other_box = thorpy.make_ok_box([thorpy.make_text(<span class='str'>"Color is gonna change..."</span>)])
+my_launcher = thorpy.set_launcher(button3, other_box)<span class='comment'>#this time get the launcher
+</span><span class='comment'>##we specify some custom operations that have to be done before/after launching:
+</span><span class='keyword'>def </span>my_func_before():
+    my_launcher.launched.set_main_color((<span class='number'>0</span>,<span class='number'>255</span>,<span class='number'>0</span>)) <span class='comment'>#change launched box color
+</span>    my_launcher.default_func_before() <span class='comment'>#default stuff
+</span><span class='keyword'>def </span>my_func_after():
+    background.set_main_color((<span class='number'>0</span>,<span class='number'>100</span>,<span class='number'>100</span>)) <span class='comment'>#change background color
+</span>    my_launcher.default_func_after() <span class='comment'>#default stuff
+</span>
+my_launcher.func_before = my_func_before
+my_launcher.func_after = my_func_after
 
-<span class="n">my_launcher</span><span class="o">.</span><span class="n">func_before</span> <span class="o">=</span> <span class="n">my_func_before</span>
-<span class="n">my_launcher</span><span class="o">.</span><span class="n">func_after</span> <span class="o">=</span> <span class="n">my_func_after</span>
-
-<span class="c"># ****************** Fourth launcher : event ******************</span>
-<span class="c">#This launcher is not linked to a ThorPy element, but instead user can activate</span>
-<span class="c">#it by pressing SPACE</span>
-<span class="n">unlaunch_button</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_ok_box</span><span class="p">([</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Ready to unlaunch?&quot;</span><span class="p">)])</span>
-<span class="n">unlaunch_button</span><span class="o">.</span><span class="n">stick_to</span><span class="p">(</span><span class="s">&quot;screen&quot;</span><span class="p">,</span> <span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="s">&quot;top&quot;</span><span class="p">)</span>
-<span class="n">invisible_launcher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">get_launcher</span><span class="p">(</span><span class="n">unlaunch_button</span><span class="p">,</span> <span class="n">autocenter</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="c"># set focus to False for non-blocking behaviour:</span>
-<span class="c">##invisible_launcher.focus = False</span>
-<span class="c">#this reaction will be added to the background:</span>
-<span class="n">reac</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ConstantReaction</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">,</span> <span class="n">invisible_launcher</span><span class="o">.</span><span class="n">launch</span><span class="p">,</span>
-                                <span class="p">{</span><span class="s">&quot;key&quot;</span><span class="p">:</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">})</span>
-<span class="c">#add a text so user knows what to do</span>
-<span class="n">text4</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Press space to launch invisible_launcher&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span>
+<span class='comment'>## ****************** Fourth launcher : event ******************
+</span><span class='comment'>##This launcher is not linked to a ThorPy element, but instead user can activate
+</span><span class='comment'>##it by pressing SPACE
+</span>unlaunch_button = thorpy.make_ok_box([thorpy.make_text(<span class='str'>"Ready to unlaunch?"</span>)])
+unlaunch_button.stick_to(<span class='str'>"screen"</span>, <span class='str'>"top"</span>, <span class='str'>"top"</span>)
+invisible_launcher = thorpy.get_launcher(unlaunch_button, autocenter=False)
+<span class='comment'>## set focus to False for non-blocking behaviour:
+</span><span class='comment'>###invisible_launcher.focus = False
+</span><span class='comment'>##this reaction will be added to the background:
+</span>reac = thorpy.ConstantReaction(pygame.KEYDOWN, invisible_launcher.launch,
+                                {<span class='str'>"key"</span>:pygame.K_SPACE})
+<span class='comment'>##add a text so user knows what to do
+</span>text4 = thorpy.make_text(<span class='str'>"Press space to launch invisible_launcher"</span>, <span class='number'>15</span>)
 
 
-<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">text4</span><span class="p">,</span> <span class="n">button1</span><span class="p">,</span> <span class="n">button2</span><span class="p">,</span> <span class="n">button3</span><span class="p">])</span>
-<span class="n">background</span><span class="o">.</span><span class="n">add_reaction</span><span class="p">(</span><span class="n">reac</span><span class="p">)</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+background = thorpy.Background(elements=[text4, button1, button2, button3])
+background.add_reaction(reac)
+thorpy.store(background)
 
-<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
-<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+menu = thorpy.Menu(background)
+menu.play()
 
-<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
-</td></tr></table></body>
-
+application.quit()</div>
+</td></tr></table>
 
 </div></a>
 	
-                </article>
-            </section>
-            
-            <footer>
-			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
-            </footer>
-        </div>
-    </body>
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
 </html>

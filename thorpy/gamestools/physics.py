@@ -1,5 +1,5 @@
 """for 2-dimensional physics"""
-import math, pygame
+import math
 from pygame.math import Vector2 as V
 
 def projection_length(v1, v2):

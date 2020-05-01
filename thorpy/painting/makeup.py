@@ -2,7 +2,7 @@
 
 from thorpy.elements._makeuputils._shadow import StaticShadow
 from thorpy.elements.hoverzone import HoverZone
-from thorpy.miscgui import constants, style
+from thorpy.miscgui import style
 from thorpy.painting.painters.imageframe import ImageFrame
 
 def add_static_shadow(element, dict_args=None):

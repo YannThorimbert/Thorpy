@@ -9,7 +9,6 @@ except ImportError:
 import pygame
 from thorpy.elements.image import Image as ThorpyImage
 from thorpy.painting.pilgraphics import pil_img_to_pygame_surf
-from thorpy.miscgui.reaction import ConstantReaction
 import thorpy
 
 '''
@@ -105,6 +104,8 @@ class AnimatedGif(ThorpyImage):
         """Image element.
         <path>: the path to the image.
         <color>: if path is None, use this color instead of image.
+        <low>: increase this parameter to lower the gif speed.
+        <nread>: number of times the gif is played
         """
         img = AnimatedGif(path, colorkey=colorkey, low=low, nread=nread,
                             finish=False)
@@ -133,6 +134,7 @@ class AnimatedGif(ThorpyImage):
             img.set_colorkey(self.colorkey)
         if finish:
             self.finish()
+        self.time_func = None
 
     def next_frame(self):
         if self.i%self.low == 0 and self.nread>0:
@@ -142,6 +144,8 @@ class AnimatedGif(ThorpyImage):
                 self.nread -= 1
             self.set_image(self.frames[self.current_frame])
             self.unblit_and_reblit()
+            if self.time_func:
+                self.time_func()
         if self.nread <= 0:
             self.set_visible(False)
         self.i += 1

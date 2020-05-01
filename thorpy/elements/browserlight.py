@@ -9,7 +9,6 @@ from thorpy.elements.element import Element
 from thorpy.elements.inserter import Inserter
 from thorpy.elements.ddlf import DropDownListFast
 from thorpy.elements.text import OneLineText
-from thorpy.miscgui.storage import Storer
 from thorpy.miscgui.reaction import Reaction
 from thorpy.miscgui import constants, functions, parameters, style, painterstyle
 

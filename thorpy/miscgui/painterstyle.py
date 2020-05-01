@@ -6,8 +6,9 @@ from thorpy.painting.painters.basicframe import BasicFrame
 from thorpy.painting.painters.classicframe import ClassicFrame
 from thorpy.painting.painters.classicround import ClassicRound
 from thorpy.painting.painters.roundrect import RoundRect
-from thorpy.painting.painters.optionnal.human import Human
+from thorpy.painting.painters.optionnal.human import Human, HumanLite
 from thorpy.painting.painters.optionnal.rectframe import RectFrame
+from thorpy.painting.painters.optionnal.rectframe import Windows10Frame
 
 # default painters
 BASIC_PAINTER = BasicFrame
@@ -28,10 +29,11 @@ BOX_PAINTER = ClassicFrame
 
 
 painters = {"basic" : BasicFrame,
-            "round" : RoundRect,
+            "round" : HumanLite,
             "human" : Human,
             "classic" : ClassicFrame,
-            "simple" : RectFrame}
+            "simple" : RectFrame,
+            "windows10" : Windows10Frame}
 
 # default writers
 

@@ -7,6 +7,33 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
     </head>
     
     <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
@@ -34,24 +61,26 @@
                 </nav>
             </header>
             
-            <section>
-                <article>
-                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Shadows</span></h1></h1>
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+Shadows</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
-<p>The code below shows how to check if the user can generate shadows and how to generate them. We also give a few parameters for the shadow at the end of the code. Note that this code is suitable for generating shadows of objects that are supposed to stand 'vertically' on the ground. If not, you can either manually parametrize the shadow by setting its vertical attribute to <code>False</code> or use <code>thorpy.makeup.set_button_shadow</code>.</p>
-<p>If you want to use the same awesome character image as the one in the example below, you can find it <a href="character.png">here</a>.</p>
-<div class="tutoframe">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<p>The code below shows how to check if the user can generate shadows and how to generate them. We also give a few parameters for the shadow at the end of the code. Note that this code is suitable for generating shadows of objects that are supposed to stand "vertically" on the ground. If not, you can either manually parametrize the shadow by setting its vertical attribute to <code>False</code> or use <code>thorpy.makeup.set_button_shadow</code>.</p><p>If you want to use the same awesome character image as the one in the example below, you can find it <a href="character.png">here</a>.</p>
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -72,48 +101,68 @@
 27
 28
 29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">pygame</span><span class="o">,</span> <span class="nn">thorpy</span>
+30
+31
+32
+33
+</div>
 
-<span class="n">ap</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span> <span class="s">&quot;Shadows example&quot;</span><span class="p">)</span>
+<div class="thorpycode" id="code1">
+<span class='keyword'>import </span>pygame, thorpy
 
-<span class="n">e_img</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Draggable</span><span class="p">()</span> <span class="c"># do not use &#39;make&#39; !</span>
-<span class="n">painter</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">painters</span><span class="o">.</span><span class="n">imageframe</span><span class="o">.</span><span class="n">ImageFrame</span><span class="p">(</span><span class="s">&quot;character.png&quot;</span><span class="p">,</span>
-                                                <span class="n">colorkey</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span>
-<span class="n">e_img</span><span class="o">.</span><span class="n">set_painter</span><span class="p">(</span><span class="n">painter</span><span class="p">)</span>
-<span class="n">e_img</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span> <span class="c">#don&#39;t forget to finish</span>
+ap = thorpy.Application((<span class='number'>500</span>,<span class='number'>400</span>), <span class='str'>"Shadows example"</span>)
 
-<span class="k">if</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">CAN_SHADOWS</span><span class="p">:</span>
-    <span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_static_shadow</span><span class="p">(</span><span class="n">e_img</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;target_altitude&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-                                            <span class="s">&quot;shadow_radius&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">})</span>
+e_img = thorpy.Draggable(finish=False)
+image_path = <span class='str'>"../documentation/examples/character.png"</span>
+painter = thorpy.painters.imageframe.ImageFrame(image_path,
+                                                colorkey=(<span class='number'>255</span>,<span class='number'>255</span>,<span class='number'>255</span>))
+e_img.set_painter(painter)
+e_img.finish() <span class='comment'>#don't forget to finish
+</span>
+<span class='keyword'>if </span>thorpy.constants.CAN_SHADOWS:
+    thorpy.makeup.add_static_shadow(e_img, {<span class='str'>"target_altitude"</span>:<span class='number'>0</span>,
+                                            <span class='str'>"shadow_radius"</span>:<span class='number'>3</span>})
 
-<span class="n">e_background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
-                                        <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">e_img</span><span class="p">])</span>
+e_text = thorpy.make_text(<span class='str'>"Drag the image"</span>, <span class='number'>20</span>, (<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>))
+e_text.stick_to(<span class='str'>"screen"</span>, <span class='str'>"top"</span>, <span class='str'>"top"</span>)
 
-<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">e_background</span><span class="p">)</span>
-<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+e_background = thorpy.Background(image=thorpy.style.EXAMPLE_IMG,
+                                        elements=[e_img, e_text])
 
-<span class="n">ap</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+menu = thorpy.Menu(e_background)
+menu.play()
 
-<span class="c">#examples of shadow arguments:</span>
-<span class="c">##thorpy.makeup.add_static_shadow(e_img,</span>
-<span class="c">##    {&quot;target_altitude&quot;:10, # altitude (in pixels) of the target</span>
-<span class="c">##     &quot;shadow_radius&quot;:3, # the smaller, the sharper is the shadow</span>
-<span class="c">##     &quot;sun_angle&quot;:60, # angle in degrees of the sun</span>
-<span class="c">##     &quot;shadow_color&quot;:(255,200,0), # color of the shadow</span>
-<span class="c">##     &quot;alpha_factor&quot;:0.5, # alpha factor</span>
-<span class="c">##     &quot;decay_mode&quot;:&quot;linear&quot;}) # linear or exponential</span>
-</pre></div>
-</td></tr></table></body>
+ap.quit()
 
-<a href="shadows.png"><img src="shadows.png" valign="top" class="tutoimg"/>
-</div></a>
+<span class='comment'>##examples of shadow arguments:
+</span><span class='comment'>###thorpy.makeup.add_static_shadow(e_img,
+</span><span class='comment'>###    {"target_altitude":10, # altitude (in pixels) of the target
+</span><span class='comment'>###     "shadow_radius":3, # the smaller, the sharper is the shadow
+</span><span class='comment'>###     "sun_angle":60, # angle in degrees of the sun
+</span><span class='comment'>###     "shadow_color":(255,200,0), # color of the shadow
+</span><span class='comment'>###     "alpha_factor":0.5, # alpha factor
+</span><span class='comment'>###     "decay_mode":"linear"}) # linear or exponential</span></div>
+</td></tr></table>
+
+<a href="shadows.png"><img src="shadows.png" valign="top" class="tutoimg"/></div></a>
 	
-                </article>
-            </section>
-            
-            <footer>
-			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
-            </footer>
-        </div>
-    </body>
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
 </html>

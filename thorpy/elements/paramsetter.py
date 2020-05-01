@@ -1,5 +1,5 @@
 from thorpy.elements.box import Box
-from thorpy.miscgui import constants, style, functions
+from thorpy.miscgui import style
 from thorpy.elements.launchers.dropdownlistlauncher import DropDownListLauncher
 
 

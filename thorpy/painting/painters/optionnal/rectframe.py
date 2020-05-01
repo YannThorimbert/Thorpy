@@ -20,7 +20,7 @@ class RectFrame(BasicFrame):
                             color=color,
                             clip=clip,
                             pressed=pressed,
-                            hovered=hovered)
+                            hovered=hover)
         self.light = style.LIGHT_FACTOR if light is None else light
         self.dark = style.DARK_FACTOR if dark is None else dark
         if isinstance(self.light, float):
@@ -41,3 +41,17 @@ class RectFrame(BasicFrame):
         surface = self.draw()
         surface.set_clip(self.clip)
         return surface
+
+class Windows10Frame(RectFrame):
+    def __init__(self, size=None, color=None, clip="auto", dark=(20,20,20),
+                            light=None, thick=3, pressed=False, hover=False):
+        RectFrame.__init__(self, size, color, clip, dark, light, thick, pressed, hover)
+
+    def draw(self):
+        surface = BasicFrame.draw(self)
+        if self.pressed:
+            draw_rect(surface, self.dark, Rect((0, 0), self.size), self.thick+2)
+        elif self.hovered:
+            draw_rect(surface, self.dark, Rect((0, 0), self.size), self.thick)
+        return surface
+

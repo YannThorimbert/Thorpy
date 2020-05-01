@@ -74,10 +74,22 @@ class SmokeGenerator(object):
         if len(self.smokes) > self.n:
             self.smokes = self.smokes[1::]
 
-    def draw(self, surface):
+    def translate_old_elements(self, delta):
         for s in self.smokes:
-            if not s.dead:
-                surface.blit(s.img, s.rect.topleft)
+            s.update_pos_only(delta)
+
+##    def draw(self, surface):
+##        for s in self.smokes:
+##            if not s.dead:
+##                surface.blit(s.img, s.rect.topleft)
+
+    def draw(self, surface):
+        blits = [(s.img, s.rect.topleft) for s in self.smokes if not s.dead]
+        surface.blits(blits)
+
+##        for s in self.smokes:
+##            if not s.dead:
+##                surface.blit(s.img, s.rect.topleft)
 
 ##    def draw(self, surface, parent):
 ##        if len(self.smokes) > self.n:
@@ -111,6 +123,11 @@ class Smoke(object):
         self.rect.center = self.q
         self.dead = False
 
+    def update_pos_only(self, dq):
+        self.q += dq
+        self.rect = self.img.get_rect()
+        self.rect.center = self.q
+
     def update_physics(self, dq):
         if self.t < self.generator.n:
             self.img = self.generator.imgs[self.s][self.t]
@@ -130,10 +147,8 @@ class FireSmokeGenerator(SmokeGenerator):
 
     def __init__(self, samples, n, opac=None, mov=1, grow=0.5, prob=0.2, i=2,
                     color=None, alpha0=255, size0=None, smoothscale=False,
-                    copy=False, black_increase=None):
-        self.black_increase = black_increase
-        if not black_increase:
-            self.black_increase = 1. / n
+                    copy=False, black_increase_factor=1.):
+        self.black_increase = black_increase_factor / n
         if not copy:
             samples = [s.copy() for s in samples]
         self.samples = samples
@@ -278,9 +293,13 @@ class DebrisGenerator(object):
         for d in to_remove:
             self.debris.remove(d)
 
+##    def draw(self, surface):
+##        for d in self.debris:
+##            surface.blit(d.img, d.rect.topleft)
+
     def draw(self, surface):
-        for d in self.debris:
-            surface.blit(d.img, d.rect.topleft)
+        blits = [(d.img, d.rect.topleft) for d in self.debris]
+        surface.blits(blits)
 
     def update_physics(self,dt):
         for d in self.debris:
@@ -361,7 +380,7 @@ def get_smokegen(n=15, color=(99,99,99), grow=0.4, i=2, prob=0.3, alpha0=255,
 
 
 def get_fire_smokegen(n=50, color=(255,200,0), grow=0.4, i=2, prob=0.3, alpha0=255,
-                    size0=None, images=None, black_increase=None):
+                    size0=None, images=None, black_increase_factor=1.):
     if images is None:
         images = [thorpy.load_image(thorpy.style.SMOKE_IMG, (255,255,255))]
     return FireSmokeGenerator(images,
@@ -372,4 +391,4 @@ def get_fire_smokegen(n=50, color=(255,200,0), grow=0.4, i=2, prob=0.3, alpha0=2
                                  color=color,
                                  alpha0=alpha0,
                                  size0=size0,
-                                 black_increase=black_increase)
+                                 black_increase_factor=black_increase_factor)

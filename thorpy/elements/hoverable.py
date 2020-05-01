@@ -344,7 +344,7 @@ class Hoverable(Element):
             self._normal_imgs[state] = img
 
     @staticmethod
-    def set_hoverable(element, normal_params=None):
+    def make_hoverable(element, normal_params=None):
         """self.imgs[ONE_STATE] is the hovering img to place when hovering element
         while it is in state ONE_STATE. In that case, self.current_state.img =
         self._hover_imgs[ONE_STATE]. When unhovering, the self._normal_imgs[ONE_STATE] is
@@ -358,4 +358,4 @@ class Hoverable(Element):
         d = fusion_dicts(element.__dict__, hoverable.__dict__)
         hoverable.__dict__ = d
         hoverable.reinit()
-##        return hoverable
+        return hoverable

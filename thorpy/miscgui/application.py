@@ -92,11 +92,14 @@ class Application(object):
         pygame.font.quit()
         pygame.quit()
 
-    def pause(self, fps=20):
+    def pause(self, fps=20, unpause_after=float("inf")):
         stay = True
         clock = pygame.time.Clock()
+        time_elapsed = 0
         while stay:
-            clock.tick(fps)
+            time_elapsed += clock.tick(fps)
+            if time_elapsed > unpause_after:
+                stay = False
             for e in pygame.event.get():
                 if e.type == pygame.constants.QUIT:
                     pygame.font.quit()

@@ -4,7 +4,7 @@ from __future__ import division
 
 from copy import copy
 
-from pygame import Rect, SRCALPHA
+from pygame import SRCALPHA
 
 from thorpy.painting.fusionner import _Fusionner
 from thorpy.miscgui.title import Title
@@ -12,7 +12,7 @@ from thorpy.elements.ghost import Ghost
 from thorpy.miscgui.state import State
 from thorpy.miscgui._screened import _Screened
 from thorpy.miscgui.reaction import Reaction
-from thorpy.miscgui import constants, functions, parameters, style, painterstyle
+from thorpy.miscgui import constants, functions, parameters, style
 
 
 class Element(_Screened, Ghost):
@@ -35,6 +35,7 @@ class Element(_Screened, Ghost):
         self._finished = False
         self.normal_params.polite_set("txt", text)
         self.visible = self.normal_params.params.get("visible", True)
+        self.scale_to_text = self.scale_to_title
         if finish:
             self.finish()
 
@@ -57,6 +58,10 @@ class Element(_Screened, Ghost):
         for e in self._blit_after:
             rects.extend(e.get_fus_rects(state))
         return rects
+
+    def set_pressed_state(self, grayed_color=(100,100,100)):
+        if grayed_color:
+            self.set_main_color(grayed_color)
 
     def get_title(self):
         try:
@@ -298,6 +303,12 @@ class Element(_Screened, Ghost):
             if preserve_center:
                 self.set_center(center, state=state)
 
+    def scale_to_content(self, margins=None, state=constants.STATE_NORMAL,
+                     only_children=True, axis=(True,True)):
+        if not self._elements:
+            self.scale_to_text()
+        else:
+            self.fit_children(margins, state, only_children, axis)
 
     def fit_children(self, margins=None, state=constants.STATE_NORMAL,
                      only_children=True, axis=(True,True)):

@@ -73,7 +73,7 @@ TITLE_ALIGN = "left"
 CUT_WORD = ".."
 TITLE_POS = (0, 0)
 TITLE_FONT_SIZE = 15
-TITLE_FONT_COLOR = (0, 0, 255)
+TITLE_FONT_COLOR = (0, 0, 0)
 # default elements size
 SIZE = (80, 30)
 SMALL_SIZE = (16, 16)

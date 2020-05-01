@@ -34,3 +34,6 @@ class Line(Element):
         self.set_painter(painter)
         if finish:
             self.finish()
+
+    def copy(self):
+        return Line(self.size, self.type)

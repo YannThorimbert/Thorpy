@@ -2,7 +2,6 @@
 the screen.
 """
 from pygame import display
-from thorpy.miscgui import functions
 
 
 class _Screened(object):

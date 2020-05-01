@@ -7,6 +7,33 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
     </head>
     
     <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
@@ -34,23 +61,26 @@
                 </nav>
             </header>
             
-            <section>
-                <article>
-                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Elements basic styling</span></h1></h1>
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+Basic styling</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
-<p>The code below shows a few ways to tune the appearance of your elements - size, colors, fonts, ... You can also see these functions summarized in the <a href="../documentation/userguide/cheatsheet.html#style">cheat sheet</a>. Moreover, you can find a tutorial for writing your own design template <a href="../tutorials/painters.html">here</a>.</p>
-<div class="tutoframe">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<p>The code below shows a few ways to tune the appearance of your elements - size, colors, fonts, ... You can also see these functions summarized in the <a href='../documentation/userguide/cheatsheet.html#style'>cheat sheet</a>. Moreover, you can find a tutorial for writing your own design template <a href='../tutorials/painters.html'>here</a>.</p>
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -85,62 +115,98 @@
 41
 42
 43
-44</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">thorpy</span>
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+</div>
 
-<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="s">&quot;Style examples&quot;</span><span class="p">)</span>
+<div class="thorpycode" id="code1">
+<span class='keyword'>import </span>thorpy
 
-<span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;button&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+application = thorpy.Application((<span class='number'>700</span>, <span class='number'>700</span>), <span class='str'>"Style examples"</span>)
 
-<span class="n">buttons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">buttons</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span> <span class="c">#with alpha value this time</span>
-<span class="n">buttons</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_font_color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">buttons</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_font_color_hover</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="n">buttons</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_font</span><span class="p">(</span><span class="s">&quot;century&quot;</span><span class="p">)</span> <span class="c">#may not work on your computer</span>
-<span class="n">buttons</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">18</span><span class="p">);</span><span class="n">buttons</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">scale_to_title</span><span class="p">()</span>
-<span class="n">buttons</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_size</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
-<span class="n">buttons</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot;Hello</span><span class="se">\n</span><span class="s">I&#39;m a new line&quot;</span><span class="p">);</span><span class="n">buttons</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">scale_to_title</span><span class="p">()</span>
+buttons = [thorpy.make_button(<span class='str'>"button"</span>+str(i)) <span class='keyword'>for </span>i in range(<span class='number'>8</span>)]
 
-<span class="c">#set theme</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="s">&quot;human&quot;</span><span class="p">)</span>
-<span class="n">buttons</span> <span class="o">+=</span> <span class="p">[</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;button&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">11</span><span class="p">)]</span>
+buttons[<span class='number'>0</span>]<span class='number'>.</span>set_main_color((<span class='number'>0</span>,<span class='number'>255</span>,<span class='number'>0</span>)) <span class='comment'>#slow method, to be used outside of a loop
+</span>buttons[<span class='number'>1</span>]<span class='number'>.</span>set_main_color((<span class='number'>0</span>,<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>100</span>)) <span class='comment'>#with alpha value this time
+</span>buttons[<span class='number'>2</span>]<span class='number'>.</span>set_font_color((<span class='number'>255</span>,<span class='number'>255</span>,<span class='number'>0</span>)) <span class='comment'>#slow method, to be used outside of a loop
+</span>buttons[<span class='number'>3</span>]<span class='number'>.</span>set_font_color_hover((<span class='number'>0</span>, <span class='number'>255</span>, <span class='number'>0</span>)) <span class='comment'>#...
+</span>buttons[<span class='number'>4</span>]<span class='number'>.</span>set_font(<span class='str'>"century"</span>) <span class='comment'>#may not work on your computer
+</span>buttons[<span class='number'>5</span>]<span class='number'>.</span>set_font_size(<span class='number'>18</span>);buttons[<span class='number'>5</span>]<span class='number'>.</span>scale_to_title()
+buttons[<span class='number'>6</span>]<span class='number'>.</span>set_size((<span class='number'>100</span>,<span class='number'>100</span>))
+buttons[<span class='number'>7</span>]<span class='number'>.</span>set_text(<span class='str'>"First line\nSecond line"</span>)
+buttons[<span class='number'>7</span>]<span class='number'>.</span>scale_to_title()
 
-<span class="c">#set default painter as ClassicFrame (same as used in theme &#39;classic&#39;)</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">painterstyle</span><span class="o">.</span><span class="n">DEF_PAINTER</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">painters</span><span class="o">.</span><span class="n">classicframe</span><span class="o">.</span><span class="n">ClassicFrame</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">MARGINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c">#set default margins</span>
-<span class="n">buttons</span> <span class="o">+=</span> <span class="p">[</span><span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;button&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">14</span><span class="p">)]</span>
+<span class='comment'>##use predefined theme
+</span><span class='keyword'>for </span>theme_name in [<span class='str'>"classic"</span>, <span class='str'>"round"</span>, <span class='str'>"human"</span>, <span class='str'>"simple"</span>, <span class='str'>"windows10"</span>]:
+    thorpy.set_theme(theme_name)
+    button = thorpy.make_button(<span class='str'>"Theme name : "</span> + theme_name)
+    button.scale_to_title()
+    buttons.append(button)
+    thorpy.theme.set_default_theme_as_current()
 
-<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
-                                    <span class="n">elements</span><span class="o">=</span><span class="n">buttons</span><span class="p">)</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+<span class='comment'>##A customized style
+</span>a_round_button = thorpy.Clickable(<span class='str'>"Custom round Button"</span>)
+painter = thorpy.painters.optionnal.human.Human(size=(<span class='number'>200</span>,<span class='number'>30</span>),
+                                                radius_ext=<span class='number'>0.5</span>,
+                                                radius_int=<span class='number'>0.4</span>,
+                                                border_color=(<span class='number'>0</span>,<span class='number'>0</span>,<span class='number'>255</span>),
+                                                color=(<span class='number'>100</span>,<span class='number'>100</span>,<span class='number'>255</span>))
+a_round_button.set_painter(painter)
+a_round_button.finish()
+buttons.append(a_round_button)
 
-<span class="c">#very personalized style</span>
-<span class="n">a_round_button</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Clickable</span><span class="p">(</span><span class="s">&quot;Round Button&quot;</span><span class="p">)</span>
-<span class="n">painter</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">painters</span><span class="o">.</span><span class="n">optionnal</span><span class="o">.</span><span class="n">human</span><span class="o">.</span><span class="n">Human</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span>
-                                                <span class="n">radius_ext</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                                                <span class="n">radius_int</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
-                                                <span class="n">border_color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span>
-<span class="n">a_round_button</span><span class="o">.</span><span class="n">set_painter</span><span class="p">(</span><span class="n">painter</span><span class="p">)</span>
-<span class="n">a_round_button</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+<span class='comment'>##Another customized style
+</span><span class='comment'>##set default painter as ClassicFrame (same as used in theme 'classic')
+</span>thorpy.painterstyle.DEF_PAINTER = thorpy.painters.classicframe.ClassicFrame
+thorpy.style.MARGINS = (<span class='number'>50</span>, <span class='number'>2</span>) <span class='comment'>#set default margins
+</span>thorpy.style.COLOR_TXT_HOVER = (<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>)
+button = thorpy.make_button(<span class='str'>"Another custom button"</span>)
+buttons.append(button)
 
-<span class="n">a_text_button</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">a_text_button</span><span class="o">.</span><span class="n">stick_to</span><span class="p">(</span><span class="n">background</span><span class="p">,</span> <span class="s">&quot;right&quot;</span><span class="p">,</span> <span class="s">&quot;right&quot;</span><span class="p">)</span>
+<span class='comment'>##text button
+</span>title = thorpy.make_text(<span class='str'>"Text only"</span>, font_size=<span class='number'>22</span>, font_color=(<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>))
+title.stick_to(<span class='str'>"screen"</span>, <span class='str'>"top"</span>, <span class='str'>"top"</span>)
 
-<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">([</span><span class="n">background</span><span class="p">,</span> <span class="n">a_round_button</span><span class="p">,</span> <span class="n">a_text_button</span><span class="p">])</span>
-<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+<span class='comment'>##To add shadows to a button, see effects.py in the examples folder.
+</span>
+background = thorpy.Background(image=thorpy.style.EXAMPLE_IMG, elements=buttons)
+thorpy.store(background)
 
-<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
+menu = thorpy.Menu([background, title])
+menu.play()
+
+application.quit()</div>
 </td></tr></table>
 
-<a href="style.png"><img src="style.png" valign="top" class="tutoimg"/>
-</div></a>
+<a href="style.png"><img src="style.png" valign="top" class="tutoimg"/></div></a>
 	
-                </article>
-            </section>
-            
-            <footer>
-			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
-            </footer>
-        </div>
-    </body>
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
 </html>

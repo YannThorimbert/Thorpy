@@ -7,6 +7,33 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
     </head>
     
     <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
@@ -34,24 +61,26 @@
                 </nav>
             </header>
             
-            <section>
-                <article>
-                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Alerts</span></h1></h1>
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+Alerts</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
 <p>The code below shows how to set up alerts (box appearing on the screen and delivering a message to the user). You can use blocking and non-blocking alerts, depending on your needs.</p>
-<div class="tutoframe">
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -81,57 +110,69 @@
 36
 37
 38
-39</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;Show how to launch alerts. 2 types of alerts are available: blocking and</span>
-<span class="sd">non-blocking. Both are presented below.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">thorpy</span>
+</div>
 
-<span class="k">def</span> <span class="nf">my_alert_1</span><span class="p">():</span>
-    <span class="n">thorpy</span><span class="o">.</span><span class="n">launch_nonblocking_alert</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;This is a non-blocking alert!&quot;</span><span class="p">,</span>
-                                <span class="n">text</span><span class="o">=</span><span class="s">&quot;This is the text..&quot;</span><span class="p">,</span>
-                                <span class="n">ok_text</span><span class="o">=</span><span class="s">&quot;Ok, I&#39;ve read&quot;</span><span class="p">,</span>
-                                <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-                                <span class="n">font_color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Proof that it is non-blocking : this sentence is printing at exit!&quot;</span><span class="p">)</span>
+<div class="thorpycode" id="code1">
+<span class='comment'>"""Show how to launch alerts. 2 types of alerts are available: blocking and
+</span><span class='comment'>non-blocking. Both are presented below.
+</span><span class='comment'>"""
+</span><span class='keyword'>import </span>thorpy
 
-<span class="k">def</span> <span class="nf">my_alert_2</span><span class="p">():</span>
-    <span class="n">thorpy</span><span class="o">.</span><span class="n">launch_blocking_alert</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;This is a blocking alert!&quot;</span><span class="p">,</span>
-                                 <span class="n">text</span><span class="o">=</span><span class="s">&quot;This is the text of the alert...&quot;</span><span class="p">,</span>
-                                 <span class="n">parent</span><span class="o">=</span><span class="n">background</span><span class="p">)</span> <span class="c">#for auto-unblitting</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;This sentence will print only after you clicked ok&quot;</span><span class="p">)</span>
+<span class='keyword'>def </span>my_alert_1():
+    thorpy.launch_nonblocking_alert(title=<span class='str'>"This is a non-blocking alert!"</span>,
+                                text=<span class='str'>"This is the text.."</span>,
+                                ok_text=<span class='str'>"Ok, I've read"</span>,
+                                font_size=<span class='number'>12</span>,
+                                font_color=(<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>))
+    <span class='keyword'>print</span>(<span class='str'>"Proof that it is non-blocking : this sentence is printing at exit!"</span>)
 
-<span class="k">def</span> <span class="nf">my_launch</span><span class="p">():</span>
-    <span class="n">some_element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;My text...&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-    <span class="n">another_element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Quit&quot;</span><span class="p">)</span>
-    <span class="n">box</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Box</span><span class="o">.</span><span class="n">make</span><span class="p">([</span><span class="n">some_element</span><span class="p">,</span> <span class="n">another_element</span><span class="p">])</span>
-    <span class="n">thorpy</span><span class="o">.</span><span class="n">set_as_done_button</span><span class="p">(</span><span class="n">another_element</span><span class="p">,</span><span class="n">box</span><span class="p">)</span><span class="c">#could be set_as_cancel_button</span>
-    <span class="n">thorpy</span><span class="o">.</span><span class="n">launch_nonblocking</span><span class="p">(</span><span class="n">box</span><span class="p">)</span> <span class="c">#could also use thorpy.launch_blocking...</span>
+<span class='keyword'>def </span>my_alert_2():
+    thorpy.launch_blocking_alert(title=<span class='str'>"This is a blocking alert!"</span>,
+                                 text=<span class='str'>"This is the text of the alert..."</span>,
+                                 parent=background) <span class='comment'>#for auto-unblitting
+</span>    <span class='keyword'>print</span>(<span class='str'>"This sentence will print only after you clicked ok"</span>)
 
-<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s">&quot;Launching alerts&quot;</span><span class="p">)</span>
+<span class='keyword'>def </span>my_launch():
+    some_element = thorpy.make_text(<span class='str'>"My text..."</span>, font_size=<span class='number'>18</span>)
+    another_element = thorpy.make_button(<span class='str'>"Quit"</span>)
+    box = thorpy.Box.make([some_element, another_element])
+    thorpy.set_as_done_button(another_element,box)<span class='comment'>#could be set_as_cancel_button
+</span>    thorpy.launch_nonblocking(box) <span class='comment'>#could also use thorpy.launch_blocking...
+</span>
+application = thorpy.Application((<span class='number'>500</span>,<span class='number'>500</span>), <span class='str'>"Launching alerts"</span>)
 
-<span class="n">button1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Non-blocking alert&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">my_alert_1</span><span class="p">)</span>
-<span class="n">button2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Blocking alert&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">my_alert_2</span><span class="p">)</span>
-<span class="n">button3</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_button</span><span class="p">(</span><span class="s">&quot;Launch element&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">my_launch</span><span class="p">)</span>
+button1 = thorpy.make_button(<span class='str'>"Non-blocking alert"</span>, func=my_alert_1)
+button2 = thorpy.make_button(<span class='str'>"Blocking alert"</span>, func=my_alert_2)
+button3 = thorpy.make_button(<span class='str'>"Launch element"</span>, func=my_launch)
 
-<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">button1</span><span class="p">,</span><span class="n">button2</span><span class="p">,</span><span class="n">button3</span><span class="p">])</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s">&quot;left&quot;</span><span class="p">)</span> <span class="c"># put the menu on the left</span>
+background = thorpy.Background(elements=[button1,button2,button3])
+thorpy.store(background, x=<span class='number'>10</span>, align=<span class='str'>"left"</span>) <span class='comment'># put the menu on the left
+</span>
+menu = thorpy.Menu(background)
+menu.play()
 
-<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
-<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
-
-<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
+application.quit()</div>
 </td></tr></table>
-</body>
 
 </div></a>
 	
-                </article>
-            </section>
-            
-            <footer>
-			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
-            </footer>
-        </div>
-    </body>
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
 </html>

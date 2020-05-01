@@ -7,6 +7,33 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
     </head>
     
     <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
@@ -34,23 +61,26 @@
                 </nav>
             </header>
             
-            <section>
-                <article>
-                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Elements overview</span></h1></h1>
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+Elements overview</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
-<p>The code below produces an application summarizing most of the common built-in elements that one would use in a program. In addition, an help element has been added to each element presented in order to show dynamic help to the user during execution. Note that there is many other available built-in elements : you can check them on the <a href="../documentation/userguide/cheatsheet.html#elements">cheat sheet</a>.</p>
-<div class="tutoframe">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<p>ThorPy provides a fast way to let user decide between a list of choices. As for alerts, you may either need blocking or non-blocking choices.</p>
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -93,70 +123,82 @@
 49
 50
 51
-52</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">thorpy</span>
+</div>
 
-<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="s">&quot;ThorPy Overview&quot;</span><span class="p">)</span>
+<div class="thorpycode" id="code1">
+<span class='keyword'>import </span>thorpy
 
-<span class="n">element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;Element&quot;</span><span class="p">)</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_basic_help</span><span class="p">(</span><span class="n">element</span><span class="p">,</span><span class="s">&quot;Element:</span><span class="se">\n</span><span class="s">Most simple graphical element.&quot;</span><span class="p">)</span>
+application = thorpy.Application((<span class='number'>800</span>, <span class='number'>600</span>), <span class='str'>"ThorPy Overview"</span>)
 
-<span class="n">clickable</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Clickable</span><span class="p">(</span><span class="s">&quot;Clickable&quot;</span><span class="p">)</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_basic_help</span><span class="p">(</span><span class="n">clickable</span><span class="p">,</span><span class="s">&quot;Clickable:</span><span class="se">\n</span><span class="s">Can be hovered and pressed.&quot;</span><span class="p">)</span>
+element = thorpy.Element(<span class='str'>"Element"</span>)
+thorpy.makeup.add_basic_help(element,<span class='str'>"Element:\nMost simple graphical element."</span>)
 
-<span class="n">draggable</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Draggable</span><span class="p">(</span><span class="s">&quot;Draggable&quot;</span><span class="p">)</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_basic_help</span><span class="p">(</span><span class="n">draggable</span><span class="p">,</span><span class="s">&quot;Draggable:</span><span class="se">\n</span><span class="s">You can drag it.&quot;</span><span class="p">)</span>
+clickable = thorpy.Clickable(<span class='str'>"Clickable"</span>)
+thorpy.makeup.add_basic_help(clickable,<span class='str'>"Clickable:\nCan be hovered and pressed."</span>)
 
-<span class="n">checker_check</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Checker</span><span class="p">(</span><span class="s">&quot;Checker&quot;</span><span class="p">)</span>
+draggable = thorpy.Draggable(<span class='str'>"Draggable"</span>)
+thorpy.makeup.add_basic_help(draggable,<span class='str'>"Draggable:\nYou can drag it."</span>)
 
-<span class="n">checker_radio</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Checker</span><span class="p">(</span><span class="s">&quot;Radio&quot;</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="s">&quot;radio&quot;</span><span class="p">)</span>
+checker_check = thorpy.Checker(<span class='str'>"Checker"</span>)
 
-<span class="n">browser</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Browser</span><span class="p">(</span><span class="s">&quot;../../&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">&quot;Browser&quot;</span><span class="p">)</span>
+checker_radio = thorpy.Checker(<span class='str'>"Radio"</span>, type_=<span class='str'>"radio"</span>)
 
-<span class="n">browserlauncher</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">BrowserLauncher</span><span class="p">(</span><span class="n">browser</span><span class="p">,</span> <span class="n">const_text</span><span class="o">=</span><span class="s">&quot;Choose file:&quot;</span><span class="p">,</span>
-                                                <span class="n">var_text</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="n">browserlauncher</span><span class="o">.</span><span class="n">max_chars</span> <span class="o">=</span> <span class="mi">15</span> <span class="c">#limit size of browser launcher</span>
+browser = thorpy.Browser(<span class='str'>"../../"</span>, text=<span class='str'>"Browser"</span>)
 
-<span class="n">dropdownlist</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">DropDownListLauncher</span><span class="p">(</span><span class="n">const_text</span><span class="o">=</span><span class="s">&quot;Choose:&quot;</span><span class="p">,</span>
-                                                <span class="n">var_text</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span>
-                                         <span class="n">titles</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)])</span>
-<span class="n">dropdownlist</span><span class="o">.</span><span class="n">scale_to_title</span><span class="p">()</span>
-<span class="n">dropdownlist</span><span class="o">.</span><span class="n">max_chars</span> <span class="o">=</span> <span class="mi">12</span> <span class="c">#limit size of drop down list</span>
+browserlauncher = thorpy.BrowserLauncher(browser, const_text=<span class='str'>"Choose file:"</span>,
+                                                var_text=<span class='str'>""</span>)
+browserlauncher.max_chars = <span class='number'>15</span> <span class='comment'>#limit size of browser launcher
+</span>
+dropdownlist = thorpy.DropDownListLauncher(const_text=<span class='str'>"Choose:"</span>,
+                                                var_text=<span class='str'>""</span>,
+                                         titles=[str(i)*i <span class='keyword'>for </span>i in range(<span class='number'>1</span>, <span class='number'>9</span>)])
+dropdownlist.scale_to_title()
+dropdownlist.max_chars = <span class='number'>12</span> <span class='comment'>#limit size of drop down list
+</span>
+slider = thorpy.SliderX(<span class='number'>80</span>, (<span class='number'>5</span>, <span class='number'>12</span>), <span class='str'>"Slider: "</span>, type_=float,
+                                initial_value=<span class='number'>8.4</span>)
 
-<span class="n">slider</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">SliderX</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="s">&quot;Slider: &quot;</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
-                                <span class="n">initial_value</span><span class="o">=</span><span class="mf">8.4</span><span class="p">)</span>
+inserter = thorpy.Inserter(name=<span class='str'>"Inserter: "</span>, value=<span class='str'>"Write here."</span>)
 
-<span class="n">inserter</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Inserter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Inserter: &quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;Write here.&quot;</span><span class="p">)</span>
+title_element = thorpy.make_text(<span class='str'>"Overview example"</span>, <span class='number'>22</span>, (<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>))
 
-<span class="n">title_element</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_text</span><span class="p">(</span><span class="s">&quot;Overview example&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+elements = [element, clickable, draggable, checker_check, checker_radio,
+            dropdownlist, browserlauncher, slider, inserter]
+central_box = thorpy.Box(elements=elements)
+central_box.fit_children(margins=(<span class='number'>30</span>,<span class='number'>30</span>)) <span class='comment'>#we want big margins
+</span>central_box.center() <span class='comment'>#center on screen
+</span>central_box.add_lift() <span class='comment'>#add a lift (useless since box fits children)
+</span>central_box.set_main_color((<span class='number'>220</span>,<span class='number'>220</span>,<span class='number'>220</span>,<span class='number'>180</span>)) <span class='comment'>#set box color and opacity
+</span>
+background = thorpy.Background(image=thorpy.style.EXAMPLE_IMG,
+                                    elements=[title_element, central_box])
+thorpy.store(background)
 
-<span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span><span class="p">,</span> <span class="n">clickable</span><span class="p">,</span> <span class="n">draggable</span><span class="p">,</span> <span class="n">checker_check</span><span class="p">,</span> <span class="n">checker_radio</span><span class="p">,</span>
-            <span class="n">dropdownlist</span><span class="p">,</span> <span class="n">browserlauncher</span><span class="p">,</span> <span class="n">slider</span><span class="p">,</span> <span class="n">inserter</span><span class="p">]</span>
-<span class="n">central_box</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">)</span>
-<span class="n">central_box</span><span class="o">.</span><span class="n">fit_children</span><span class="p">(</span><span class="n">margins</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span> <span class="c">#we want big margins</span>
-<span class="n">central_box</span><span class="o">.</span><span class="n">center</span><span class="p">()</span> <span class="c">#center on screen</span>
-<span class="n">central_box</span><span class="o">.</span><span class="n">add_lift</span><span class="p">()</span> <span class="c">#add a lift (useless since box fits children)</span>
-<span class="n">central_box</span><span class="o">.</span><span class="n">set_main_color</span><span class="p">((</span><span class="mi">220</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">180</span><span class="p">))</span> <span class="c">#set box color and opacity</span>
+menu = thorpy.Menu(background)
+menu.play()
 
-<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
-                                    <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">title_element</span><span class="p">,</span> <span class="n">central_box</span><span class="p">])</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
-
-<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
-<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
-
-<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
+application.quit()</div>
 </td></tr></table>
 
-
-<a href="overview.png"><img src="overview.png" valign="top" class="tutoimg"/></div></a>
+<a href="overview.png"><img src="overview.png" valign="top" class="tutoimg"/></div></a></div></a>
 	
-                </article>
-            </section>
-            
-            <footer>
-			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
-            </footer>
-        </div>
-    </body>
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
 </html>

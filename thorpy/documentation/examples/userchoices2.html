@@ -64,11 +64,11 @@
 <section>
 <article>
 <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
-User choices</span></h1>
+User choices (2)</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
-<p>The code below produces an application summarizing most of the common built-in elements that one would use in a program. In addition, an help element has been added to each element presented in order to show dynamic help to the user during execution. Note that there is manyother available built-in elements : you can check them on the <a href='../documentation/userguide/cheatsheet.html#elements'>cheat sheet</a>.</p>
+<p> It is shown here how to use user input on several procedurally generated buttons. </p>
 <button onclick="copycode1()">Copy code</button><br>
 <div class="codelines">
 0
@@ -113,38 +113,38 @@ User choices</span></h1>
 
 <div class="thorpycode" id="code1">
 <span class='keyword'>import </span>thorpy
-<span class='comment'>"""
-</span><span class='comment'>In this example, a box opens in which the user can choose between turning the
-</span><span class='comment'>background blue or red (or do nothing).
-</span><span class='comment'>"""
-</span>
-<span class='keyword'>def </span>set_blue():
-    background.set_main_color((<span class='number'>0</span>,<span class='number'>0</span>,<span class='number'>255</span>))
-    background.unblit_and_reblit()
 
-<span class='keyword'>def </span>set_red():
-    background.set_main_color((<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>))
-    background.unblit_and_reblit()
+application = thorpy.Application(size=(<span class='number'>500</span>, <span class='number'>500</span>))
 
-<span class='keyword'>def </span>my_choices_1():
-    choices = [(<span class='str'>"I like blue"</span>,set_blue), (<span class='str'>"No! red"</span>,set_red), (<span class='str'>"cancel"</span>,None)]
-    thorpy.launch_nonblocking_choices(<span class='str'>"This is a non-blocking choices box!\n"</span>,
-                                        choices)
-    <span class='keyword'>print</span>(<span class='str'>"Proof that it is non-blocking : this sentence is printing!"</span>)
+thorpy.set_theme(<span class='str'>"round"</span>)
 
-<span class='keyword'>def </span>my_choices_2():
-    choices = [(<span class='str'>"I like blue"</span>,set_blue), (<span class='str'>"No! red"</span>,set_red), (<span class='str'>"cancel"</span>,None)]
-    thorpy.launch_blocking_choices(<span class='str'>"Blocking choices box!\n"</span>, choices,
-                                    parent=background) <span class='comment'>#for auto unblit
-</span>    <span class='keyword'>print</span>(<span class='str'>"This sentence will print only after you clicked ok"</span>)
+<span class='keyword'>def </span>launch_menu(choices):
+    title = thorpy.make_text(<span class='str'>"Choose something"</span>, <span class='number'>14</span>, (<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>))
+    <span class='comment'>#now define the behaviour of clicked elements
+</span>    <span class='keyword'>def </span>at_press(what):
+        some_text.set_text(what) <span class='comment'>#change the element content (see below)
+</span>        thorpy.functions.quit_menu_func() <span class='comment'>#exit the menu
+</span>        thorpy.store(background) <span class='comment'>#align the elements (size has changed)
+</span>        background.unblit_and_reblit()
+    <span class='comment'>#dynamically create elements
+</span>    elements = []
+    <span class='keyword'>for </span>text in choices:
+        element = thorpy.make_button(text, func=at_press)
+        element.user_params = {<span class='str'>"what"</span>:text}
+        elements.append(element)
+    <span class='comment'>#box to store everything
+</span>    box = thorpy.Box([title] + elements)
+    box.set_main_color((<span class='number'>200</span>,<span class='number'>200</span>,<span class='number'>200</span>,<span class='number'>150</span>))
+    box.center()
+    m = thorpy.Menu(box)
+    m.play()
 
-application = thorpy.Application((<span class='number'>500</span>,<span class='number'>500</span>), <span class='str'>"Launching alerts"</span>)
-
-button1 = thorpy.make_button(<span class='str'>"Non-blocking version"</span>, func=my_choices_1)
-button2 = thorpy.make_button(<span class='str'>"Blocking version"</span>, func=my_choices_2)
-
-background = thorpy.Background(elements=[button1,button2])
+some_text = thorpy.make_text(<span class='str'>"Click on the button below to change the text."</span>, <span class='number'>18</span>)
+choices = [<span class='str'>"My new text"</span>, <span class='str'>"Another proposition"</span>, <span class='str'>"Blah"</span>, <span class='str'>"blah"</span>]
+button = thorpy.make_button(<span class='str'>"Change text"</span>, launch_menu, {<span class='str'>"choices"</span>:choices})
+background = thorpy.Background(elements=[some_text,button])
 thorpy.store(background)
+
 
 menu = thorpy.Menu(background)
 menu.play()

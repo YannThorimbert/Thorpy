@@ -7,6 +7,33 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
     </head>
     
     <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
@@ -34,26 +61,26 @@
                 </nav>
             </header>
             
-            <section>
-                <article>
-                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Shadows</span></h1></h1>
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+Image buttons</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
-<p>Here is shown a fast way to create buttons from images. The image used can be different for normal, hover and pressed states. If no image is passed for hover and/or pressed states, the image for normal state will be used by default.</p>
-
-<p>The files used in this example are <a href="normal.png">normal.png</a>, <a href="hover.png">hover.png</a> and <a href="pressed.png">pressed.png</a>.</p>
-<div class="tutoframe">
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<p>Here is shown a fast way to create buttons from images. The image used can be different for normal, hover and pressed states. If no image is passed for hover and/or pressed states, the image for normal state will be used by default.</p><p>The files used in this example are <a href="normal.png">normal.png</a>, <a href="hover.png">hover.png</a> and <a href="pressed.png">pressed.png</a>.</p>
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -68,43 +95,56 @@
 21
 22
 23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;Show how to use image to make buttons. Here 2 buttons are created.&quot;&quot;&quot;</span>
+24
+</div>
 
-<span class="kn">import</span> <span class="nn">thorpy</span><span class="o">,</span> <span class="nn">pygame</span>
-
-<span class="n">application</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s">&quot;Launching alerts&quot;</span><span class="p">)</span>
-
-<span class="n">normal</span><span class="p">,</span> <span class="n">pressed</span><span class="p">,</span> <span class="n">hover</span> <span class="o">=</span> <span class="s">&quot;normal.png&quot;</span><span class="p">,</span> <span class="s">&quot;pressed.png&quot;</span><span class="p">,</span> <span class="s">&quot;hover.png&quot;</span>
-
-<span class="n">button1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_image_button</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">pressed</span><span class="p">,</span> <span class="n">hover</span><span class="p">,</span>
-                                    <span class="n">alpha</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="c">#opaque</span>
-                                    <span class="n">colorkey</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span> <span class="c">#white=transparent</span>
-
-<span class="c">#this time a very simple button, with a text (only 1 image)</span>
-<span class="n">button2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">make_image_button</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">colorkey</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
-
-
-<span class="n">background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
-                                    <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">button1</span><span class="p">,</span> <span class="n">button2</span><span class="p">])</span>
-<span class="n">thorpy</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
-
-<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
-<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
-
-<span class="n">application</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
+<div class="thorpycode" id="code1">
+<span class='comment'>"""Show how to use image to make buttons. Here 2 buttons are created."""
+</span><span class='comment'>
+</span><span class='comment'>import thorpy, pygame
+</span><span class='comment'>
+</span><span class='comment'>application = thorpy.Application((500,500), "Image buttons")
+</span><span class='comment'>
+</span><span class='comment'>root = "../documentation/examples/"
+</span><span class='comment'>normal, pressed, hover = "normal.png", "pressed.png", "hover.png"
+</span><span class='comment'>
+</span><span class='comment'>button1 = thorpy.make_image_button(root+normal, root+pressed, root+hover,
+</span><span class='comment'>                                    alpha=255, #opaque
+</span><span class='comment'>                                    colorkey=(255,255,255)) #white=transparent
+</span><span class='comment'>
+</span><span class='comment'>#this time a very simple button, with a text (only 1 image)
+</span><span class='comment'>button2 = thorpy.make_image_button(root+hover, colorkey=False, text="Hello")
+</span><span class='comment'>
+</span><span class='comment'>
+</span><span class='comment'>background = thorpy.Background(image=thorpy.style.EXAMPLE_IMG,
+</span><span class='comment'>                                    elements=[button1, button2])
+</span><span class='comment'>thorpy.store(background)
+</span><span class='comment'>
+</span><span class='comment'>menu = thorpy.Menu(background)
+</span><span class='comment'>menu.play()
+</span><span class='comment'>
+</span><span class='comment'>application.quit()</span></div>
 </td></tr></table>
-
-</body>
 
 </div></a>
 	
-                </article>
-            </section>
-            
-            <footer>
-			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
-            </footer>
-        </div>
-    </body>
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
 </html>

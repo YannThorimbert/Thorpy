@@ -7,6 +7,33 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
     </head>
     
     <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
@@ -34,24 +61,26 @@
                 </nav>
             </header>
             
-            <section>
-                <article>
-                    <h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> - Smoke, fire and explosion debris</span></h1></h1>
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+Smoke, fire and explosion debris</span></h1>
 
 <a name="fullcode"></a>
 <h2>Full code</h2>
 <p>We show here how to use smokes and debris generators. For this, we use this <a href="boat_example.png">ship sprite</a>.</p>
-<div class="tutoframe">
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -110,88 +139,108 @@
 65
 66
 67
-68</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">pygame</span><span class="o">,</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">pygame.math</span> <span class="kn">import</span> <span class="n">Vector2</span> <span class="k">as</span> <span class="n">V2</span>
-<span class="kn">import</span> <span class="nn">thorpy</span>
+68
+69
+70
+71
+72
+</div>
 
-<span class="k">def</span> <span class="nf">refresh</span><span class="p">():</span>
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">get_pos</span><span class="p">()</span>
-    <span class="n">e_ship</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="c">#ship follows mouse</span>
-    <span class="c"># process smoke</span>
-    <span class="n">smokegen1</span><span class="o">.</span><span class="n">kill_old_elements</span><span class="p">()</span>
-    <span class="n">smokegen2</span><span class="o">.</span><span class="n">kill_old_elements</span><span class="p">()</span>
-    <span class="n">pressed</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="c">#left mouse button</span>
-        <span class="n">smokegen1</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">V2</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
-    <span class="k">elif</span> <span class="n">pressed</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="c">#left mouse button</span>
-        <span class="n">smokegen2</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">V2</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
-    <span class="n">smokegen1</span><span class="o">.</span><span class="n">update_physics</span><span class="p">(</span><span class="n">V2</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-    <span class="n">smokegen2</span><span class="o">.</span><span class="n">update_physics</span><span class="p">(</span><span class="n">V2</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-    <span class="c"># process debris</span>
-    <span class="n">debrisgen</span><span class="o">.</span><span class="n">kill_old_elements</span><span class="p">(</span><span class="n">screen</span><span class="o">.</span><span class="n">get_rect</span><span class="p">())</span>
-    <span class="n">debrisgen</span><span class="o">.</span><span class="n">update_physics</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-    <span class="c"># refresh screen</span>
-    <span class="n">e_background</span><span class="o">.</span><span class="n">blit</span><span class="p">()</span>
-    <span class="n">debrisgen</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">thorpy</span><span class="o">.</span><span class="n">get_screen</span><span class="p">())</span>
-    <span class="n">smokegen1</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
-    <span class="n">smokegen2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
-    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+<div class="thorpycode" id="code1">
+<span class='keyword'>import </span>pygame, math, random
+<span class='keyword'>from </span>pygame.math <span class='keyword'>import </span>Vector2 as V2
+<span class='keyword'>import </span>thorpy
+
+<span class='keyword'>def </span>refresh():
+    pos = pygame.mouse.get_pos()
+    e_ship.set_center(pos) <span class='comment'>#ship follows mouse
+</span>    <span class='comment'># process smoke
+</span>    smokegen1.kill_old_elements()
+    smokegen2.kill_old_elements()
+    pressed = pygame.mouse.get_pressed()
+    <span class='keyword'>if </span>pressed[<span class='number'>0</span>]: <span class='comment'>#left mouse button
+</span>        smokegen1.generate(V2(pos))
+    el<span class='keyword'>if </span>pressed[<span class='number'>2</span>]: <span class='comment'>#left mouse button
+</span>        smokegen2.generate(V2(pos))
+    smokegen1.update_physics(V2(<span class='number'>0</span>))
+    smokegen2.update_physics(V2(<span class='number'>0</span>))
+    <span class='comment'># process debris
+</span>    debrisgen.kill_old_elements(screen.get_rect())
+    debrisgen.update_physics(dt=<span class='number'>0.1</span>)
+    <span class='comment'># refresh screen
+</span>    e_background.blit()
+    debrisgen.draw(thorpy.get_screen())
+    smokegen1.draw(screen)
+    smokegen2.draw(screen)
+    pygame.display.flip()
 
 
-<span class="k">def</span> <span class="nf">make_debris</span><span class="p">():</span>
-    <span class="n">angle</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span> <span class="c">#pick random angle</span>
-    <span class="n">spread</span> <span class="o">=</span> <span class="mi">15</span> <span class="c">#spread of debris directions</span>
-    <span class="n">debrisgen</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span> <span class="n">V2</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">get_pos</span><span class="p">()),</span> <span class="c">#position</span>
-                        <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="c">#number of debris</span>
-                        <span class="n">v_range</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span> <span class="c">#translational velocity range</span>
-                        <span class="n">omega_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="c">#rotational velocity range</span>
-                        <span class="n">angle_range</span><span class="o">=</span><span class="p">(</span><span class="n">angle</span><span class="o">-</span><span class="n">spread</span><span class="p">,</span><span class="n">angle</span><span class="o">+</span><span class="n">spread</span><span class="p">))</span>
+<span class='keyword'>def </span>make_debris():
+    angle = random.randint(<span class='number'>0</span>,<span class='number'>360</span>) <span class='comment'>#pick random angle
+</span>    spread = <span class='number'>15</span> <span class='comment'>#spread of debris directions
+</span>    debrisgen.generate( V2(pygame.mouse.get_pos()), <span class='comment'>#position
+</span>                        n=<span class='number'>20</span>, <span class='comment'>#number of debris
+</span>                        v_range=(<span class='number'>10</span>,<span class='number'>50</span>), <span class='comment'>#translational velocity range
+</span>                        omega_range=(<span class='number'>5</span>,<span class='number'>25</span>), <span class='comment'>#rotational velocity range
+</span>                        angle_range=(angle-spread,angle+spread))
 
-<span class="c"># ##############################################################################</span>
+<span class='comment'>## ##############################################################################
+</span>
+app = thorpy.Application((<span class='number'>400</span>,<span class='number'>400</span>), <span class='str'>"Effects"</span>)
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Application</span><span class="p">((</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span> <span class="s">&quot;Effects&quot;</span><span class="p">)</span>
+smokegen1 = thorpy.fx.get_smokegen(n=<span class='number'>50</span>, color=(<span class='number'>200</span>,<span class='number'>200</span>,<span class='number'>255</span>), grow=<span class='number'>0.6</span>)
+smokegen2 = thorpy.fx.get_fire_smokegen(n=<span class='number'>50</span>, color=(<span class='number'>200</span>,<span class='number'>255</span>,<span class='number'>155</span>), grow=<span class='number'>0.4</span>)
+debrisgen = thorpy.fx.get_debris_generator(duration=<span class='number'>200</span>, <span class='comment'>#nb. frames before die
+</span>                                    color=(<span class='number'>100</span>,<span class='number'>100</span>,<span class='number'>100</span>),
+                                    max_size=<span class='number'>10</span>)
 
-<span class="n">smokegen1</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">fx</span><span class="o">.</span><span class="n">get_smokegen</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">grow</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-<span class="n">smokegen2</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">fx</span><span class="o">.</span><span class="n">get_fire_smokegen</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">155</span><span class="p">),</span> <span class="n">grow</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
-<span class="n">debrisgen</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">fx</span><span class="o">.</span><span class="n">get_debris_generator</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="c">#nb. frames before die</span>
-                                    <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span>
-                                    <span class="n">max_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+e_ship = thorpy.Image(<span class='str'>"../documentation/examples/boat_example.png"</span>,
+                        colorkey=(<span class='number'>255</span>,<span class='number'>255</span>,<span class='number'>255</span>))
+<span class='keyword'>if </span>thorpy.constants.CAN_SHADOWS: <span class='comment'>#set shadow
+</span>    thorpy.makeup.add_static_shadow(e_ship, {<span class='str'>"target_altitude"</span>:<span class='number'>5</span>,
+                                            <span class='str'>"shadow_radius"</span>:<span class='number'>3</span>,
+                                            <span class='str'>"sun_angle"</span>:<span class='number'>40</span>,
+                                            <span class='str'>"alpha_factor"</span>:<span class='number'>0.6</span>})
 
-<span class="n">e_ship</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s">&quot;boat_example.png&quot;</span><span class="p">,</span> <span class="n">colorkey</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span>
-<span class="k">if</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">CAN_SHADOWS</span><span class="p">:</span> <span class="c">#set shadow</span>
-    <span class="n">thorpy</span><span class="o">.</span><span class="n">makeup</span><span class="o">.</span><span class="n">add_static_shadow</span><span class="p">(</span><span class="n">e_ship</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;target_altitude&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
-                                            <span class="s">&quot;shadow_radius&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
-                                            <span class="s">&quot;sun_angle&quot;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span>
-                                            <span class="s">&quot;alpha_factor&quot;</span><span class="p">:</span><span class="mf">0.6</span><span class="p">})</span>
+e_background = thorpy.Background(image=thorpy.style.EXAMPLE_IMG,
+                                        elements=[e_ship])
 
-<span class="n">e_background</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">thorpy</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">EXAMPLE_IMG</span><span class="p">,</span>
-                                        <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="n">e_ship</span><span class="p">])</span>
+reac_time = thorpy.ConstantReaction(thorpy.constants.THORPY_EVENT, refresh,
+                                    {<span class='str'>"id"</span>:thorpy.constants.EVENT_TIME})
+reac_space = thorpy.ConstantReaction(pygame.KEYDOWN, make_debris,
+                                    {<span class='str'>"key"</span>:pygame.K_SPACE})
+e_background.add_reactions([reac_time, reac_space])
 
-<span class="n">reac_time</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ConstantReaction</span><span class="p">(</span><span class="n">thorpy</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">THORPY_EVENT</span><span class="p">,</span> <span class="n">refresh</span><span class="p">,</span>
-                                    <span class="p">{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="n">thorpy</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">EVENT_TIME</span><span class="p">})</span>
-<span class="n">reac_space</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">ConstantReaction</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">,</span> <span class="n">make_debris</span><span class="p">,</span>
-                                    <span class="p">{</span><span class="s">&quot;key&quot;</span><span class="p">:</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">})</span>
-<span class="n">e_background</span><span class="o">.</span><span class="n">add_reactions</span><span class="p">([</span><span class="n">reac_time</span><span class="p">,</span> <span class="n">reac_space</span><span class="p">])</span>
-
-<span class="n">screen</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">get_screen</span><span class="p">()</span>
-<span class="n">menu</span> <span class="o">=</span> <span class="n">thorpy</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">e_background</span><span class="p">)</span>
-<span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">set_repeat</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">menu</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
+screen = thorpy.get_screen()
+infotext = <span class='str'>"Press SPACE to spawn debris\n"</span>+\
+            <span class='str'>"LMB and RMB to spawn smokes\n"</span>+\
+            <span class='str'>"and move the mouse to move the boat."</span>
+thorpy.launch_blocking_alert(<span class='str'>"Commands"</span>, infotext)
+menu = thorpy.Menu(e_background)
+pygame.key.set_repeat(<span class='number'>30</span>,<span class='number'>30</span>)
+menu.play()
+app.quit()</div>
 </td></tr></table>
 
-<a href="fx.png"><img src="fx.png" valign="top" class="tutoimg"/></div></a>
-</body>
-
-</div></a>
+<a href="fx.png"><img src="fx.png" valign="top" class="tutoimg"/></div></a></div></a>
 	
-                </article>
-            </section>
-            
-            <footer>
-			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
-            </footer>
-        </div>
-    </body>
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
 </html>

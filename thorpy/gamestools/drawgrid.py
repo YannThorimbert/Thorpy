@@ -1,8 +1,8 @@
 import pygame
 
-from thorpy.gamestools.grid import PygameGrid, Grid
+from thorpy.gamestools.grid import Grid
 from thorpy.elements.element import Element
-from thorpy.miscgui import constants, style, painterstyle
+from thorpy.miscgui import style
 from thorpy.painting.painters.basicframe import BasicFrame
 from thorpy.miscgui.reaction import Reaction
 

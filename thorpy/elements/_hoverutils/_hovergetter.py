@@ -1,6 +1,6 @@
 from pygame import Surface
 
-from thorpy.miscgui import constants, functions, style
+from thorpy.miscgui import functions, style
 from thorpy.painting.painters.optionnal.illuminer import IlluminerAlphaExcept as Illuminer
 from thorpy.painting import pilgraphics
 

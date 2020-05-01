@@ -2,7 +2,7 @@
 elements.
 """
 # -*- coding: utf-8 -*-
-from math import sin, cos, pi, radians, hypot
+from math import sin, cos, tan, pi, radians, hypot
 
 try:
     from pygame import surfarray
@@ -12,15 +12,17 @@ except ImportError:
 
 import pygame.draw
 from pygame import Surface, RLEACCEL, SRCALPHA, Rect, draw, transform
-from pygame import SRCALPHA, BLEND_RGBA_MAX, BLEND_RGBA_MIN, Color
-from pygame.transform import rotate
-
+from pygame import BLEND_RGBA_MAX, BLEND_RGBA_MIN, Color
+from pygame.transform import rotate, flip, scale
 
 from thorpy._utils.colorscomputing import mid_color, different_color, grow_color, normalize_color
 from thorpy._utils.rectscomputing import get_top_coords, get_bottom_coords
 from thorpy._utils.images import load_image, change_color_on_img_ip
 from thorpy._utils.colorscomputing import get_alpha_color as gac
 from thorpy.miscgui import constants, functions
+from thorpy.painting.pilgraphics import get_shadow as  _pilshadow
+
+
 
 def get_aa_round_rect(size, radius, color):
     surface = Surface(size, flags=SRCALPHA).convert_alpha()
@@ -572,10 +574,6 @@ def aadashed_lines(surface, points, N=50, start=True):
         else:
             pass
 
-from thorpy.painting.pilgraphics import get_shadow as  _pilshadow
-from math import tan, pi
-from pygame import Surface
-from pygame.transform import rotate, flip, scale
 
 def get_shadow(target_img, shadow_radius=2, black=255, color_format="RGBA",
                 alpha_factor=0.85, decay_mode="exponential", color=(0,0,0),

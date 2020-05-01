@@ -1,4 +1,4 @@
-import os, fileinput
+import os
 
 pattern_src = '<span class="o">.</span><span class="n">make</span><span class="p">(</span>'
 pattern_dst = '<span class="p">(</span>'

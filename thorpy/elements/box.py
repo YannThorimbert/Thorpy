@@ -71,10 +71,6 @@ class Box(Element):
         self.store()
 
 
-from thorpy.elements.element import Element
-from thorpy.miscgui.storage import Storer, store
-from thorpy.miscgui import functions, style, painterstyle
-
 
 class BarBox(Element):
 

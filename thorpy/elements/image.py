@@ -1,7 +1,7 @@
 from thorpy.elements.element import Element
 from thorpy.painting.painters.imageframe import ImageFrame
 from thorpy.painting.painters.basicframe import BasicFrame
-from thorpy.miscgui import style, functions
+from thorpy.miscgui import style
 
 
 class Image(Element):

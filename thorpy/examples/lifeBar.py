@@ -1,5 +1,5 @@
 """Example from www.thorpy.org/examples.html"""
-import thorpy,pygame
+import thorpy
 
 application = thorpy.Application((800, 600), "ThorPy Overview")
 

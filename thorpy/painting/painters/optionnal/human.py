@@ -72,3 +72,32 @@ class Human(ClassicFrame):
         ClassicFrame.set_color(self, color)
         if len(color) == 4:
             self.border_color = tuple(list(self.border_color) + [color[3]])
+
+class HumanLite(Human):
+
+    def draw(self):
+        if self.hovered:
+            exterior = RoundRect(self.size, style.COLOR_BULK_HOVER, self.clip,
+                                 self.radius_ext)
+        else:
+            exterior = RoundRect(self.size, self.border_color, self.clip,
+                                 self.radius_ext)
+        w, h = (self.size[0] - 2*self.thick, self.size[1] - 2*self.thick)
+        w = 0 if w < 0 else w
+        h = 0 if h < 0 else h
+        int_size = (w, h)
+        if self.pressed:
+            interior = RoundRect(int_size, self.color, self.clip, self.radius_int)
+        else:
+            interior = RoundRect(int_size, self.light, self.clip, self.radius_int)
+        sext = exterior.draw()
+        sint = interior.draw()
+        degrad = Surface(int_size)
+        if self.pressed:
+            degrad.fill(self.dark)
+            sint.blit(degrad, (0, 0), special_flags=BLEND_RGBA_MIN)
+        else:
+            degrad.fill(self.color)
+            sint.blit(degrad, (0, 0), special_flags=BLEND_RGBA_MIN)
+        sext.blit(sint, (self.thick, self.thick))
+        return sext

@@ -112,7 +112,7 @@ def h_store(rect, children, ycoord=None, xstart="auto", margin=None, gap=None,
 def store(frame, elements=None, mode="v", x="auto", y="auto", margin=None,
             gap=None, align="center"):
     """
-    <frame> can be either an element or a pygame.Rect
+    <frame> can be either an element, a pygame.Rect or "screen"
     <elements>=None, None (default) will store the children of <frame>
     <mode>="v", can be either "v" ("vertical") or "h" ("horizontal")
     <x>="auto", x coordinate begin

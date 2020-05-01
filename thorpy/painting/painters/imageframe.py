@@ -9,12 +9,13 @@ from thorpy.miscgui import functions
 class ImageFrame(Painter):
 
     def __init__(self, img_path, alpha=255, colorkey=None, clip=None,
-                 pressed=False, mode=None, hovered=False):
+                 pressed=False, mode=None, hovered=False,
+                 force_convert_alpha=False):
         self.alpha = alpha
         self.img_path = img_path
         self.colorkey = colorkey
         self.mode = mode
-##        print("type3",img_path)
+        self.force_convert_alpha = force_convert_alpha
         size = list(self.init_get_img().get_size())
         W, H = functions.get_screen_size()
         if self.mode == "cut":
@@ -54,6 +55,8 @@ class ImageFrame(Painter):
             surface = load_image(self.img_path)
         else:  # take image
             surface = self.img_path
+        if self.force_convert_alpha:
+            return surface.convert_alpha()
         return surface
 
     def get_surface(self):
@@ -72,24 +75,22 @@ class ImageFrame(Painter):
             surface = scale(surface, self._resized)
         elif self.mode:
             functions.debug_msg("Unrecognized mode : ", self.mode)
-##        elif self._resized:
-##            surface = scale(surface, self._resized)
         if self.colorkey:
             surface.set_colorkey(self.colorkey, RLEACCEL)
         surface.set_clip(self.clip)
-        if self.alpha < 255:
+        if self.alpha < 255 or self.force_convert_alpha:
             return surface.convert_alpha()
         else:
             return surface.convert()
 
 
-class ButtonImage(ImageFrame):
+class ImageButton(ImageFrame):
 
     def __init__(self, img_normal, img_pressed=None, img_hover=None, alpha=255,
                  colorkey=None, clip=None, pressed=False, mode=None,
-                 hovered=False):
+                 hovered=False, force_convert_alpha=False):
         ImageFrame.__init__(self, img_normal, alpha, colorkey, clip, pressed,
-                            mode, hovered)
+                            mode, hovered, force_convert_alpha)
         img_pressed = img_normal if not img_pressed else img_pressed
         img_hover = img_normal if not img_hover else img_hover
         self.img_pressed = img_pressed
@@ -110,7 +111,7 @@ class ButtonImage(ImageFrame):
             surface = ImageFrame.get_image(self)
         return surface
 
-class ButtonImageFrame(ButtonImage):
+class ImageButtonFrame(ImageButton):
 
     def __init__(self, painter, img_normal, img_pressed=None, img_hover=None, alpha=255,
                  colorkey=None, clip=None, pressed=False, mode=None,
