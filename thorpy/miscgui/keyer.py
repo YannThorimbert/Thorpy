@@ -86,7 +86,7 @@ class Keyer(object):
                     if key < 256:
                         return chr(key)
         key = self._get_changed(key)
-        if pressed[K_LSHIFT]:  # handle caps
+        if pressed[K_LSHIFT] or pressed[K_RSHIFT]:  # handle caps
             if key >= 32 and key <= 126:
                 key -= 32
         debug_msg("key interpretation :", key, pygame.key.name(key))
