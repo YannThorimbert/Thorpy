@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+User choices (2)</span></h1>
+
+<a name="fullcode"></a>
+<h2>Full code</h2>
+<p> It is shown here how to use user input on several procedurally generated buttons. </p>
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</div>
+
+<div class="thorpycode" id="code1">
+<span class='keyword'>import </span>thorpy
+
+application = thorpy.Application(size=(<span class='number'>500</span>, <span class='number'>500</span>))
+
+thorpy.set_theme(<span class='str'>"round"</span>)
+
+<span class='keyword'>def </span>launch_menu(choices):
+    title = thorpy.make_text(<span class='str'>"Choose something"</span>, <span class='number'>14</span>, (<span class='number'>255</span>,<span class='number'>0</span>,<span class='number'>0</span>))
+    <span class='comment'>#now define the behaviour of clicked elements
+</span>    <span class='keyword'>def </span>at_press(what):
+        some_text.set_text(what) <span class='comment'>#change the element content (see below)
+</span>        thorpy.functions.quit_menu_func() <span class='comment'>#exit the menu
+</span>        thorpy.store(background) <span class='comment'>#align the elements (size has changed)
+</span>        background.unblit_and_reblit()
+    <span class='comment'>#dynamically create elements
+</span>    elements = []
+    <span class='keyword'>for </span>text in choices:
+        element = thorpy.make_button(text, func=at_press)
+        element.user_params = {<span class='str'>"what"</span>:text}
+        elements.append(element)
+    <span class='comment'>#box to store everything
+</span>    box = thorpy.Box([title] + elements)
+    box.set_main_color((<span class='number'>200</span>,<span class='number'>200</span>,<span class='number'>200</span>,<span class='number'>150</span>))
+    box.center()
+    m = thorpy.Menu(box)
+    m.play()
+
+some_text = thorpy.make_text(<span class='str'>"Click on the button below to change the text."</span>, <span class='number'>18</span>)
+choices = [<span class='str'>"My new text"</span>, <span class='str'>"Another proposition"</span>, <span class='str'>"Blah"</span>, <span class='str'>"blah"</span>]
+button = thorpy.make_button(<span class='str'>"Change text"</span>, launch_menu, {<span class='str'>"choices"</span>:choices})
+background = thorpy.Background(elements=[some_text,button])
+thorpy.store(background)
+
+
+menu = thorpy.Menu(background)
+menu.play()
+
+application.quit()</div>
+</td></tr></table>
+
+</div></a>
+	
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
+</html>

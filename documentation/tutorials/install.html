@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <section>
+                <article>
+                    <h1><img src="../images/thorpy_head.png" /><a href="../tutorials.html">Tutorials</a><span class="subtitle"> - Installation tutorial</span></h1></h1>
+						<p>This tutorial is for people who already installed Python and Pygame. If not, install any version of Python 3 or Python 2.7 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">(Python download page for beginners)</a> and the corresponding <a href="http://www.pygame.org/download.shtml">pygame</a> release.
+						If you are completely new with Python, it might be useful to have a look at <a href="https://www.python.org/about/gettingstarted/">this page.</a></p>
+
+
+						<p>ThorPy releases are on PyPi and can be found on <a href="https://pypi.python.org/pypi/thorpy/">https://pypi.python.org/pypi/thorpy/</a>.</p>
+						<p>The source code and a list of modifications is also published on GitHub at <a href="https://github.com/YannThorimbert/Thorpy"> https://github.com/YannThorimbert/Thorpy</a>.</p>
+
+						<p>We give here two different way to use ThorPy, each one is cross-platform and independant of your Python version.</p>
+						<div class = "tutorial">
+							<div class="tutotitle"><h2>Install ThorPy using pip</h2></div>
+								<div class="subtutorial">
+									<h3> This method allows you to import ThorPy from Python just as any other package. </h3>
+										<ol>
+										<li>Open a console. Type <code>pip install thorpy</code>. That's all. Make sure your version of pip matches the version of Python you plan to use to code your applications with Pygame and Thorpy.</li>
+										<li>Once the installation is completed, you can open a Python shell and test if ThorPy was successfully installed either by running <code>python3 testmodule.py</code> in a console, or by typing the following instruction: <code>from thorpy import testmodule; testmodule.run()</code>. If a window with some buttons appears, then ThorPy is working.</li>
+										</ol>
+								</div>
+							<div class="tutotitle"><h2>Download ThorPy as zip file for use/distribution with in a specific project. </h2></div>
+								<div class="subtutorial">
+									<h3> Direct extraction </h3>
+										You can use ThorPy without installing it as a python package ; just put the folder at the root of your project.
+										<ol>
+											<li>Download ThorPy from <a href="../thorpy.zip">here</a>.</li>
+											<li>Extract the <em>thorpy</em> folder anywhere you want in your computer.</li>
+											<li>All the scripts which are located in the same folder as <em>thorpy</em> can use ThorPy as if it was installed. Note that this is a way to distribute your scripts.</li>
+										<ol>
+								</div>
+							</div>
+                <h1><img src="../images/thorpy_head.png" />(optional) Installing dependencies</h1>
+						<p>ThorPy has no other critical dependencies than pygame. However, some graphical effects like shadows and blurs need NumPy and PIL (Python Imaging Library) to work properly. If you do not have these libraries, you can use ThorPy, but without these graphical effects (by the way, see <a href="../tutorials/graphics.html"> graphics tutorial </a> if you want to make your code safe for people who don't have PIL and NumPy on their computer). You can test if ThorPy is able to produce shadows by checking the value of HAS_NUMPY, HAS_PIL and HAS_SHADOW in the constants module. For instance <code>if thorpy.constants.CAN_SHADOWS:
+						thorpy.makeup.add_button_shadow(my_button)</code>.</p>
+						<p>NumPy can be found on <a href="http://www.numpy.org">http://www.numpy.org</a>, PIL for python 2.7 on <a href="http://www.numpy.org">http://www.pythonware.com/products/pil/</a> and for python 3.x we advise to use Pillow, which provides installation instructions on <a href="http://pillow.readthedocs.org/installation.html">http://pillow.readthedocs.org/installation.html</a> .</p>
+				</div>
+                </article>
+            </section>
+
+            <footer>
+			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

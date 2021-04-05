@@ -85,7 +85,7 @@ def get_centered_image(img, dims, bckgr):
 
 def get_colorkey(colorkey, surf):
     if colorkey is not None:
-        if colorkey is "auto":
+        if colorkey == "auto":
             colorkey = surf.get_at((0,0))
     return colorkey
 
@@ -136,7 +136,7 @@ def fusion_images(surf1, surf2, rel_pos=(0,0), colorkey=(255, 255, 255)):
     """Blit surf1 at <rel_pos> from surf1's topleft corner"""
     surface = pygame.Surface(surf1.get_rect().size)
     if colorkey is not None:
-        if colorkey is -1:
+        if colorkey == -1:
             colorkey = surf1.get_at((0,0))
         surface.fill(colorkey)
         surface.set_colorkey(colorkey, pygame.RLEACCEL)
@@ -147,7 +147,7 @@ def fusion_images(surf1, surf2, rel_pos=(0,0), colorkey=(255, 255, 255)):
 def fusion_images_fine(size, surf1, pos1, surf2, pos2, colorkey=(255, 255, 255)):
     surface = pygame.Surface(size)
     if colorkey is not None:
-        if colorkey is -1:
+        if colorkey == -1:
             colorkey = surf1.get_at((0,0))
         surface.fill(colorkey)
         surface.set_colorkey(colorkey, pygame.RLEACCEL)

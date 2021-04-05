@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 """
 
 setup(name='thorpy',
-      version='1.6.3',
+      version='1.8',
       description='GUI library for pygame',
       long_description='GUI library for pygame',
       author='Yann Thorimbert',

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section>
+                <article>
+                    <h1><img src="../images/thorpy_head.png" /><a href="../tutorials.html">Tutorials</a><span class="subtitle"> - Installation tutorial</span></h1></h1>
+						<p>This tutorial is for people who already installed Python and pygame. If not, please install Python 2.7 or any version of Python 3 <a href="https://wiki.python.org/moin/BeginnersGuide/Download"> (Python download page for beginners) </a> and the corresponding <a href="http://www.pygame.org/download.shtml">pygame</a> release.
+						If you are completely new with Python, you can <a href="https://www.python.org/about/gettingstarted/">get started here.</a></p>
+						
+						<p>ThorPy installers for windows, built and source are uploaded on the PyPI stack ; its releases can be found on <a href="https://pypi.python.org/pypi/thorpy/">https://pypi.python.org/pypi/thorpy/</a>.</p>
+						<p>The source code and a list of modifications is also published on GitHub at <a href="https://github.com/YannThorimbert/Thorpy"> https://github.com/YannThorimbert/Thorpy</a>.</p>
+						<p>We give here three different installation methods for Windows OS, one for Linux OS and one way to use ThorPy without installing it on your machine, which works for all systems.</p>
+						<div class = "tutorial">
+							<div class="tutotitle"><h2>Windows</h2></div>
+								<div class="subtutorial">
+									<h3> Install with installer </h3>
+										<ol>
+											<li>On <a href="https://pypi.python.org/pypi/thorpy">https://pypi.python.org/pypi/thorpy</a>, download <em>thorpy-1.5.5b0.win-amd64.exe</em> if you need the 64-bit version (works on 64-bit OS with 64-bit Python version), or <em>thorpy-1.5.5b0.win32.exe</em> if not.</li>
+											<li>Run the installation file and follow instructions. If the installer cannot Python in register, you are probably trying to install the wrong version of ThorPy (64-bit instead of 32, or 32 instead of 64).</li>
+											<li>Once the installation is completed, you can open a Python shell and test if ThorPy was successfully installed by typing the following instruction: <code>from thorpy import testmodule; testmodule.run()</code>. If a window with some buttons appears, then ThorPy is working.</li>
+										</ol>
+									<hr>
+									<h3> Manually install from source </h3>
+										Since it is written in pure Python, ThorPy is really easy to install manually from source.
+										<ol>
+											<li>On <a href="https://pypi.python.org/pypi/thorpy/">https://pypi.python.org/pypi/thorpy/</a>, download <em>thorpy-1.5.5b0.zip</em>.</li>
+											<li>Go to your Python directory, in Lib\site-packages folder (for example, <em>C:\Python34\Lib\site-packages\</em>). Extract the <em>thorpy</em> folder. That's all. </li>
+											<li>You can open a Python shell and test if ThorPy was successfully installed by typing the following instruction: <code>from thorpy import testmodule; testmodule.run()</code>. If a window with some buttons appears, then ThorPy is working.</li>
+										</ol>
+									<hr>
+									<h3> Build and Source from PyPI</h3>
+									
+										Build and source files for windows are uploaded on PyPI (<a href="https://pypi.python.org/pypi/thorpy/">https://pypi.python.org/pypi/thorpy/</a>). Thus, you can use traditional <em>pip install</em> commands if you are familiar with this method.
+								</div>
+							<div class="tutotitle"><h2>Linux</h2></div>
+								<div class="subtutorial">
+									<h3> Manually install from source </h3>
+										Since it is written in pure Python, ThorPy is really easy to install manually from source. For the moment, this is the only possible installation for Linux systems.
+										<ol>
+											<li>On <a href="https://pypi.python.org/pypi/thorpy/">https://pypi.python.org/pypi/thorpy/</a>, download <em>thorpy-1.5.5b0.tar.gz</em> or <em>thorpy-1.5.5b0.zip</em>.</li>
+											<li>Go to your Python directory, in site-packages folder (for example, <em>/usr/local/lib/python3.4/site-packages/</em>). Extract the <em>thorpy</em> folder. That's all. </li>
+											<li>You can open a Python shell and test if ThorPy was successfully installed by typing the following instruction: <code>from thorpy import testmodule; testmodule.run()</code>. If a window with some buttons appears, then ThorPy is working.</li>
+										</ol>
+								</div>
+							<div class="tutotitle"><h2>All Plateforms</h2></div>
+								<div class="subtutorial">
+									<h3> Use ThorPy without installing it </h3>
+										You can use ThorPy without installing it. However, this kind of use is less general than the other ones. We advise to properly install ThorPy if possible.
+										<ol>
+											<li>On <a href="https://pypi.python.org/pypi/thorpy/">https://pypi.python.org/pypi/thorpy/</a>, download <em>thorpy-1.5.5b0.tar.gz</em> or <em>thorpy-1.5.5b0.zip</em>.</li>
+											<li>Extract the <em>thorpy</em> folder anywhere you want in your computer.</li>
+											<li>All the scripts which are located in the same folder as <em>thorpy</em> can use ThorPy as if it was installed. Note that this is a way to distribute your scripts.</li>
+										</ol>
+								</div>
+							</div>
+                <h1><img src="../images/thorpy_head.png" />(optional) Installing dependencies</h1>
+						<p>ThorPy has no other critical dependencies than pygame. However, some graphical effects like shadows and blurs need NumPy and PIL (Python Imaging Library) to work properly. If you do not have these libraries, you can use ThorPy, but without these graphical effects (by the way, see <a href="../tutorials/graphics.html"> graphics tutorial </a> if you want to make your code safe for people who don't have PIL and NumPy on their computer). You can check if ThorPy is able to produce shadows by checking the value of HAS_NUMPY, HAS_PIL and HAS_SHADOW in the constants module. For example:  <code>if thorpy.constants.CAN_SHADOWS:
+						thorpy.makeup.add_button_shadow(my_button)</code>. </p>
+						<p>NumPy can be found on <a href="http://www.numpy.org">http://www.numpy.org</a>, PIL for python 2.7 on <a href="http://www.numpy.org">http://www.pythonware.com/products/pil/</a> and for python 3.x we advise to use Pillow, which provides installation instructions on <a href="http://pillow.readthedocs.org/installation.html">http://pillow.readthedocs.org/installation.html</a> .</p>
+                </article>
+            </section>
+            
+            <footer>
+			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

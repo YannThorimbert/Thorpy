@@ -1,4 +1,4 @@
-__version__ = "1.6.3"
+__version__ = "1.7"
 
 import sys
 import os
@@ -49,7 +49,7 @@ from thorpy.elements.browser import Browser
 from thorpy.elements.checker import Checker
 CheckBox = Checker
 from thorpy.elements.clickable import Clickable
-from thorpy.elements._wrappers import make_button, make_text, make_image_button, make_menu_button, make_image_button_with_frame
+from thorpy.elements._wrappers import make_button, make_text, make_image_button, make_menu_button
 ##from thorpy.elements._wrappers import launch_blocking_alert
 ##from thorpy.elements._wrappers import launch_alert as launch_nonblocking_alert
 ##from thorpy.elements._wrappers import launch_blocking_choices
@@ -91,7 +91,7 @@ from thorpy.menus.basicmenu import BasicMenu
 # miscellaneous stuff, constants, parameters
 from thorpy.miscgui.application import Application
 from thorpy.miscgui.reaction import Reaction, ConstantReaction
-from thorpy.miscgui.reaction import add_time_reaction, add_keydown_reaction, add_keyup_reaction
+from thorpy.miscgui.reaction import add_time_reaction, add_keydown_reaction, add_keyup_reaction, add_click_reaction, add_mousemotion_reaction
 from thorpy.miscgui import constants, functions
 from thorpy.miscgui.functions import get_screen
 from thorpy.miscgui.functions import get_current_application as get_application
@@ -101,7 +101,7 @@ from thorpy.miscgui import painterstyle
 from thorpy.miscgui import parameters
 from thorpy.miscgui.initializer import Initializer
 from thorpy.miscgui.state import State
-from thorpy.miscgui.storage import Storer, store
+from thorpy.miscgui.storage import Storer, store, grid_store
 from thorpy.miscgui.title import Title
 from thorpy.miscgui.varset import VarSet
 from thorpy.miscgui import theme
@@ -116,12 +116,12 @@ from thorpy.miscgui.launchers.launcher import Launcher, make_ok_cancel_box, make
 from thorpy.miscgui.launchers.launcher import launch_blocking, auto_ok, set_as_done_button, set_as_cancel_button
 from thorpy.miscgui.launchers.launcher import launch as launch_nonblocking
 from thorpy.elements.dialog import launch_blocking_alert, launch_blocking_choices, make_textbox
+from thorpy.elements.dialog import launch_blocking_choices_str
 from thorpy.elements.dialog import launch_nonblocking_alert, launch_nonblocking_choices
 
 from thorpy.painting.writer import Writer
 from thorpy.painting import painters
 from thorpy.painting import makeup
-##from thorpy.painting.painters.imageframe import ButtonImage
 from thorpy.painting import mousecursor
 
 from thorpy.gamestools import basegrid
@@ -129,7 +129,7 @@ from thorpy.gamestools import commands
 from thorpy.gamestools.basegrid import BaseGrid
 from thorpy.gamestools.drawgrid import DrawGrid
 from thorpy.gamestools.grid import Grid, PygameGrid
-from thorpy.gamestools.sound import SoundCollection #1.5.8
+from thorpy.gamestools.sound import SoundCollection
 from thorpy.gamestools import fx
 from thorpy.gamestools import hud
 from thorpy.gamestools.monitoring import Monitor

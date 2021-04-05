@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+		<style>
+			.thorpycode{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				box-shadow: inset 0 0 10px;
+				padding:15px;
+				margin :0px;
+			}
+			.codelines{
+				white-space: pre;
+				background-color: white;
+				font-size: 0.8em;
+				font-family: monospace, monospace;
+				display: inline-block;
+				text-align:right;
+				padding:1px;
+				margin :0px;
+			}
+			.keyword {color:blue;}
+			.str {color:gold;}
+			.comment {color:gray;}
+			.number {color:red;
+				font-weight:bold;}
+		</style>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+<section>
+<article>
+<h1><img src="../images/thorpy_head.png" /><a href="../examples.html">Examples</a><span class="subtitle"> -
+###TITLE###
+</span></h1>
+
+<a name="fullcode"></a>
+<h2>Full code</h2>
+###TEXT###
+
+<button onclick="copycode1()">Copy code</button><br>
+<div class="codelines">
+###LINES###
+</div>
+
+<div class="thorpycode" id="code1">
+###CODE###
+</div>
+</td></tr></table>
+
+###IMG###
+</div></a>
+	
+</article>
+</section>
+
+<footer>
+<p>&copy; Copyright 2020, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> </p>
+</footer>
+
+<script>
+function copycode1() {
+	var text = document.getElementById("code1").textContent;
+	navigator.clipboard.writeText(text).then(function() {
+	console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	console.error('Async: Could not copy text: ', err);
+	});
+}
+</script>
+		
+</body>
+</html>

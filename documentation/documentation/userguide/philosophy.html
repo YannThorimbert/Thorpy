@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../../index.html"><img src="../../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../../index.html">Home</a></li>
+						<li><a href="../../downloads.html">Downloads</a></li>
+                        <li><a href="../../documentation.html">Documentation</a></li>
+                        <li><a href="../../examples.html">Examples</a></li>
+						<li><a href="../../tutorials.html">Tutorials</a></li>
+						<li><a href="../../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section>
+                <article>
+                    <h1><img src="../../images/thorpy_head.png" /><a href="../../documentation.html">User Guide</a><span class="subtitle"> - Introduction</span></h1>
+						<p>Some excellent GUI for python already exists - among them are the famous Tkinter and PyQt. However, many game developers or even just curious programmers need to use the pygame library, for which it is difficult to find satisfactory GUI library. In the other hand, it appears to be tedious to use pygame within Tkinter or PyQt. For these reasons, we wrote ThorPy as a pure python, pygame-based library that provides all the most common tools of a GUI library.</p>
+						<p>ThorPy has been written according to a few principles:
+							<ol>
+								<li>A good GUI is recognizable as it is not recognizable - this means that you cannot identify which GUI library was used by simply observing the application. Thus, styling and design mechanisms must offer a way to fully tune the graphical elements.</li>
+								<li>Make the GUI code as descriptive as possible. This means that the code defining the user interface in a game or an application must not be the complicated part of the code - we think that it should be as much as possible a list of descriptive statements (<em>i.e</em> something like : 'Here is a button that do that. Here, another one. Here, a slider, etc...') and not a code requiring advanced coding skills. For this reason, ThorPy is firstly intended to use <em>outside of the loop</em> : you describe what GUI elements have to do, and you do not need to directly write anything into the main loop of the code - as you will see later, this can be done through the 'reaction' mechanism.
+								<li>Never blit nor update surfaces more than needed. However, if the whole screen was updated each frame, the visual result must be the same. This is a good coding principle for preventing bugs to occur, but preserving performances.</li>
+								<li>In most cases, if you chose to use pygame, it means that you do not plan to use GUI for your application - in other words, most of the work will be done by the CPU. In the other hand, the central memory of computers is very large nowadays (from the point of view of a 2D-game programmer). Consequently, ThorPy is written in such a way that a maximum amount of pygame surfaces are pre-calculated and stored into the memory in order to be blitted when necessary, and a minimum amount of work is let to the CPU.
+							</ol>
+						</p>
+						<p>Even if ThorPy is easy to use once you have found what you need, the difficulty lies - like for most libraries - in the fact that it is not trivial to find the right objects to use, nor the way they should be used. For this reason we regroup on this website as much <a href="../../tutorials.html">tutorials</a> and <a href="../../examples.html">examples</a> as possible - but remember that most of the objects you will discover in these tutorials and examples can be highly parametrized, and the documentation is the place where you will find the details.</p>
+						
+                </article>
+            </section>
+            
+            <footer>
+			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../../about.html">About</a> | <a href="../../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

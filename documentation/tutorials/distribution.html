@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>ThorPy</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="top_title">
+                    <a href="../index.html"><img src="../images/thorpy.png" alt="logo_thorpy" id="logo" border="0"/></a>
+                    <h1>ThorPy</h1>
+                    <h2>A GUI library for pygame</h2>
+                </div>
+                
+                <nav>
+                    <ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../downloads.html">Downloads</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../examples.html">Examples</a></li>
+						<li><a href="../tutorials.html">Tutorials</a></li>
+						<li><a href="../more.html">More...</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section>
+                <article>
+                    <h1><img src="../images/thorpy_head.png" /><a href="../tutorials.html">Tutorials</a><span class="subtitle"> - Distribute your application</span></h1></h1>
+					
+						
+						
+<p>You will learn here how to distribute your application written with ThorPy. The first part concerns a cross-platform, script-based distribution, while the second part is about converting your code to executable file for windows.</p>
+
+<h2>Distribute a Pygame-ThorPy script (all plateforms)</h2>
+<p>If you want to distribute an application as a script, then you assume that users will have Python and Pygame installed on their machine, as well as any other library you used to code the application. If not, tell them to do so (this is actually the only tricky part).</p>
+<p>Once your code is written, just add (copy/paste) the thorpy folder from when you installed it to the directory of the main script of your application. Here is an example from the game <a href="../applications/ninarow.html">NinArow</a>:</p>
+
+<a href="distribution/img1.png"><img src="distribution/img1.png" valign="top"/></a>
+
+<p>This is all. Pack the entire folder containing the scripts and thorpy folder and distribute it.</p>
+
+<h2>Convert a Pygame-ThorPy script as an executable windows file</h2>
+<p>The advantage of this method is that users won't have to install Python neither any library on their computer in order to run your application, which is often much more practical for them. Also, in certain cases, if script distribution does not work properly on a given computer, it can be the solution to distribute it as an executable. One of the drawback of this method of distribution is that it produces much heavier files: while a script is typically a few kB, its corresponding weight, as a working .exe application, is several MB. Another disadvantage is that many antiviruses will detect the executable as a potential danger for the user's machine. This is user's responsibility to make its antivirus allow your application to run normally. Finally, it is advised to distribute your source code with the executable, so that users can see what they are executing.</p>
+
+<p>The method that is presented here makes use of the famous module <a href="http://www.py2exe.org">py2exe</a>. You will need it in order to build executable files from your scripts. The script below provides a convenient way to set up the configuration of your distributed application (just follow the indicated steps):</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">glob</span><span class="o">,</span> <span class="nn">fnmatch</span><span class="o">,</span> <span class="nn">py2exe</span>
+
+<span class="sd">&quot;&quot;&quot;Usage:</span>
+<span class="sd">1. Fill the informations below</span>
+<span class="sd">2. Go to thorpy&#39;s __init__ file and set THORPY_PATH equals to &quot;./&quot;
+<span class="sd">3. Open a console, go to the folder where this script is located, and type:</span>
+<span class="sd">    python convert2exe.py py2exe</span>
+<span class="sd">4. That&#39;s all. Your executable is normally in &#39;dist&#39; folder.</span>
+<span class="sd">5. Don't forget to set THORPY_PATH to its original value.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">main_python_file</span> <span class="o">=</span> <span class="s">&quot;play.py&quot;</span>
+<span class="n">project_name</span> <span class="o">=</span> <span class="s">&quot;TheNameOfYourProject&quot;</span>
+<span class="n">project_url</span> <span class="o">=</span> <span class="s">&quot;http://www.your-url.com&quot;</span>
+<span class="n">project_version</span> <span class="o">=</span> <span class="s">&quot;1.0&quot;</span>
+<span class="n">project_license</span> <span class="o">=</span> <span class="s">&quot;YourLicence&quot;</span>
+<span class="n">author_name</span> <span class="o">=</span> <span class="s">&quot;Your Name&quot;</span>
+<span class="n">author_email</span> <span class="o">=</span> <span class="s">&quot;your.email@fakemail.com&quot;</span>
+<span class="n">copyright</span> <span class="o">=</span> <span class="s">&quot;Copyright (c) 2016 Your Name&quot;</span>
+<span class="n">project_description</span> <span class="o">=</span> <span class="s">&quot;blah blah&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">add_folder_to_data</span><span class="p">(</span><span class="n">dist_folder_name</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">folder</span><span class="o">+</span><span class="n">fn</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">fn</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">end</span><span class="p">)]</span>
+    <span class="n">data_files</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">dist_folder_name</span><span class="p">,</span> <span class="n">files</span><span class="p">))</span>
+
+<span class="n">data_files</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c">#add thorpy data</span>
+<span class="n">add_folder_to_data</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="s">&quot;C:/Python34/Lib/site-packages/thorpy/data/&quot;</span><span class="p">)</span>
+<span class="c">#for your own data, follow instructions at thorpy.org/tutorials/distribution.html</span>
+
+
+<span class="n">setup</span><span class="p">(</span>  <span class="n">windows</span><span class="o">=</span><span class="p">[{</span><span class="s">&#39;script&#39;</span><span class="p">:</span><span class="n">main_python_file</span><span class="p">,</span> <span class="s">&#39;copyright&#39;</span><span class="p">:</span> <span class="n">copyright</span><span class="p">}],</span>
+        <span class="n">data_files</span> <span class="o">=</span> <span class="n">data_files</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">project_name</span><span class="p">,</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">project_version</span><span class="p">,</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">project_description</span><span class="p">,</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">project_url</span><span class="p">,</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="n">author_name</span><span class="p">,</span>
+        <span class="n">author_email</span> <span class="o">=</span> <span class="n">author_email</span><span class="p">,</span>
+        <span class="n">license</span> <span class="o">=</span> <span class="n">project_license</span><span class="p">,</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;py2exe&#39;</span><span class="p">:</span>
+                    <span class="p">{</span><span class="s">&#39;includes&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="c"># name of the modules that py2exe did not automatically detected</span>
+                    <span class="s">&#39;excludes&#39;</span> <span class="p">:</span> <span class="p">[],</span> <span class="c"># modules to exclude that py2exe put in</span>
+                    <span class="s">&#39;optimize&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c"># Not necessary,</span>
+                    <span class="s">&#39;bundle_files&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&#39;compressed&#39;</span> <span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+                    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+
+<p>As indicated in the script, you must modify a line from thorpy's __init__.py in order to make the executable use the path of thorpy's internal data. When all is finished, do not forget to set this line to its original state, otherwise you won't be able to properly use ThorPy from scripts on your computer.</p>
+
+<p>Once you have followed the four steps that are given in the script, you are almost done. If your application uses data, put the data in 'dist' folder (just reproduce the same file hierarchy, using 'dist' as the root folder). Pack all into a zip file, and do not forget to write a README file that indicates user how to run the game (for example, go to dist folder and execute play.exe). </p>
+
+				
+                </article>
+            </section>
+            
+            <footer>
+			  <p>&copy; Copyright 2019, Yann Thorimbert - <a href="mailto:yann.thorimbert@gmail.com"> Contact </a> | <a href="../about.html">About</a> | <a href="../phpBB3/index.php">Forum</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

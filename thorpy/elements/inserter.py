@@ -14,6 +14,10 @@ from thorpy.miscgui.reaction import Reaction
 from thorpy.miscgui.keyer import Keyer
 from thorpy.miscgui import constants, functions, parameters, style, painterstyle
 
+
+def basic_filter(word):
+    return word
+
 class Inserter(Clickable):
     """Element fo text insertion."""
 
@@ -89,6 +93,7 @@ class Inserter(Clickable):
         self.auto_resize = True
         self.numeric_only = False
         self.int_only = False
+        self.filter = basic_filter
         if finish:
             self.finish()
 
@@ -193,6 +198,7 @@ class Inserter(Clickable):
                     before = self._inserted[0:self._cursor_index]
                     after = self._inserted[self._cursor_index:]
                     new_word = before + char + after
+                    new_word = self.filter(new_word)
                     if self._iwriter._is_small_enough(new_word):
                         self._inserted = new_word
                         self._cursor_index += 1
@@ -310,6 +316,12 @@ class Inserter(Clickable):
         """set font color for a given state"""
         Clickable.set_font_size(self, size, state, center_title)
         self._name_element.set_font_size(size, state, center_title)
+
+    def set_iwriter_font_size(self, size, state=None, center_title=True):
+        self._iwriter.set_font_size(size, state, center_title)
+        w = self.get_fus_size()[0]
+        h = self._iwriter.get_rect().inflate((2,2)).size[1]
+        self.set_size((w,h))
 
     def set_font(self, fontname, state=None, center_title=True):
         """set font for a given state"""

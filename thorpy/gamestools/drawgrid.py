@@ -1,8 +1,8 @@
 import pygame
 
-from thorpy.gamestools.grid import PygameGrid, Grid
+from thorpy.gamestools.grid import Grid
 from thorpy.elements.element import Element
-from thorpy.miscgui import constants, style, painterstyle
+from thorpy.miscgui import style
 from thorpy.painting.painters.basicframe import BasicFrame
 from thorpy.miscgui.reaction import Reaction
 
@@ -71,8 +71,8 @@ class DrawGrid(Element):
         return dg
 
     def __init__(self, nx, ny, cell_size):
-        Element.__init__(self)
         self.grid = Grid(nx, ny, cell_size)
+        Element.__init__(self)
         self.margins = style.MARGINS
         self.current_coord = None
         self.current_rect = None
@@ -86,7 +86,7 @@ class DrawGrid(Element):
         self.set_painter(painter)
         Element.finish(self)
 
-    def draw_values(self, value):
+    def print_values(self, value):
         for x in range(self.grid.nx):
             for y in range(self.grid.ny):
                 if self.grid[x,y] == value:
