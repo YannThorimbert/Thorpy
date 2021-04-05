@@ -86,12 +86,8 @@ def launch_blocking_choices(text, choices, parent=None, title_fontsize=None,
 
 def launch_blocking_choices_str(text, choices, parent=None, title_fontsize=None,
                             title_fontcolor=None, func=None, store="v"):
-<<<<<<< HEAD
     """Return the clicked choice.
     <choices> is a list of strings."""
-=======
-    """choices are tuple (text,func)"""
->>>>>>> 36ed703e1bd4c7fee7d965cccd7c2a549b96a1e4
     if title_fontsize is None: title_fontsize = thorpy.style.FONT_SIZE
     if title_fontcolor is None: title_fontcolor = thorpy.style.FONT_COLOR
     class Choice:

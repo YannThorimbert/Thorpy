@@ -319,12 +319,9 @@ class Inserter(Clickable):
 
     def set_iwriter_font_size(self, size, state=None, center_title=True):
         self._iwriter.set_font_size(size, state, center_title)
-<<<<<<< HEAD
         w = self.get_fus_size()[0]
         h = self._iwriter.get_rect().inflate((2,2)).size[1]
         self.set_size((w,h))
-=======
->>>>>>> 36ed703e1bd4c7fee7d965cccd7c2a549b96a1e4
 
     def set_font(self, fontname, state=None, center_title=True):
         """set font for a given state"""
