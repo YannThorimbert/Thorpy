@@ -36,6 +36,10 @@ class SoundCollection:
     def __init__(self):
 
         pygame.mixer.pre_init(44100, 16, 2, 4096) #frequency, size, channels, buffersize
+<<<<<<< HEAD
+=======
+##        pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
+>>>>>>> 36ed703e1bd4c7fee7d965cccd7c2a549b96a1e4
         pygame.mixer.init(frequency=22050, size=-16, buffer=512)
         self.current_channel_number = 0
         self.current_channel = pygame.mixer.Channel(self.current_channel_number)

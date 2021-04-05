@@ -937,8 +937,11 @@ class Ghost(object):
 
     def get_help_rect(self):
         return self.get_ghost_rect()
+<<<<<<< HEAD
 
 ##    def copy(self):
 ##        copy_children = [e.copy() for e in self.get_elements()]
 ##        e = self.__class__(elements=copy_children)
 ##        return e
+=======
+>>>>>>> 36ed703e1bd4c7fee7d965cccd7c2a549b96a1e4

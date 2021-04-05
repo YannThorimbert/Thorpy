@@ -2,9 +2,12 @@ import thorpy
 
 application = thorpy.Application((800, 600), "ThorPy Overview")
 
+<<<<<<< HEAD
 text = thorpy.make_text("Some text", 12, (0,0,255))
 line = thorpy.Line(200, "h") #horizontal line of width = 200px
 
+=======
+>>>>>>> 36ed703e1bd4c7fee7d965cccd7c2a549b96a1e4
 element = thorpy.Element("Element")
 thorpy.makeup.add_basic_help(element,"Element:\nMost simple graphical element.")
 
@@ -37,8 +40,13 @@ inserter = thorpy.Inserter(name="Inserter: ", value="Write here.")
 
 title_element = thorpy.make_text("Overview example", 22, (255,0,0))
 
+<<<<<<< HEAD
 elements = [text, line, element, clickable, draggable, checker_check,
             checker_radio, dropdownlist, browserlauncher, slider, inserter]
+=======
+elements = [element, clickable, draggable, checker_check, checker_radio,
+            dropdownlist, browserlauncher, slider, inserter]
+>>>>>>> 36ed703e1bd4c7fee7d965cccd7c2a549b96a1e4
 central_box = thorpy.Box(elements=elements)
 central_box.fit_children(margins=(30,30)) #we want big margins
 central_box.center() #center on screen
