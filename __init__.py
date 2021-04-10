@@ -91,7 +91,9 @@ from thorpy.menus.basicmenu import BasicMenu
 # miscellaneous stuff, constants, parameters
 from thorpy.miscgui.application import Application
 from thorpy.miscgui.reaction import Reaction, ConstantReaction
-from thorpy.miscgui.reaction import add_time_reaction, add_keydown_reaction, add_keyup_reaction, add_click_reaction
+from thorpy.miscgui.reaction import add_time_reaction, add_keydown_reaction
+from thorpy.miscgui.reaction import add_keyup_reaction, add_click_reaction
+from thorpy.miscgui.reaction import add_mousemotion_reaction, add_unclick_reaction
 from thorpy.miscgui import constants, functions
 from thorpy.miscgui.functions import get_screen
 from thorpy.miscgui.functions import get_current_application as get_application
