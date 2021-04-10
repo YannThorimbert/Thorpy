@@ -86,4 +86,14 @@ def add_click_reaction(element, func, event_args=None, params=None,
             reac_name)
     element.add_reaction(reac)
 
+add_mousebuttondown_reaction = add_click_reaction
+
+def add_unclick_reaction(element, func, event_args=None, params=None,
+                            reac_name=None):
+    reac = ConstantReaction(pygame.MOUSEBUTTONUP, func, event_args, params,
+            reac_name)
+    element.add_reaction(reac)
+
+add_mousebuttonup_reaction = add_unclick_reaction
+
 
