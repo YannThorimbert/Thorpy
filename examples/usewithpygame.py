@@ -1,5 +1,6 @@
-#Tutorial : how to use ThorPy with a pre-existing code - step 1
+#Tutorial : how to use ThorPy with a pre-existing code
 import pygame, thorpy
+import thorpy.miscgui.functions
 pygame.init()
 pygame.key.set_repeat(300, 30)
 screen = pygame.display.set_mode((400,400))
@@ -19,6 +20,7 @@ text = thorpy.make_text("Left arrow to move the red square")
 box = thorpy.Box(elements=[slider,button, text])
 #we regroup all elements on a menu, even if we do not launch the menu
 menu = thorpy.Menu(box)
+thorpy.miscgui.functions.set_current_menu(menu)
 #important : set the screen as surface for all elements
 for element in menu.get_population():
     element.surface = screen
